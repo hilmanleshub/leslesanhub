@@ -4,10 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LesHub — Guru les terbaik. Sesimpel itu.</title>
-  
-  <!-- Memuat Tailwind CSS untuk tata letak responsif -->
+  <meta name="description" content="Les privat 1-on-1 terkurasi untuk anak hingga dewasa. Pilih guru terverifikasi, tentukan paket transparan all-in, langsung belajar online atau tatap muka." />
+
+  <!-- =====================================================================
+       FAVICON INLINE SVG (IKON TAB BROWSER KHAS LESHUB)
+  ====================================================================== -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231D1D1F'/%3E%3Ctext x='16' y='22' font-family='Inter,Arial,sans-serif' font-size='18' font-weight='700' fill='%23FFFFFF' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
+
+  <!-- =====================================================================
+       OPENGRAPH & TWITTER META TAGS (PREVIEW RAPI SAAT LINK DIBAGIKAN DI WA)
+  ====================================================================== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LesHub Indonesia" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:title" content="LesHub — Guru les terbaik. Sesimpel itu." />
+  <meta property="og:description" content="Les privat 1-on-1 terkurasi untuk anak hingga dewasa. Mulai dari Rp 100.000 (Sesi Trial). Harga transparan all-in & garansi ganti guru gratis." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LesHub — Guru les terbaik. Sesimpel itu." />
+  <meta name="twitter:description" content="Pilih guru terkurasi, tentukan paket, langsung belajar. Tersedia Online (Zoom/Meet) & Tatap Muka." />
+
+  <!-- Memuat Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- Memuat Font Inter sebagai padanan bersih SF Pro khas Apple -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -52,11 +70,19 @@
       overflow-x: hidden;
     }
 
+    /* Tekstur latar belakang studio dot-grid (#D2D2D7) pada lapisan fixed z-0 */
+    .studio-dot-pattern {
+      background-image: radial-gradient(#D2D2D7 1.1px, transparent 1.1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, #000 55%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, #000 55%, transparent 100%);
+    }
+
     /* Animasi kemunculan halus saat scroll */
     .reveal-up {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal-up.is-visible {
       opacity: 1;
@@ -73,10 +99,42 @@
       50% { transform: translateY(6px); }
     }
     .animate-float-slow {
-      animation: floatSlow 5s ease-in-out infinite;
+      animation: floatSlow 5.5s ease-in-out infinite;
     }
     .animate-float-delayed {
-      animation: floatDelayed 6s ease-in-out infinite;
+      animation: floatDelayed 6.5s ease-in-out infinite;
+    }
+
+    /* Animasi cahaya aurora ambient di belakang mockup iPhone */
+    @keyframes auroraPulse {
+      0%, 100% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.85; }
+      50% { transform: scale(1.05) translate3d(10px, -8px, 0); opacity: 1; }
+    }
+    .animate-aurora-ambient {
+      animation: auroraPulse 10s ease-in-out infinite;
+    }
+
+    /* Animasi gelombang suara (audio equalizer bars) */
+    @keyframes soundWave {
+      0%, 100% { transform: scaleY(0.3); }
+      50% { transform: scaleY(1); }
+    }
+    .wave-bar {
+      transform-origin: center;
+      animation: soundWave 0.85s ease-in-out infinite;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.15s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+
+    /* Transisi 3D tilt halus pada frame iPhone (clamped max ±4deg di JS) */
+    #iphone-device {
+      transform-style: preserve-3d;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+      will-change: transform;
+    }
+    #iphone-device.is-returning {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
     }
 
     /* Transisi kartu guru */
@@ -88,101 +146,78 @@
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
     }
 
-    /* Hilangkan scrollbar horizontal pada tab filter mobile */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    /* Animasi gelombang suara (audio wave bars) untuk simulasi kelas & sapaan guru */
-    @keyframes soundWave {
-      0%, 100% { transform: scaleY(0.35); }
-      50% { transform: scaleY(1); }
-    }
-    .wave-bar {
-      transform-origin: center;
-      animation: soundWave 0.9s ease-in-out infinite;
-    }
-    .wave-bar:nth-child(2) { animation-delay: 0.15s; }
-    .wave-bar:nth-child(3) { animation-delay: 0.3s; }
-    .wave-bar:nth-child(4) { animation-delay: 0.45s; }
-    .wave-bar:nth-child(5) { animation-delay: 0.2s; }
-
-    /* Animasi masuk bertahap untuk kartu guru saat filter diganti */
     @keyframes cardPopIn {
-      0% {
-        opacity: 0;
-        transform: translateY(14px) scale(0.97);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      0% { opacity: 0; transform: translateY(12px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
     .teacher-card-enter {
       opacity: 0;
-      animation: cardPopIn 0.48s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: cardPopIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Transisi 3D tilt halus pada frame iPhone */
-    #iphone-device {
-      transform-style: preserve-3d;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
-      will-change: transform;
-    }
-    #iphone-device.is-returning {
-      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
-    }
+    /* Hilangkan scrollbar horizontal pada tab filter mobile */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Transisi spring halus untuk modal pendaftaran */
-    #booking-modal {
+    /* Transisi spring halus untuk kedua modal */
+    .modal-backdrop {
       opacity: 0;
-      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    #booking-modal.modal-open {
+    .modal-backdrop.modal-open {
       opacity: 1;
     }
-    #modal-card {
-      transform: translateY(16px) scale(0.95);
+    .modal-panel {
+      transform: translateY(16px) scale(0.96);
       opacity: 0;
-      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease;
+      transition: transform 0.34s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.26s ease;
     }
-    #booking-modal.modal-open #modal-card {
+    .modal-backdrop.modal-open .modal-panel {
       transform: translateY(0) scale(1);
       opacity: 1;
     }
 
-    /* Transisi halus panel preview kelas di dalam kartu guru */
-    .preview-drawer {
+    /* FAQ Accordion smooth expand/collapse */
+    .faq-answer {
       display: grid;
       grid-template-rows: 0fr;
-      transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1), margin-top 0.32s ease;
+      transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .preview-drawer.open {
+    .faq-item.open .faq-answer {
       grid-template-rows: 1fr;
-      margin-top: 0.75rem;
     }
-    .preview-drawer > div {
+    .faq-answer > div {
       overflow: hidden;
+    }
+    .faq-icon {
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background-color: #0071E3;
+      color: #FFFFFF;
     }
   </style>
 </head>
-<body class="selection:bg-[#0071E3]/15 selection:text-[#0071E3]">
+<body class="relative bg-white text-[#1D1D1F] selection:bg-[#0071E3]/15 selection:text-[#0071E3]">
 
   <!-- =====================================================================
-       1. NAVBAR MENGAMBANG (FROSTED GLASS STICKY HEADER + SCROLL PROGRESS)
+       LAPISAN LATAR BELAKANG TETAP (Z-0 STUDIO DOT-GRID PATTERN)
+  ====================================================================== -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div class="studio-dot-pattern absolute inset-0 opacity-75"></div>
+  </div>
+
+  <!-- =====================================================================
+       1. STICKY FROSTED GLASS NAVBAR + TOP SCROLL PROGRESS BAR
   ====================================================================== -->
   <header class="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-xl border-b border-black/[0.06] transition-all">
-    <!-- Top Scroll Progress Bar -->
+    <!-- Indikator Progres Scroll (#0071E3) -->
     <div aria-hidden="true" class="absolute top-0 left-0 right-0 h-[2.5px] bg-transparent pointer-events-none overflow-hidden">
       <div id="scroll-progress" class="h-full w-0 bg-[#0071E3] transition-[width] duration-75 ease-out"></div>
     </div>
 
     <div class="max-w-6xl mx-auto px-5 sm:px-8 h-14 sm:h-16 flex items-center justify-between">
-      
       <!-- Logo Minimalis di Kiri -->
       <a href="#" class="flex items-center gap-2 group focus:outline-none">
         <span class="w-7 h-7 rounded-lg bg-[#1D1D1F] text-white flex items-center justify-center font-bold text-sm tracking-tight group-hover:bg-[#0071E3] transition-colors">
@@ -191,15 +226,29 @@
         <span class="font-semibold text-[17px] tracking-tight text-[#1D1D1F]">LesHub</span>
       </a>
 
-      <!-- Menu Sangat Ringkas di Tengah dengan Indikator Section Aktif -->
-      <nav aria-label="Navigasi Utama" class="hidden md:flex items-center gap-2 text-[13px] font-medium text-[#1D1D1F]/80">
+      <!-- Menu Navigasi Tengah dengan Penyorotan Section Aktif -->
+      <nav aria-label="Navigasi Utama" class="hidden md:flex items-center gap-1 lg:gap-2 text-[13px] font-medium text-[#1D1D1F]/80">
         <a href="#cara-kerja" data-nav="cara-kerja" class="nav-link rounded-full px-3.5 py-1.5 hover:text-[#1D1D1F] transition-all">Cara Kerja</a>
         <a href="#pilih-guru" data-nav="pilih-guru" class="nav-link rounded-full px-3.5 py-1.5 hover:text-[#1D1D1F] transition-all">Pilih Guru</a>
         <a href="#harga" data-nav="harga" class="nav-link rounded-full px-3.5 py-1.5 hover:text-[#1D1D1F] transition-all">Harga</a>
+        <a href="#testimoni" data-nav="testimoni" class="nav-link rounded-full px-3.5 py-1.5 hover:text-[#1D1D1F] transition-all">Testimoni</a>
+        <a href="#faq" data-nav="faq" class="nav-link rounded-full px-3.5 py-1.5 hover:text-[#1D1D1F] transition-all">FAQ</a>
       </nav>
 
-      <!-- Satu Tombol CTA Berbentuk Pil Warna Biru di Kanan -->
-      <div class="flex items-center gap-3">
+      <!-- Tombol Menu Mobile & CTA Biru Pil -->
+      <div class="flex items-center gap-2.5">
+        <button
+          type="button"
+          id="mobile-menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-navigation"
+          aria-label="Buka menu navigasi"
+          onclick="toggleMobileMenu()"
+          class="md:hidden w-9 h-9 rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] text-[#1D1D1F] flex items-center justify-center transition-colors cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
         <button
           type="button"
           onclick="openBookingModal()"
@@ -208,67 +257,91 @@
         </button>
       </div>
     </div>
+
+    <!-- Dropdown Menu Mobile -->
+    <nav id="mobile-navigation" aria-label="Navigasi Ponsel" class="hidden md:hidden px-5 pb-4 pt-2 border-t border-black/[0.06] bg-white/95 backdrop-blur-xl flex-col gap-1 text-sm font-medium text-[#1D1D1F]">
+      <a href="#cara-kerja" onclick="closeMobileMenu()" class="rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7] transition-colors">Cara Kerja</a>
+      <a href="#pilih-guru" onclick="closeMobileMenu()" class="rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7] transition-colors">Pilih Guru</a>
+      <a href="#harga" onclick="closeMobileMenu()" class="rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7] transition-colors">Harga</a>
+      <a href="#testimoni" onclick="closeMobileMenu()" class="rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7] transition-colors">Testimoni</a>
+      <a href="#faq" onclick="closeMobileMenu()" class="rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7] transition-colors">FAQ</a>
+    </nav>
   </header>
 
-  <main>
-    <!-- =====================================================================
-         2. HERO SECTION (FOKUS VISUAL, 3D TILT IPHONE & LIVE CLASS SWITCHER)
-    ====================================================================== -->
+  <!-- =====================================================================
+       KONTEN UTAMA (RELATIVE Z-10 DI ATAS STUDIO DOT-GRID)
+  ====================================================================== -->
+  <main class="relative z-10">
+
+    <!-- ===================================================================
+         2. HERO SECTION & INTERACTIVE IPHONE MOCKUP
+    ==================================================================== -->
     <section class="pt-14 pb-20 sm:pt-20 sm:pb-28 px-5 sm:px-8 overflow-hidden">
       <div class="max-w-5xl mx-auto text-center">
-        
+
         <!-- Label Kecil Produk -->
         <p class="reveal-up text-xs sm:text-sm font-semibold tracking-wide uppercase text-[#0071E3] mb-3">
-          Les Privat 1-on-1 Terkurasi
+          Les Privat 1-on-1 Terkurasi • Anak hingga Dewasa
         </p>
 
-        <!-- Headline Besar & Tebal -->
+        <!-- Headline Utama -->
         <h1 class="reveal-up text-4xl sm:text-6xl md:text-[68px] font-bold tracking-[-0.035em] leading-[1.06] text-[#1D1D1F] max-w-3xl mx-auto">
           Guru les terbaik.<br class="hidden sm:inline" /> Sesimpel itu.
         </h1>
 
-        <!-- Sub-headline 1 Baris Saja -->
+        <!-- Sub-headline Ringkas -->
         <p class="reveal-up mt-5 text-lg sm:text-xl md:text-2xl font-normal tracking-[-0.015em] text-[#6E6E73] max-w-2xl mx-auto">
           Pilih guru terkurasi, tentukan paket, langsung belajar.
         </p>
 
-        <!-- Tombol Utama & Link Sekunder -->
-        <div class="reveal-up mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+        <!-- Tombol CTA Utama & Sekunder (Termasuk Trial 1 Sesi) -->
+        <div class="reveal-up mt-8 flex flex-wrap items-center justify-center gap-3.5 sm:gap-6">
           <a
             href="#pilih-guru"
             class="rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.98] text-white font-medium text-base px-7 py-3.5 transition-all shadow-sm">
             Pilih Guru
           </a>
+          <button
+            type="button"
+            onclick="openBookingModal(null, 1)"
+            class="group inline-flex items-center gap-1 rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] text-[#1D1D1F] font-medium text-base px-5 py-3.5 transition-all cursor-pointer">
+            <span>Coba 1 Sesi Trial</span>
+            <span class="text-[#0071E3] transition-transform group-hover:translate-x-1" aria-hidden="true">&rsaquo;</span>
+          </button>
           <a
             href="#harga"
             class="group inline-flex items-center gap-1 text-[#0071E3] hover:underline font-medium text-base py-2 px-2">
-            Lihat Paket
+            <span>Lihat Paket</span>
             <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">&rsaquo;</span>
           </a>
         </div>
 
-        <!-- Elemen Visual Utama: Mockup Showcase Layar iPhone 3D Tilt + Floating Badges -->
-        <div id="iphone-tilt-area" style="perspective: 1200px;" class="reveal-up relative mt-14 sm:mt-16 max-w-3xl mx-auto flex justify-center items-center py-2">
-          
-          <!-- Ambient Soft Glow di Belakang Perangkat -->
-          <div class="absolute -inset-4 bg-gradient-to-tr from-[#0071E3]/10 via-[#F5F5F7] to-emerald-400/10 rounded-[56px] blur-2xl -z-10"></div>
+        <!-- Wadah Visual Mockup iPhone + Floating Badges Simetris -->
+        <div id="iphone-tilt-area" style="perspective: 1200px;" class="reveal-up relative mt-14 sm:mt-16 max-w-4xl mx-auto flex justify-center items-center py-2">
 
-          <!-- Badge Mengambang 1: Kiri Atas -->
-          <div class="hidden sm:flex animate-float-slow absolute -left-4 md:-left-10 top-10 z-20 items-center gap-2.5 bg-white/90 backdrop-blur-xl border border-black/[0.06] shadow-apple-float rounded-2xl px-4 py-3">
-            <span class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+          <!-- Lapisan Latar Belakang Terisolasi (-z-10): Aurora Glow & Orbit Rings -->
+          <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
+            <div class="animate-aurora-ambient w-[340px] h-[340px] sm:w-[520px] sm:h-[520px] rounded-full bg-gradient-to-tr from-[#0071E3]/15 via-indigo-400/10 to-emerald-400/15 blur-3xl"></div>
+            <div class="absolute w-[330px] h-[330px] sm:w-[450px] sm:h-[450px] rounded-full border border-black/[0.045]"></div>
+            <div class="hidden sm:block absolute w-[580px] h-[580px] rounded-full border border-dashed border-[#0071E3]/[0.14]"></div>
+          </div>
+
+          <!-- Badge Mengambang 1: Kiri Atas (Hanya Desktop lg+ agar tidak menimpa ponsel) -->
+          <div class="hidden lg:flex animate-float-slow absolute left-0 xl:left-6 top-10 z-20 items-center gap-2.5 bg-white/90 backdrop-blur-xl border border-black/[0.06] shadow-apple-float rounded-2xl px-4 py-3">
+            <span class="w-8 h-8 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </span>
             <div class="text-left">
               <p class="text-xs font-semibold text-[#1D1D1F]">100% Guru Terverifikasi</p>
-              <p class="text-[11px] text-[#6E6E73]">Seleksi ketat &amp; ramah anak</p>
+              <p class="text-[11px] text-[#6E6E73]">Seleksi ketat &amp; ramah</p>
             </div>
           </div>
 
-          <!-- Badge Mengambang 2: Kanan Tengah -->
-          <div class="hidden sm:flex animate-float-delayed absolute -right-4 md:-right-10 top-1/2 -translate-y-1/2 z-20 items-center gap-2.5 bg-white/90 backdrop-blur-xl border border-black/[0.06] shadow-apple-float rounded-2xl px-4 py-3">
-            <span class="w-8 h-8 rounded-full bg-[#0071E3]/10 text-[#0071E3] flex items-center justify-center">
+          <!-- Badge Mengambang 2: Kanan Tengah (Hanya Desktop lg+) -->
+          <div class="hidden lg:flex animate-float-delayed absolute right-0 xl:right-6 top-1/2 -translate-y-1/2 z-20 items-center gap-2.5 bg-white/90 backdrop-blur-xl border border-black/[0.06] shadow-apple-float rounded-2xl px-4 py-3">
+            <span class="w-8 h-8 rounded-full bg-[#0071E3]/10 text-[#0071E3] flex items-center justify-center shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -279,9 +352,9 @@
             </div>
           </div>
 
-          <!-- Badge Mengambang 3: Kiri Bawah -->
-          <div class="hidden sm:flex animate-float-slow absolute -left-2 md:-left-6 bottom-8 z-20 items-center gap-2.5 bg-white/90 backdrop-blur-xl border border-black/[0.06] shadow-apple-float rounded-2xl px-4 py-3">
-            <span class="w-8 h-8 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center">
+          <!-- Badge Mengambang 3: Kiri Bawah (Hanya Desktop lg+) -->
+          <div class="hidden lg:flex animate-float-slow absolute left-2 xl:left-8 bottom-8 z-20 items-center gap-2.5 bg-white/90 backdrop-blur-xl border border-black/[0.06] shadow-apple-float rounded-2xl px-4 py-3">
+            <span class="w-8 h-8 rounded-full bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
@@ -292,14 +365,14 @@
             </div>
           </div>
 
-          <!-- Frame Perangkat iPhone Minimalis dengan 3D Tilt & Specular Glare -->
-          <div id="iphone-device" class="w-full max-w-[360px] sm:max-w-[390px] bg-[#1D1D1F] p-[11px] rounded-[48px] shadow-iphone relative">
+          <!-- Frame Perangkat iPhone Minimalis Terpusat -->
+          <div id="iphone-device" class="w-full max-w-[360px] sm:max-w-[390px] bg-[#1D1D1F] p-[11px] rounded-[48px] shadow-iphone relative z-10">
             <!-- Kilau Kaca Specular Halus -->
             <div id="iphone-glare" aria-hidden="true" class="pointer-events-none absolute inset-0 rounded-[48px] opacity-0 transition-opacity duration-300 z-20"></div>
 
-            <!-- Layar Dalam -->
+            <!-- Layar Dalam iPhone -->
             <div class="bg-[#F5F5F7] rounded-[38px] overflow-hidden text-left relative z-10">
-              
+
               <!-- Dynamic Island & Status Bar -->
               <div class="pt-3 pb-2 px-6 flex items-center justify-between bg-white">
                 <span class="text-[11px] font-semibold text-[#1D1D1F]">09:41</span>
@@ -316,36 +389,43 @@
                 </div>
               </div>
 
-              <!-- Live Class Preview Switcher Pill Bar di dalam layar iPhone -->
-              <div class="px-4 pt-1 pb-2 bg-white">
-                <div role="tablist" aria-label="Pratinjau Suasana Kelas" class="grid grid-cols-3 gap-1 p-1 bg-[#F5F5F7] rounded-full text-[11px] font-medium">
+              <!-- Live Class Preview Switcher (4 Tab: B. Inggris, Matematika, Calistung, Conversation) -->
+              <div class="px-3.5 pt-1 pb-2 bg-white">
+                <div role="tablist" aria-label="Pratinjau Suasana Kelas" class="grid grid-cols-4 gap-1 p-1 bg-[#F5F5F7] rounded-full text-[10px] font-medium">
                   <button
                     type="button"
                     data-hero-tab="nadia"
                     onclick="switchHeroPreview('nadia')"
-                    class="hero-preview-tab rounded-full py-1.5 px-2 bg-white text-[#1D1D1F] font-semibold shadow-2xs transition-all cursor-pointer truncate">
+                    class="hero-preview-tab rounded-full py-1.5 px-1.5 bg-white text-[#1D1D1F] font-semibold shadow-2xs transition-all cursor-pointer truncate">
                     B. Inggris
                   </button>
                   <button
                     type="button"
                     data-hero-tab="dimas"
                     onclick="switchHeroPreview('dimas')"
-                    class="hero-preview-tab rounded-full py-1.5 px-2 text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer truncate">
+                    class="hero-preview-tab rounded-full py-1.5 px-1.5 text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer truncate">
                     Matematika
                   </button>
                   <button
                     type="button"
                     data-hero-tab="rina"
                     onclick="switchHeroPreview('rina')"
-                    class="hero-preview-tab rounded-full py-1.5 px-2 text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer truncate">
+                    class="hero-preview-tab rounded-full py-1.5 px-1.5 text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer truncate">
                     Calistung
+                  </button>
+                  <button
+                    type="button"
+                    data-hero-tab="bagas"
+                    onclick="switchHeroPreview('bagas')"
+                    class="hero-preview-tab rounded-full py-1.5 px-1.5 text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer truncate">
+                    Conversation
                   </button>
                 </div>
               </div>
 
               <!-- Konten Interaktif Suasana Kelas Privat 1-on-1 -->
               <div id="hero-screen-content" class="p-4 pt-2 space-y-3 bg-white rounded-b-[32px] shadow-sm transition-opacity duration-200">
-                <div class="flex items-center justify-between">
+                <div class="flex items-center justify-between gap-2">
                   <div>
                     <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full">
                       <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
@@ -353,16 +433,15 @@
                     </span>
                     <h2 id="hero-class-title" class="text-base font-bold text-[#1D1D1F] mt-1">Bahasa Inggris Dasar</h2>
                   </div>
-                  <span class="text-xs font-semibold text-[#6E6E73] bg-[#F5F5F7] px-2.5 py-1 rounded-full">60 mnt</span>
+                  <span class="text-xs font-semibold text-[#6E6E73] bg-[#F5F5F7] px-2.5 py-1 rounded-full shrink-0">60 mnt</span>
                 </div>
 
                 <!-- Visual Video Call 1-on-1 (Guru & Murid) -->
                 <div id="hero-class-stage" class="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#E8F1FC] via-[#F2F6FC] to-[#E5EEFA] h-48 flex flex-col justify-between p-3.5 border border-black/[0.04] transition-colors duration-300">
-                  <!-- Baris Atas: Guru + Gelombang Suara & PiP Murid -->
-                  <div class="flex items-center justify-between">
+                  <!-- Baris Atas: Badge Guru + Audio Equalizer & PiP Murid -->
+                  <div class="flex items-center justify-between gap-2">
                     <span class="inline-flex items-center gap-2 bg-white/90 backdrop-blur-md text-[#1D1D1F] text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-2xs">
                       <span id="hero-teacher-badge">Kak Nadia • ★ 4.9</span>
-                      <!-- Audio Wave Bars Aktif -->
                       <span class="inline-flex items-end gap-[2px] h-3" aria-hidden="true">
                         <span class="wave-bar w-[2px] h-3 bg-[#0071E3] rounded-full"></span>
                         <span class="wave-bar w-[2px] h-3 bg-[#0071E3] rounded-full"></span>
@@ -371,15 +450,15 @@
                       </span>
                     </span>
                     <!-- Picture-in-Picture Murid -->
-                    <div class="w-14 h-16 rounded-xl bg-white shadow-md border border-black/[0.06] flex flex-col items-center justify-center p-1">
-                      <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm">🧒</div>
-                      <span class="text-[9px] font-medium text-[#6E6E73] mt-0.5">Ananda</span>
+                    <div class="w-14 h-16 rounded-xl bg-white shadow-md border border-black/[0.06] flex flex-col items-center justify-center p-1 shrink-0">
+                      <div id="hero-student-emoji" class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm">🧒</div>
+                      <span id="hero-student-label" class="text-[9px] font-medium text-[#6E6E73] mt-0.5">Ananda</span>
                     </div>
                   </div>
 
-                  <!-- Tengah: Visual Interaktif Kartu Materi -->
+                  <!-- Tengah: Kartu Materi Interaktif -->
                   <div class="my-auto mx-auto bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl shadow-sm border border-black/[0.05] text-center">
-                    <p id="hero-topic-label" class="text-[10px] uppercase tracking-wider font-semibold text-[#0071E3]">Topik Hari Ini</p>
+                    <p class="text-[10px] uppercase tracking-wider font-semibold text-[#0071E3]">Topik Hari Ini</p>
                     <p id="hero-topic-quote" class="text-sm font-bold text-[#1D1D1F]">"Nice to meet you!"</p>
                   </div>
 
@@ -399,19 +478,18 @@
                 </div>
               </div>
 
-              <!-- Ringkasan Paket Singkat di Bagian Bawah Layar iPhone -->
-              <div class="p-4 space-y-2.5">
-                <div class="bg-white rounded-2xl p-3 flex items-center justify-between shadow-2xs">
+              <!-- Quick-Book Bar di Bagian Bawah Layar iPhone -->
+              <div class="p-4">
+                <div class="bg-white rounded-2xl p-3 flex items-center justify-between gap-2 shadow-2xs">
                   <div>
-                    <p class="text-[11px] text-[#6E6E73]">Paket Fokus (4 Sesi)</p>
-                    <p class="text-sm font-bold text-[#1D1D1F]">Rp 400.000 <span class="text-[11px] font-normal text-[#6E6E73]">all-in</span></p>
+                    <p class="text-[11px] text-[#6E6E73]">Mulai dari Sesi Trial</p>
+                    <p class="text-sm font-bold text-[#1D1D1F]">Rp 100.000 <span class="text-[11px] font-normal text-[#6E6E73]">all-in</span></p>
                   </div>
                   <button
-                    id="hero-book-btn"
                     type="button"
-                    onclick="openBookingModal(currentHeroPreviewId, 4)"
-                    class="rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.97] text-white text-xs font-medium px-3.5 py-1.5 transition-all cursor-pointer">
-                    Pesan
+                    onclick="openBookingModal(currentHeroPreviewId, 1)"
+                    class="rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.97] text-white text-xs font-medium px-3.5 py-1.5 transition-all cursor-pointer shrink-0">
+                    Coba Trial
                   </button>
                 </div>
               </div>
@@ -420,8 +498,8 @@
           </div>
         </div>
 
-        <!-- Baris Badge Mobile (Tampil rapi pada layar kecil) -->
-        <div class="mt-8 flex sm:hidden flex-wrap justify-center gap-2">
+        <!-- Baris Badge Mobile & Tablet (< lg) -->
+        <div class="mt-8 flex lg:hidden flex-wrap justify-center gap-2">
           <span class="inline-flex items-center gap-1.5 bg-[#F5F5F7] text-[#1D1D1F] text-xs font-medium px-3.5 py-2 rounded-full">
             <span class="text-emerald-600 font-bold">✓</span> 100% Guru Terverifikasi
           </span>
@@ -436,25 +514,26 @@
       </div>
     </section>
 
-    <!-- =====================================================================
-         3. BAGIAN '3 LANGKAH MUDAH' (BENTO GRID KHAS APPLE)
-    ====================================================================== -->
-    <section id="cara-kerja" class="py-20 sm:py-28 px-5 sm:px-8 border-t border-black/[0.04]">
+    <!-- ===================================================================
+         3. BAGIAN '3 LANGKAH MUDAH' (BENTO GRID + SPOTLIGHT HOVER)
+    ==================================================================== -->
+    <section id="cara-kerja" class="py-20 sm:py-28 px-5 sm:px-8 border-t border-black/[0.05] bg-white/70 backdrop-blur-[2px]">
       <div class="max-w-6xl mx-auto">
-        
+
         <div class="reveal-up text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <h2 class="text-3xl sm:text-5xl font-bold tracking-[-0.03em] text-[#1D1D1F]">
             3 Langkah Mudah.
           </h2>
           <p class="mt-3 text-base sm:text-xl text-[#6E6E73]">
-            Tanpa formulir panjang. Anak siap belajar hari ini.
-        <!-- 3 Kartu Bento Apple dengan Spotlight Hover & Icon Micro-Interaction -->
+            Tanpa formulir panjang. Siap belajar hari ini.
+          </p>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
           <!-- Kartu Bento 1 -->
-          <div class="reveal-up bento-card group relative overflow-hidden bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[260px] transition-transform duration-300 hover:-translate-y-1">
+          <div class="reveal-up bento-card group relative overflow-hidden bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[250px] transition-transform duration-300 hover:-translate-y-1">
             <div class="bento-spotlight pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative z-10 w-14 h-14 rounded-2xl bg-white group-hover:bg-[#0071E3] shadow-apple-card flex items-center justify-center text-[#0071E3] group-hover:text-white group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 mb-8">
+            <div class="relative z-10 w-14 h-14 rounded-2xl bg-white group-hover:bg-[#0071E3] shadow-apple-card flex items-center justify-center text-[#0071E3] group-hover:text-white transition-colors duration-300 mb-8">
               <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -464,15 +543,15 @@
                 1. Pilih Guru
               </h3>
               <p class="mt-2 text-base text-[#6E6E73] leading-relaxed">
-                Lihat profil singkat &amp; gaya mengajarnya.
+                Cek kredensial, gaya mengajar &amp; sapaan suaranya.
               </p>
             </div>
           </div>
 
           <!-- Kartu Bento 2 -->
-          <div class="reveal-up bento-card group relative overflow-hidden bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[260px] transition-transform duration-300 hover:-translate-y-1">
+          <div class="reveal-up bento-card group relative overflow-hidden bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[250px] transition-transform duration-300 hover:-translate-y-1">
             <div class="bento-spotlight pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative z-10 w-14 h-14 rounded-2xl bg-white group-hover:bg-[#0071E3] shadow-apple-card flex items-center justify-center text-[#0071E3] group-hover:text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 mb-8">
+            <div class="relative z-10 w-14 h-14 rounded-2xl bg-white group-hover:bg-[#0071E3] shadow-apple-card flex items-center justify-center text-[#0071E3] group-hover:text-white transition-colors duration-300 mb-8">
               <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
               </svg>
@@ -482,15 +561,15 @@
                 2. Pilih Paket
               </h3>
               <p class="mt-2 text-base text-[#6E6E73] leading-relaxed">
-                4 atau 8 sesi. Harga sudah all-in.
+                Mulai 1 sesi trial, 4 sesi, atau 8 sesi all-in.
               </p>
             </div>
           </div>
 
           <!-- Kartu Bento 3 -->
-          <div class="reveal-up bento-card group relative overflow-hidden bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[260px] transition-transform duration-300 hover:-translate-y-1">
+          <div class="reveal-up bento-card group relative overflow-hidden bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between min-h-[250px] transition-transform duration-300 hover:-translate-y-1">
             <div class="bento-spotlight pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative z-10 w-14 h-14 rounded-2xl bg-white group-hover:bg-[#0071E3] shadow-apple-card flex items-center justify-center text-[#0071E3] group-hover:text-white group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 mb-8">
+            <div class="relative z-10 w-14 h-14 rounded-2xl bg-white group-hover:bg-[#0071E3] shadow-apple-card flex items-center justify-center text-[#0071E3] group-hover:text-white transition-colors duration-300 mb-8">
               <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -501,79 +580,86 @@
                 3. Mulai Belajar
               </h3>
               <p class="mt-2 text-base text-[#6E6E73] leading-relaxed">
-                Jadwal fleksibel via Zoom atau tatap muka.
+                Jadwal fleksibel via Zoom/Meet atau tatap muka.
               </p>
             </div>
           </div>
-
         </div>
+
       </div>
     </section>
 
-    <!-- =====================================================================
-         4. BAGIAN 'PILIH GURU' (KATALOG VISUAL MINIMALIS)
-    ====================================================================== -->
-    <section id="pilih-guru" class="py-20 sm:py-28 px-5 sm:px-8 border-t border-black/[0.04]">
+    <!-- ===================================================================
+         4. BAGIAN 'PILIH GURU' (KATALOG DENGAN KREDENSIAL & PREVIEW MODAL)
+    ==================================================================== -->
+    <section id="pilih-guru" class="py-20 sm:py-28 px-5 sm:px-8 border-t border-black/[0.05]">
       <div class="max-w-6xl mx-auto">
-        
-        <!-- Header & Pill Tabs Filter -->
-        <div class="reveal-up flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+
+        <!-- Header & Filter Kategori Pill Tabs -->
+        <div class="reveal-up flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
           <div>
             <h2 class="text-3xl sm:text-5xl font-bold tracking-[-0.03em] text-[#1D1D1F]">
               Pilih Guru.
             </h2>
             <p class="mt-3 text-base sm:text-xl text-[#6E6E73]">
-              Pengajar ramah yang terbukti disukai anak.
+              Pengajar berkredensial yang terbukti ramah &amp; komunikatif.
             </p>
           </div>
 
-          <!-- Filter Kategori Berbentuk Pil (Pill Tabs) -->
+          <!-- Filter Kategori Berbentuk Pil -->
           <div role="tablist" aria-label="Filter Mata Pelajaran" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
             <button
               type="button"
               data-filter="Semua"
               onclick="filterTeachers('Semua')"
-              class="filter-pill active rounded-full px-5 py-2.5 text-sm font-medium transition-all bg-[#1D1D1F] text-white cursor-pointer whitespace-nowrap">
+              class="filter-pill active rounded-full px-4 sm:px-5 py-2.5 text-sm font-medium transition-all bg-[#1D1D1F] text-white cursor-pointer whitespace-nowrap">
               Semua
             </button>
             <button
               type="button"
               data-filter="Bahasa Inggris"
               onclick="filterTeachers('Bahasa Inggris')"
-              class="filter-pill rounded-full px-5 py-2.5 text-sm font-medium transition-all bg-[#F5F5F7] text-[#1D1D1F] hover:bg-[#EBEBF0] cursor-pointer whitespace-nowrap">
+              class="filter-pill rounded-full px-4 sm:px-5 py-2.5 text-sm font-medium transition-all bg-[#F5F5F7] text-[#1D1D1F] hover:bg-[#EBEBF0] cursor-pointer whitespace-nowrap">
               Bahasa Inggris
             </button>
             <button
               type="button"
               data-filter="Matematika"
               onclick="filterTeachers('Matematika')"
-              class="filter-pill rounded-full px-5 py-2.5 text-sm font-medium transition-all bg-[#F5F5F7] text-[#1D1D1F] hover:bg-[#EBEBF0] cursor-pointer whitespace-nowrap">
+              class="filter-pill rounded-full px-4 sm:px-5 py-2.5 text-sm font-medium transition-all bg-[#F5F5F7] text-[#1D1D1F] hover:bg-[#EBEBF0] cursor-pointer whitespace-nowrap">
               Matematika
             </button>
             <button
               type="button"
               data-filter="Calistung"
               onclick="filterTeachers('Calistung')"
-              class="filter-pill rounded-full px-5 py-2.5 text-sm font-medium transition-all bg-[#F5F5F7] text-[#1D1D1F] hover:bg-[#EBEBF0] cursor-pointer whitespace-nowrap">
+              class="filter-pill rounded-full px-4 sm:px-5 py-2.5 text-sm font-medium transition-all bg-[#F5F5F7] text-[#1D1D1F] hover:bg-[#EBEBF0] cursor-pointer whitespace-nowrap">
               Calistung
+            </button>
+            <button
+              type="button"
+              data-filter="Dewasa & Umum"
+              onclick="filterTeachers('Dewasa & Umum')"
+              class="filter-pill rounded-full px-4 sm:px-5 py-2.5 text-sm font-medium transition-all bg-[#F5F5F7] text-[#1D1D1F] hover:bg-[#EBEBF0] cursor-pointer whitespace-nowrap">
+              Dewasa &amp; Umum
             </button>
           </div>
         </div>
 
-        <!-- Grid Kartu Guru Bergaya Kartu Produk Apple -->
+        <!-- Grid Kartu Guru -->
         <div id="teacher-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Kartu guru dirender melalui JavaScript agar sinkron dengan modal pendaftaran -->
+          <!-- Dirender dinamis oleh JavaScript -->
         </div>
 
       </div>
     </section>
 
-    <!-- =====================================================================
-         5. BAGIAN 'HARGA TRANSPARAN' (INTERACTIVE COMPARISON & PRICE COUNTER)
-    ====================================================================== -->
-    <section id="harga" class="py-20 sm:py-28 px-5 sm:px-8 border-t border-black/[0.04]">
+    <!-- ===================================================================
+         5. BAGIAN 'HARGA TRANSPARAN' (PAKET FOKUS, INTENSIF & SESI TRIAL)
+    ==================================================================== -->
+    <section id="harga" class="py-20 sm:py-28 px-5 sm:px-8 border-t border-black/[0.05] bg-white/75 backdrop-blur-[2px]">
       <div class="max-w-4xl mx-auto">
-        
+
         <div class="reveal-up text-center mb-10 sm:mb-12">
           <h2 class="text-3xl sm:text-5xl font-bold tracking-[-0.03em] text-[#1D1D1F]">
             Harga Transparan.
@@ -582,29 +668,28 @@
             Satu harga jelas. Sudah termasuk biaya layanan.
           </p>
 
-          <!-- Interactive Frequency Toggle Switcher -->
+          <!-- Pengalih Frekuensi Belajar Interaktif -->
           <div class="mt-7 inline-flex flex-col items-center">
             <div role="tablist" aria-label="Perbandingan Frekuensi Belajar" class="inline-flex items-center p-1 bg-[#F5F5F7] rounded-full border border-black/[0.05]">
               <button
                 type="button"
                 id="pricing-tab-4"
                 onclick="highlightPricingPlan(4)"
-                class="rounded-full px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold transition-all bg-white text-[#1D1D1F] shadow-xs cursor-pointer">
-                1x Seminggu • 4 Sesi
+                class="rounded-full px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold transition-all bg-white text-[#1D1D1F] shadow-2xs cursor-pointer">
+                1x Seminggu
               </button>
               <button
                 type="button"
                 id="pricing-tab-8"
                 onclick="highlightPricingPlan(8)"
                 class="rounded-full px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium transition-all text-[#6E6E73] hover:text-[#1D1D1F] cursor-pointer flex items-center gap-1.5">
-                <span>2x Seminggu • 8 Sesi</span>
+                <span>2x Seminggu</span>
                 <span class="rounded-full bg-[#0071E3]/10 text-[#0071E3] text-[10px] font-bold px-2 py-0.5">Hemat</span>
               </button>
             </div>
 
-            <!-- Live Animated Counter Summary Pill -->
-            <div class="mt-4 inline-flex items-center gap-2.5 bg-[#F5F5F7] rounded-full px-4 py-1.5 text-xs text-[#6E6E73]">
-              <span>Estimasi biaya per sesi:</span>
+            <div class="mt-4 inline-flex items-center gap-2 bg-[#F5F5F7] rounded-full px-4 py-1.5 text-xs text-[#6E6E73]">
+              <span>Estimasi per sesi:</span>
               <span id="animated-session-rate" class="font-bold text-[#1D1D1F]">Rp 100.000</span>
               <span id="animated-savings-badge" class="hidden rounded-full bg-emerald-500/10 text-emerald-700 font-semibold px-2.5 py-0.5">
                 Hemat Rp 50.000
@@ -613,37 +698,37 @@
           </div>
         </div>
 
-        <!-- 2 Kartu Perbandingan Bersih Berdampingan -->
+        <!-- 2 Kartu Utama Berdampingan -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          
+
           <!-- Paket Fokus (4 Sesi) -->
-          <div id="pricing-card-4" class="reveal-up bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between ring-2 ring-[#0071E3] transition-all duration-300">
+          <div id="pricing-card-4" class="reveal-up bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300">
             <div>
               <div class="flex items-center justify-between gap-2">
                 <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-[#1D1D1F]">
                   Paket Fokus (4 Sesi)
                 </h3>
-                <span id="badge-plan-4" class="rounded-full bg-[#1D1D1F] text-white text-[11px] font-semibold px-3 py-1 whitespace-nowrap">
-                  Fleksibel
+                <span class="rounded-full bg-white text-[#1D1D1F] text-[11px] font-semibold px-3 py-1 whitespace-nowrap shadow-2xs">
+                  1x / Minggu
                 </span>
               </div>
               <div class="mt-5 flex items-baseline gap-1.5">
-                <span id="price-display-4" class="text-3xl sm:text-4xl font-bold tracking-tight text-[#1D1D1F]">Rp 400.000</span>
+                <span class="text-3xl sm:text-4xl font-bold tracking-tight text-[#1D1D1F]">Rp 400.000</span>
                 <span class="text-sm text-[#6E6E73]">/ paket</span>
               </div>
               <p class="mt-2 text-xs text-[#6E6E73]">Setara Rp 100.000 per sesi • All-in</p>
 
               <ul class="mt-8 space-y-3.5 text-sm sm:text-base text-[#1D1D1F]/90">
                 <li class="flex items-center gap-3">
-                  <span class="w-5 h-5 rounded-full bg-white text-[#0071E3] flex items-center justify-center text-xs font-bold shadow-2xs">✓</span>
-                  Cocok untuk evaluasi awal
+                  <span class="w-5 h-5 rounded-full bg-white text-[#0071E3] flex items-center justify-center text-xs font-bold shadow-2xs shrink-0">✓</span>
+                  Cocok untuk pendampingan rutin mingguan
                 </li>
                 <li class="flex items-center gap-3">
-                  <span class="w-5 h-5 rounded-full bg-white text-[#0071E3] flex items-center justify-center text-xs font-bold shadow-2xs">✓</span>
-                  Jadwal 1x seminggu (fleksibel)
+                  <span class="w-5 h-5 rounded-full bg-white text-[#0071E3] flex items-center justify-center text-xs font-bold shadow-2xs shrink-0">✓</span>
+                  Jadwal fleksibel bisa diatur ulang
                 </li>
                 <li class="flex items-center gap-3">
-                  <span class="w-5 h-5 rounded-full bg-white text-[#0071E3] flex items-center justify-center text-xs font-bold shadow-2xs">✓</span>
+                  <span class="w-5 h-5 rounded-full bg-white text-[#0071E3] flex items-center justify-center text-xs font-bold shadow-2xs shrink-0">✓</span>
                   Garansi ganti guru gratis
                 </li>
               </ul>
@@ -658,7 +743,7 @@
           </div>
 
           <!-- Paket Intensif (8 Sesi) -->
-          <div id="pricing-card-8" class="reveal-up bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300">
+          <div id="pricing-card-8" class="reveal-up bg-[#F5F5F7] rounded-3xl p-8 sm:p-10 flex flex-col justify-between ring-2 ring-[#0071E3] transition-all duration-300">
             <div>
               <div class="flex items-center justify-between gap-2">
                 <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-[#1D1D1F]">
@@ -669,22 +754,22 @@
                 </span>
               </div>
               <div class="mt-5 flex items-baseline gap-1.5">
-                <span id="price-display-8" class="text-3xl sm:text-4xl font-bold tracking-tight text-[#1D1D1F]">Rp 750.000</span>
+                <span class="text-3xl sm:text-4xl font-bold tracking-tight text-[#1D1D1F]">Rp 750.000</span>
                 <span class="text-sm text-[#6E6E73]">/ paket</span>
               </div>
               <p class="mt-2 text-xs text-[#0071E3] font-medium">Hemat Rp 50.000 • Sudah termasuk biaya layanan</p>
 
               <ul class="mt-8 space-y-3.5 text-sm sm:text-base text-[#1D1D1F]/90">
                 <li class="flex items-center gap-3">
-                  <span class="w-5 h-5 rounded-full bg-[#0071E3] text-white flex items-center justify-center text-xs font-bold">✓</span>
-                  Progres belajar lebih cepat
+                  <span class="w-5 h-5 rounded-full bg-[#0071E3] text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                  Progres belajar 2x lebih cepat
                 </li>
                 <li class="flex items-center gap-3">
-                  <span class="w-5 h-5 rounded-full bg-[#0071E3] text-white flex items-center justify-center text-xs font-bold">✓</span>
+                  <span class="w-5 h-5 rounded-full bg-[#0071E3] text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>
                   Jadwal 2x seminggu (fleksibel)
                 </li>
                 <li class="flex items-center gap-3">
-                  <span class="w-5 h-5 rounded-full bg-[#0071E3] text-white flex items-center justify-center text-xs font-bold">✓</span>
+                  <span class="w-5 h-5 rounded-full bg-[#0071E3] text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>
                   Laporan perkembangan bulanan
                 </li>
               </ul>
@@ -699,20 +784,281 @@
           </div>
 
         </div>
+
+        <!-- Kartu Full-Width: 1 Sesi Trial / Evaluasi Awal -->
+        <div class="reveal-up mt-6 sm:mt-8 bg-[#F5F5F7] rounded-3xl p-6 sm:p-8 border border-black/[0.05] flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div class="space-y-1.5">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="rounded-full bg-[#0071E3]/10 text-[#0071E3] text-[11px] font-semibold px-3 py-0.5">
+                Coba Dulu Tanpa Komitmen
+              </span>
+              <span class="text-xs text-[#6E6E73]">60 Menit • Online / Tatap Muka</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold tracking-tight text-[#1D1D1F]">
+              1 Sesi Trial / Evaluasi Awal — <span class="text-[#0071E3]">Rp 100.000</span> <span class="text-xs font-normal text-[#6E6E73]">(All-in)</span>
+            </h3>
+            <p class="text-sm text-[#6E6E73]">
+              Uji kecocokan gaya mengajar guru &amp; pemetaan level belajar sebelum mengambil paket bulanan.
+            </p>
+          </div>
+          <button
+            type="button"
+            onclick="openBookingModal(null, 1)"
+            class="rounded-full bg-[#1D1D1F] hover:bg-[#0071E3] active:scale-[0.98] text-white font-semibold text-sm py-3.5 px-6 transition-all whitespace-nowrap cursor-pointer shrink-0">
+            Pesan Sesi Trial
+          </button>
+        </div>
+
       </div>
     </section>
+
+    <!-- ===================================================================
+         6. BAGIAN 'CERITA ORANG TUA & MURID' (TESTIMONI TERVERIFIKASI)
+    ==================================================================== -->
+    <section id="testimoni" class="py-20 sm:py-28 px-5 sm:px-8 border-t border-black/[0.05]">
+      <div class="max-w-6xl mx-auto">
+
+        <div class="reveal-up text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+          <h2 class="text-3xl sm:text-5xl font-bold tracking-[-0.03em] text-[#1D1D1F]">
+            Cerita Orang Tua &amp; Murid.
+          </h2>
+          <p class="mt-3 text-base sm:text-xl text-[#6E6E73]">
+            Pengalaman nyata dari sesi belajar 1-on-1 bersama guru terkurasi.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Testimoni 1: Orang Tua SD -->
+          <article class="reveal-up bg-[#F5F5F7] rounded-3xl p-7 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-5">
+                <div class="flex items-center gap-0.5 text-amber-500 text-sm" aria-label="Rating 5 dari 5 bintang">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <span class="inline-flex items-center gap-1 bg-white text-emerald-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-2xs">
+                  ✓ Terverifikasi
+                </span>
+              </div>
+              <p class="text-[15px] sm:text-base text-[#1D1D1F] leading-relaxed">
+                "Awalnya anak saya pemalu kalau diminta bicara bahasa Inggris. Baru 4 sesi bersama Kak Nadia, sekarang sudah berani bercerita pakai kalimat pendek di sekolah."
+              </p>
+            </div>
+            <div class="mt-6 pt-5 border-t border-black/[0.06] flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-white text-[#0071E3] font-bold text-sm flex items-center justify-center shadow-2xs shrink-0">
+                IM
+              </div>
+              <div>
+                <p class="text-sm font-bold text-[#1D1D1F]">Ibu Maya</p>
+                <p class="text-xs text-[#6E6E73]">Orang Tua Siswa SD Kelas 4</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Testimoni 2: Orang Tua SMP -->
+          <article class="reveal-up bg-[#F5F5F7] rounded-3xl p-7 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-5">
+                <div class="flex items-center gap-0.5 text-amber-500 text-sm" aria-label="Rating 5 dari 5 bintang">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <span class="inline-flex items-center gap-1 bg-white text-emerald-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-2xs">
+                  ✓ Terverifikasi
+                </span>
+              </div>
+              <p class="text-[15px] sm:text-base text-[#1D1D1F] leading-relaxed">
+                "Penjelasan Kak Dimas runtut dan tidak terburu-buru. Nilai ulangan aljabar anak kami naik drastis karena paham konsep dasarnya, bukan sekadar menghafal rumus."
+              </p>
+            </div>
+            <div class="mt-6 pt-5 border-t border-black/[0.06] flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-white text-[#1D1D1F] font-bold text-sm flex items-center justify-center shadow-2xs shrink-0">
+                BH
+              </div>
+              <div>
+                <p class="text-sm font-bold text-[#1D1D1F]">Bapak Hendra</p>
+                <p class="text-xs text-[#6E6E73]">Orang Tua Siswa SMP</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Testimoni 3: Murid Dewasa / Karyawan -->
+          <article class="reveal-up bg-[#F5F5F7] rounded-3xl p-7 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-5">
+                <div class="flex items-center gap-0.5 text-amber-500 text-sm" aria-label="Rating 5 dari 5 bintang">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <span class="inline-flex items-center gap-1 bg-white text-emerald-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-2xs">
+                  ✓ Terverifikasi
+                </span>
+              </div>
+              <p class="text-[15px] sm:text-base text-[#1D1D1F] leading-relaxed">
+                "Ambil kelas English Conversation malam sepulang kerja bareng Kak Bagas. Karena 1-on-1, full praktik ngobrol dan langsung dikoreksi tanpa rasa canggung."
+              </p>
+            </div>
+            <div class="mt-6 pt-5 border-t border-black/[0.06] flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-white text-emerald-700 font-bold text-sm flex items-center justify-center shadow-2xs shrink-0">
+                RK
+              </div>
+              <div>
+                <p class="text-sm font-bold text-[#1D1D1F]">Raka</p>
+                <p class="text-xs text-[#6E6E73]">Karyawan • Kelas English Conversation</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         7. BAGIAN 'PERTANYAAN UMUM' (FAQ AKORDEON MINIMALIS ALA APPLE)
+    ==================================================================== -->
+    <section id="faq" class="py-20 sm:py-28 px-5 sm:px-8 border-t border-black/[0.05] bg-white/75 backdrop-blur-[2px]">
+      <div class="max-w-3xl mx-auto">
+
+        <div class="reveal-up text-center mb-12 sm:mb-14">
+          <h2 class="text-3xl sm:text-5xl font-bold tracking-[-0.03em] text-[#1D1D1F]">
+            Pertanyaan Umum.
+          </h2>
+          <p class="mt-3 text-base sm:text-xl text-[#6E6E73]">
+            Jawaban singkat untuk hal yang paling sering ditanyakan.
+          </p>
+        </div>
+
+        <div class="reveal-up space-y-3" id="faq-list">
+          <!-- FAQ 1 -->
+          <div class="faq-item bg-[#F5F5F7] rounded-2xl transition-colors">
+            <button
+              type="button"
+              aria-expanded="false"
+              onclick="toggleFaq(this)"
+              class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer">
+              <span class="text-base sm:text-[17px] font-semibold text-[#1D1D1F]">
+                Bagaimana jika anak berhalangan atau perlu reschedule jadwal?
+              </span>
+              <span class="faq-icon w-7 h-7 rounded-full bg-white text-[#1D1D1F] flex items-center justify-center text-lg font-medium shadow-2xs shrink-0">
+                +
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="px-6 pb-5 text-sm sm:text-[15px] text-[#6E6E73] leading-relaxed">
+                  Sangat fleksibel. Anda cukup menginfokan ke Admin atau guru minimal 4 jam sebelum sesi dimulai, dan jadwal akan diganti ke hari lain tanpa hangus.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item bg-[#F5F5F7] rounded-2xl transition-colors">
+            <button
+              type="button"
+              aria-expanded="false"
+              onclick="toggleFaq(this)"
+              class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer">
+              <span class="text-base sm:text-[17px] font-semibold text-[#1D1D1F]">
+                Apakah kelas tersedia secara Online maupun Tatap Muka?
+              </span>
+              <span class="faq-icon w-7 h-7 rounded-full bg-white text-[#1D1D1F] flex items-center justify-center text-lg font-medium shadow-2xs shrink-0">
+                +
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="px-6 pb-5 text-sm sm:text-[15px] text-[#6E6E73] leading-relaxed">
+                  Ya, Anda bisa memilih mode belajar <strong>Online</strong> (via Zoom atau Google Meet interaktif) maupun <strong>Tatap Muka</strong> (guru datang ke rumah sesuai ketersediaan area).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item bg-[#F5F5F7] rounded-2xl transition-colors">
+            <button
+              type="button"
+              aria-expanded="false"
+              onclick="toggleFaq(this)"
+              class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer">
+              <span class="text-base sm:text-[17px] font-semibold text-[#1D1D1F]">
+                Bagaimana cara kerja Garansi Ganti Guru gratis?
+              </span>
+              <span class="faq-icon w-7 h-7 rounded-full bg-white text-[#1D1D1F] flex items-center justify-center text-lg font-medium shadow-2xs shrink-0">
+                +
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="px-6 pb-5 text-sm sm:text-[15px] text-[#6E6E73] leading-relaxed">
+                  Jika setelah pertemuan pertama gaya mengajar guru dirasa kurang cocok, hubungi WhatsApp Admin kami. Kami akan mencarikan pengganti yang lebih sesuai tanpa biaya tambahan dan sisa sesi tetap utuh.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item bg-[#F5F5F7] rounded-2xl transition-colors">
+            <button
+              type="button"
+              aria-expanded="false"
+              onclick="toggleFaq(this)"
+              class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer">
+              <span class="text-base sm:text-[17px] font-semibold text-[#1D1D1F]">
+                Apa yang didapat dari paket 1 Sesi Trial / Evaluasi Awal?
+              </span>
+              <span class="faq-icon w-7 h-7 rounded-full bg-white text-[#1D1D1F] flex items-center justify-center text-lg font-medium shadow-2xs shrink-0">
+                +
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="px-6 pb-5 text-sm sm:text-[15px] text-[#6E6E73] leading-relaxed">
+                  Anda mendapatkan 1 sesi penuh berdurasi 60 menit bersama guru pilihan, pemetaan kemampuan awal murid, serta rekomendasi rencana belajar sebelum memutuskan mengambil paket 4 atau 8 sesi.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item bg-[#F5F5F7] rounded-2xl transition-colors">
+            <button
+              type="button"
+              aria-expanded="false"
+              onclick="toggleFaq(this)"
+              class="w-full px-6 py-5 text-left flex items-center justify-between gap-4 cursor-pointer">
+              <span class="text-base sm:text-[17px] font-semibold text-[#1D1D1F]">
+                Apakah LesHub hanya untuk anak sekolah atau bisa untuk mahasiswa/dewasa?
+              </span>
+              <span class="faq-icon w-7 h-7 rounded-full bg-white text-[#1D1D1F] flex items-center justify-center text-lg font-medium shadow-2xs shrink-0">
+                +
+              </span>
+            </button>
+            <div class="faq-answer">
+              <div>
+                <p class="px-6 pb-5 text-sm sm:text-[15px] text-[#6E6E73] leading-relaxed">
+                  Terbuka untuk semua usia—mulai dari Anak Usia Dini (Calistung), SD, SMP, SMA, hingga Mahasiswa dan Karyawan/Dewasa (seperti kelas <em>English Conversation</em> untuk kerja maupun wawancara).
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <!-- =====================================================================
-       7. FOOTER MINIMALIS ALA APPLE
+       8. FOOTER MINIMALIS ALA APPLE
   ====================================================================== -->
-  <footer class="bg-[#F5F5F7] border-t border-black/[0.06] py-10 px-5 sm:px-8">
+  <footer class="relative z-10 bg-[#F5F5F7] border-t border-black/[0.06] py-10 px-5 sm:px-8">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#6E6E73]">
-      <p>Harga yang tertera sudah final tanpa biaya tambahan.</p>
-      <div class="flex items-center gap-6">
+      <p>Harga yang tertera sudah final (all-in) tanpa biaya tambahan.</p>
+      <div class="flex flex-wrap items-center justify-center gap-5">
         <a href="#cara-kerja" class="hover:text-[#1D1D1F] transition-colors">Cara Kerja</a>
         <a href="#pilih-guru" class="hover:text-[#1D1D1F] transition-colors">Pilih Guru</a>
         <a href="#harga" class="hover:text-[#1D1D1F] transition-colors">Harga</a>
+        <a href="#testimoni" class="hover:text-[#1D1D1F] transition-colors">Testimoni</a>
+        <a href="#faq" class="hover:text-[#1D1D1F] transition-colors">FAQ</a>
       </div>
       <p>© 2026 LesHub Indonesia</p>
     </div>
@@ -740,19 +1086,119 @@
   </div>
 
   <!-- =====================================================================
-       6. MODAL PENDAFTARAN TANPA RIBET (INTERACTIVE 1-SCREEN BOOKING MODAL)
+       9. MODAL PREVIEW KELAS & SAPAAN SUARA GURU
+  ====================================================================== -->
+  <div
+    id="teacher-preview-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="preview-modal-title"
+    class="modal-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-black/40 backdrop-blur-md">
+    <div class="modal-panel relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-black/[0.06] max-h-[92vh] overflow-y-auto p-6 sm:p-8">
+      <!-- Tombol Tutup -->
+      <button
+        type="button"
+        aria-label="Tutup pratinjau guru"
+        onclick="closeTeacherPreviewModal()"
+        class="absolute top-5 right-5 w-8 h-8 rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] text-[#6E6E73] hover:text-[#1D1D1F] flex items-center justify-center transition-colors cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Header Profil Guru -->
+      <div class="flex items-center gap-4 pr-8">
+        <div id="preview-modal-avatar" class="w-16 h-16 rounded-2xl bg-[#F5F5F7] overflow-hidden shrink-0 shadow-apple-card"></div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="preview-modal-rating" class="inline-flex items-center gap-1 bg-[#F5F5F7] text-[#1D1D1F] text-xs font-semibold px-2.5 py-0.5 rounded-full">★ 4.9</span>
+            <span id="preview-modal-exp" class="text-xs font-medium text-[#0071E3]">5 Thn Mengajar</span>
+          </div>
+          <h3 id="preview-modal-title" class="text-xl font-bold tracking-tight text-[#1D1D1F] mt-1">Kak Nadia</h3>
+          <p id="preview-modal-subject" class="text-xs font-semibold text-[#6E6E73]">Bahasa Inggris</p>
+        </div>
+      </div>
+
+      <!-- Kredensial & Jadwal -->
+      <div class="mt-5 bg-[#F5F5F7] rounded-2xl p-4 space-y-2 text-xs">
+        <div class="flex items-start gap-2">
+          <span class="text-[#0071E3] font-bold">🎓</span>
+          <div>
+            <p class="font-semibold text-[#1D1D1F]">Latar Belakang &amp; Sertifikasi</p>
+            <p id="preview-modal-credential" class="text-[#6E6E73] mt-0.5">-</p>
+          </div>
+        </div>
+        <div class="pt-2 border-t border-black/[0.05] flex items-start gap-2">
+          <span class="text-emerald-600 font-bold">📅</span>
+          <div>
+            <p class="font-semibold text-[#1D1D1F]">Hari Tersedia</p>
+            <p id="preview-modal-days" class="text-[#6E6E73] mt-0.5">-</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gaya Mengajar -->
+      <div class="mt-4">
+        <p class="text-xs font-semibold text-[#1D1D1F] mb-1">Gaya &amp; Metode Mengajar</p>
+        <p id="preview-modal-method" class="text-sm text-[#6E6E73] leading-relaxed">-</p>
+      </div>
+
+      <!-- Simulasi Pemutar Sapaan Suara Guru -->
+      <div class="mt-5 bg-[#F5F5F7] rounded-2xl p-4 border border-black/[0.04]">
+        <div class="flex items-center justify-between gap-3">
+          <button
+            type="button"
+            onclick="togglePreviewGreetingAudio()"
+            class="inline-flex items-center gap-2.5 rounded-full bg-white hover:bg-[#EBEBF0] px-4 py-2 text-xs font-semibold text-[#1D1D1F] shadow-2xs transition-all cursor-pointer">
+            <span id="modal-voice-icon" class="w-5 h-5 rounded-full bg-[#0071E3] text-white flex items-center justify-center text-[10px]">▶</span>
+            <span id="modal-voice-label">Putar Sapaan Guru</span>
+          </button>
+          <div class="flex items-center gap-2">
+            <span id="modal-voice-waves" class="inline-flex items-end gap-[2px] h-3.5">
+              <span class="w-[2px] h-1.5 bg-[#0071E3]/50 rounded-full"></span>
+              <span class="w-[2px] h-2.5 bg-[#0071E3]/50 rounded-full"></span>
+              <span class="w-[2px] h-2 bg-[#0071E3]/50 rounded-full"></span>
+              <span class="w-[2px] h-1.5 bg-[#0071E3]/50 rounded-full"></span>
+            </span>
+            <span id="modal-voice-timer" class="text-xs font-medium text-[#6E6E73] tabular-nums">0:05</span>
+          </div>
+        </div>
+        <p id="modal-voice-quote" class="mt-3 text-xs italic text-[#1D1D1F]/85 bg-white rounded-xl p-3 border border-black/[0.04]">
+          "Halo! Yuk mulai sesi belajar yang nyaman dan menyenangkan."
+        </p>
+      </div>
+
+      <!-- Tombol Pilih Guru Ini -->
+      <div class="mt-6 flex items-center gap-2.5">
+        <button
+          type="button"
+          onclick="bookFromPreviewModal(1)"
+          class="flex-1 rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] text-[#1D1D1F] font-semibold text-xs sm:text-sm py-3.5 px-4 transition-all cursor-pointer">
+          Coba Trial (Rp 100rb)
+        </button>
+        <button
+          type="button"
+          onclick="bookFromPreviewModal(4)"
+          class="flex-1 rounded-full bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-xs sm:text-sm py-3.5 px-4 transition-all shadow-sm cursor-pointer">
+          Pilih Guru Ini
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       10. MODAL PENDAFTARAN 1-LAYAR + WHATSAPP ADMIN & QRIS
   ====================================================================== -->
   <div
     id="booking-modal"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title"
-    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-black/40 backdrop-blur-md">
-    
-    <!-- Kontainer Modal dengan Animasi Spring -->
-    <div id="modal-card" class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-black/[0.06] max-h-[92vh] overflow-y-auto p-6 sm:p-8">
-      
-      <!-- Tombol Tutup Bulat di Pojok Kanan Atas -->
+    class="modal-backdrop fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-black/40 backdrop-blur-md">
+
+    <div class="modal-panel relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-black/[0.06] max-h-[92vh] overflow-y-auto p-6 sm:p-8">
+
+      <!-- Tombol Tutup -->
       <button
         type="button"
         aria-label="Tutup jendela pendaftaran"
@@ -770,11 +1216,9 @@
           Mulai Belajar
         </h3>
 
-        <!-- Ringkasan Guru Terpilih + Dropdown Simpel untuk Ganti Guru -->
-        <div class="mt-5 bg-[#F5F5F7] rounded-2xl p-3.5 flex items-center gap-3.5">
-          <div id="modal-teacher-avatar" class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shrink-0 shadow-2xs overflow-hidden">
-            <!-- Avatar diisi dinamis -->
-          </div>
+        <!-- Ringkasan Guru Terpilih + Dropdown -->
+        <div class="mt-4 bg-[#F5F5F7] rounded-2xl p-3.5 flex items-center gap-3.5">
+          <div id="modal-teacher-avatar" class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shrink-0 shadow-2xs overflow-hidden"></div>
           <div class="flex-1 min-w-0">
             <label for="modal-teacher-select" class="block text-[11px] font-medium text-[#6E6E73]">
               Guru Terpilih
@@ -783,52 +1227,80 @@
               id="modal-teacher-select"
               onchange="handleTeacherChange(this.value)"
               class="w-full bg-transparent font-semibold text-sm text-[#1D1D1F] focus:outline-none cursor-pointer truncate pr-2">
-              <!-- Opsi guru diisi dinamis -->
             </select>
           </div>
         </div>
 
-        <!-- Toggle Pilihan Paket (4 Sesi vs 8 Sesi) + Total Harga Real-Time -->
+        <!-- 3 Pilihan Paket Belajar (1 Sesi Trial, 4 Sesi, 8 Sesi) -->
         <div class="mt-4">
           <div class="flex items-center justify-between mb-2">
             <span class="text-xs font-semibold text-[#1D1D1F]">Pilih Paket Belajar</span>
             <span class="text-[11px] text-[#6E6E73]">Harga sudah all-in</span>
           </div>
 
-          <div class="grid grid-cols-2 gap-2 p-1 bg-[#F5F5F7] rounded-2xl">
+          <div class="grid grid-cols-3 gap-1.5 p-1 bg-[#F5F5F7] rounded-2xl">
+            <button
+              type="button"
+              id="pkg-btn-1"
+              onclick="selectPackage(1)"
+              class="rounded-xl py-2.5 px-2.5 text-left transition-all text-[#6E6E73] cursor-pointer">
+              <div class="text-[11px] font-bold text-[#1D1D1F]">1 Sesi Trial</div>
+              <div class="text-[10px] text-[#6E6E73]">Rp 100.000</div>
+            </button>
             <button
               type="button"
               id="pkg-btn-4"
               onclick="selectPackage(4)"
-              class="rounded-xl py-2.5 px-3 text-left transition-all bg-white shadow-xs cursor-pointer">
-              <div class="text-xs font-bold text-[#1D1D1F]">4 Sesi</div>
-              <div class="text-[11px] text-[#6E6E73]">Rp 400.000</div>
+              class="rounded-xl py-2.5 px-2.5 text-left transition-all bg-white shadow-2xs cursor-pointer">
+              <div class="text-[11px] font-bold text-[#1D1D1F]">4 Sesi</div>
+              <div class="text-[10px] text-[#6E6E73]">Rp 400.000</div>
             </button>
             <button
               type="button"
               id="pkg-btn-8"
               onclick="selectPackage(8)"
-              class="rounded-xl py-2.5 px-3 text-left transition-all text-[#6E6E73] cursor-pointer">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-[#1D1D1F]">8 Sesi</span>
-                <span class="text-[10px] font-semibold text-[#0071E3]">Hemat</span>
+              class="rounded-xl py-2.5 px-2.5 text-left transition-all text-[#6E6E73] cursor-pointer">
+              <div class="flex items-center justify-between gap-1">
+                <span class="text-[11px] font-bold text-[#1D1D1F]">8 Sesi</span>
+                <span class="text-[9px] font-bold text-[#0071E3]">Hemat</span>
               </div>
-              <div class="text-[11px] text-[#6E6E73]">Rp 750.000</div>
+              <div class="text-[10px] text-[#6E6E73]">Rp 750.000</div>
             </button>
           </div>
         </div>
 
-        <!-- Pilihan Cepat Preferensi Waktu Belajar (Tombol Pil) -->
+        <!-- Mode Belajar Toggle Pills: Online vs Tatap Muka -->
         <div class="mt-4">
-          <span class="block text-xs font-semibold text-[#1D1D1F] mb-2">Preferensi Waktu Belajar</span>
+          <span class="block text-xs font-semibold text-[#1D1D1F] mb-2">Mode Belajar</span>
+          <div class="grid grid-cols-2 gap-1.5">
+            <button
+              type="button"
+              data-mode="Online (Zoom / Meet)"
+              onclick="selectLearningMode('Online (Zoom / Meet)')"
+              class="mode-pill rounded-xl py-2.5 px-3 text-center border border-[#0071E3] bg-[#0071E3]/10 text-[#0071E3] text-xs font-semibold transition-all cursor-pointer">
+              Online (Zoom / Meet)
+            </button>
+            <button
+              type="button"
+              data-mode="Tatap Muka"
+              onclick="selectLearningMode('Tatap Muka')"
+              class="mode-pill rounded-xl py-2.5 px-3 text-center border border-transparent bg-[#F5F5F7] text-[#1D1D1F] hover:bg-[#EBEBF0] text-xs font-semibold transition-all cursor-pointer">
+              Tatap Muka
+            </button>
+          </div>
+        </div>
+
+        <!-- Preferensi Waktu Belajar Pills -->
+        <div class="mt-4">
+          <span class="block text-xs font-semibold text-[#1D1D1F] mb-2">Preferensi Waktu</span>
           <div class="grid grid-cols-3 gap-1.5">
             <button
               type="button"
-              data-time="Sore (15.00–17.00)"
-              onclick="selectTimeSlot('Sore (15.00–17.00)')"
+              data-time="Sore (15.00–17.30)"
+              onclick="selectTimeSlot('Sore (15.00–17.30)')"
               class="time-pill rounded-xl py-2 px-2 text-center border border-[#0071E3] bg-[#0071E3]/10 text-[#0071E3] transition-all cursor-pointer">
               <div class="text-[11px] font-bold">Sore</div>
-              <div class="text-[10px] opacity-80">15.00–17.00</div>
+              <div class="text-[10px] opacity-80">15.00–17.30</div>
             </button>
             <button
               type="button"
@@ -849,26 +1321,25 @@
           </div>
         </div>
 
-        <!-- Formulir Hanya 3 Kolom Input -->
+        <!-- Formulir 3 Input Ringkas -->
         <form id="booking-form" onsubmit="submitBooking(event)" class="mt-4 space-y-3" novalidate>
-          
-          <!-- Input 1: Nama Orang Tua -->
+          <!-- Input 1: Nama Orang Tua / Murid -->
           <div>
             <label for="parent-name" class="block text-xs font-medium text-[#1D1D1F] mb-1">
-              Nama Orang Tua
+              Nama Orang Tua / Murid
             </label>
             <input
               type="text"
               id="parent-name"
-              placeholder="Contoh: Ibu Rina"
+              placeholder="Contoh: Ibu Rina / Raka"
               required
               class="w-full rounded-xl bg-[#F5F5F7] border border-transparent focus:border-[#0071E3] focus:bg-white px-4 py-2.5 text-sm text-[#1D1D1F] placeholder-[#86868B] focus:outline-none transition-all" />
           </div>
 
-          <!-- Input 2: Jenjang Kelas Anak -->
+          <!-- Input 2: Jenjang / Kategori -->
           <div>
             <label for="child-grade" class="block text-xs font-medium text-[#1D1D1F] mb-1">
-              Jenjang Kelas Anak
+              Jenjang / Kategori
             </label>
             <select
               id="child-grade"
@@ -876,7 +1347,8 @@
               <option value="SD">SD (Sekolah Dasar)</option>
               <option value="SMP">SMP (Sekolah Menengah Pertama)</option>
               <option value="SMA">SMA (Sekolah Menengah Atas)</option>
-              <option value="Umum">Umum / Anak Usia Dini</option>
+              <option value="Anak Usia Dini / TK">Anak Usia Dini / TK</option>
+              <option value="Mahasiswa / Dewasa">Mahasiswa / Dewasa</option>
             </select>
           </div>
 
@@ -895,10 +1367,10 @@
 
           <!-- Pesan Validasi Halus (Pengganti alert) -->
           <p id="form-error" class="hidden text-xs font-medium text-rose-600 bg-rose-50 px-3.5 py-2 rounded-xl">
-            Mohon lengkapi nama orang tua dan nomor WhatsApp aktif.
+            Mohon lengkapi nama dan nomor WhatsApp aktif Anda.
           </p>
 
-          <!-- Baris Total Harga Real-Time -->
+          <!-- Total Harga Real-Time -->
           <div class="pt-2 border-t border-black/[0.06] flex items-center justify-between">
             <span class="text-xs text-[#6E6E73]">Total Pembayaran (All-in)</span>
             <span id="modal-total-price" class="text-lg font-bold text-[#1D1D1F]">Rp 400.000</span>
@@ -913,7 +1385,7 @@
         </form>
       </div>
 
-      <!-- LAYAR 2: LAYAR SUKSES & KONFIRMASI WHATSAPP / QRIS -->
+      <!-- LAYAR 2: RINGKASAN KONFIRMASI, WHATSAPP ADMIN & QRIS -->
       <div id="modal-step-success" class="hidden text-center py-2">
         <div class="w-14 h-14 rounded-full bg-emerald-500/10 text-emerald-600 flex items-center justify-center mx-auto">
           <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -928,10 +1400,10 @@
           Slot guru telah diamankan sementara untuk Anda.
         </p>
 
-        <!-- Ringkasan Pesanan -->
+        <!-- Ringkasan Pesanan Lengkap -->
         <div class="mt-5 bg-[#F5F5F7] rounded-2xl p-4 text-left space-y-2.5 text-sm">
           <div class="flex justify-between gap-2">
-            <span class="text-[#6E6E73]">Orang Tua</span>
+            <span class="text-[#6E6E73]">Nama</span>
             <span id="summary-parent" class="font-semibold text-[#1D1D1F] text-right">-</span>
           </div>
           <div class="flex justify-between gap-2">
@@ -943,6 +1415,10 @@
             <span id="summary-package" class="font-semibold text-[#1D1D1F] text-right">-</span>
           </div>
           <div class="flex justify-between gap-2">
+            <span class="text-[#6E6E73]">Mode Belajar</span>
+            <span id="summary-mode" class="font-semibold text-[#1D1D1F] text-right">-</span>
+          </div>
+          <div class="flex justify-between gap-2">
             <span class="text-[#6E6E73]">Preferensi Waktu</span>
             <span id="summary-time" class="font-semibold text-[#1D1D1F] text-right">-</span>
           </div>
@@ -952,18 +1428,16 @@
           </div>
         </div>
 
-        <!-- Simulasi QRIS Instan (Tersembunyi sampai diklik) -->
+        <!-- Panel Pembayaran QRIS (Otomatis membaca QRIS_IMAGE_URL jika sudah diisi) -->
         <div id="qris-preview" class="hidden mt-4 bg-[#F5F5F7] rounded-2xl p-4 border border-black/[0.06]">
-          <p class="text-xs font-semibold text-[#1D1D1F] mb-2">Scan QRIS LesHub Indonesia</p>
-          <div class="w-36 h-36 mx-auto bg-white p-2.5 rounded-2xl shadow-2xs flex items-center justify-center">
-            <svg viewBox="0 0 100 100" class="w-full h-full text-[#1D1D1F]" fill="currentColor">
-              <path d="M10 10h25v25H10V10zm5 5v15h15V15H15zm5 5h5v5h-5v-5zm45-10h25v25H65V10zm5 5v15h15V15H70zm5 5h5v5h-5v-5zM10 65h25v25H10V65zm5 5v15h15V70H15zm5 5h5v5h-5v-5zm25-65h10v10H45V10zm0 20h10v15H45V30zm-15 15h10v10H30V45zm30 0h15v10H60V45zm25 0h5v15h-5V45zM45 60h15v10H45V60zm20 15h10v15H65V75zm15-5h10v10H80V70zm-35 10h10v10H45V80z"/>
-            </svg>
+          <p class="text-xs font-semibold text-[#1D1D1F] mb-2.5">Scan QRIS LesHub Indonesia</p>
+          <div id="qris-visual-container" class="w-40 h-40 mx-auto bg-white p-3 rounded-2xl shadow-2xs flex items-center justify-center overflow-hidden">
+            <!-- Diisi otomatis oleh renderQrisVisual() -->
           </div>
-          <p class="text-[11px] text-[#6E6E73] mt-2">Otomatis terverifikasi dalam 10 detik</p>
+          <p class="text-[11px] text-[#6E6E73] mt-2.5">Kirim bukti transfer ke WhatsApp Admin setelah scan</p>
         </div>
 
-        <!-- Tombol Aksi Lanjutan: WhatsApp & QRIS -->
+        <!-- Tombol Lanjut WhatsApp Admin & Toggle QRIS -->
         <div class="mt-5 space-y-2.5">
           <button
             type="button"
@@ -983,7 +1457,7 @@
           type="button"
           onclick="resetBookingModal()"
           class="mt-4 text-xs text-[#6E6E73] hover:text-[#1D1D1F] underline cursor-pointer">
-          Ubah pilihan guru atau paket
+          Ubah pilihan guru, paket, atau jadwal
         </button>
       </div>
 
@@ -991,45 +1465,90 @@
   </div>
 
   <!-- =====================================================================
-       SCRIPT INTERAKTIVITAS & DATA KATALOG GURU
+       JAVASCRIPT: PENGATURAN ADMIN, DATA GURU & INTERAKTIVITAS LENGKAP
   ====================================================================== -->
   <script>
-    // Data pratinjau suasana kelas pada layar iPhone di Hero Section
+    /**
+     * =====================================================================
+     * PENGATURAN CEPAT ADMIN (UBAH BAGIAN INI SEBELUM DEPLOY KE GITHUB)
+     * =====================================================================
+     * 1. nomorAdmin:
+     *    Ganti dengan nomor WhatsApp Admin Anda yang aktif.
+     *    Format wajib diawali '62' tanpa tanda '+' atau angka '0' di depan.
+     *    Contoh: '6281234567890'
+     */
+    const nomorAdmin = '6282214837804';
+
+    /**
+     * 2. QRIS_IMAGE_URL:
+     *    Jika sudah mengunggah gambar kode QRIS resmi ke GitHub, masukkan
+     *    path/URL gambarnya di sini (contoh: 'images/qris-leshub.png').
+     *    Jika dibiarkan kosong (''), website otomatis menampilkan kartu
+     *    placeholder QRIS yang rapi.
+     */
+    const QRIS_IMAGE_URL = '';
+
+    // Data pratinjau suasana kelas pada layar iPhone Hero (4 Tab)
     const HERO_PREVIEWS = {
       nadia: {
         title: 'Bahasa Inggris Dasar',
         badge: 'Kak Nadia • ★ 4.9',
         quote: '"Nice to meet you!"',
+        studentEmoji: '🧒',
+        studentLabel: 'Ananda',
         stageGradient: 'from-[#E8F1FC] via-[#F2F6FC] to-[#E5EEFA]'
       },
       dimas: {
         title: 'Matematika Logika',
         badge: 'Kak Dimas • ★ 5.0',
-        quote: '"Trik Cepat Pecahan"',
+        quote: '"Trik Cepat Aljabar"',
+        studentEmoji: '🧑‍🎓',
+        studentLabel: 'Siswa SMP',
         stageGradient: 'from-[#ECEEF8] via-[#F5F6FC] to-[#E6E9F8]'
       },
       rina: {
         title: 'Calistung Ceria',
         badge: 'Kak Rina • ★ 4.9',
         quote: '"Membaca Suku Kata"',
+        studentEmoji: '👧',
+        studentLabel: 'Ananda',
         stageGradient: 'from-[#FDF3E7] via-[#FEF9F2] to-[#FCEAD4]'
+      },
+      bagas: {
+        title: 'English Conversation',
+        badge: 'Kak Bagas • ★ 4.8',
+        quote: '"Job Interview & Daily Talk"',
+        studentEmoji: '💼',
+        studentLabel: 'Dewasa',
+        stageGradient: 'from-[#E8F7F0] via-[#F3FBF7] to-[#DDF3E8]'
       }
     };
 
-    // Data guru terkurasi lengkap dengan jadwal, metode mengajar, dan sapaan
+    /**
+     * DATA GURU TERKURASI
+     * Cara memasang foto profil asli guru:
+     * - Unggah foto guru ke folder repositori GitHub Anda (misal folder 'images/').
+     * - Isi properti `photoUrl` di bawah dengan path foto tersebut, contoh:
+     *   photoUrl: 'images/guru-nadia.jpg',
+     * - Selama `photoUrl` kosong (''), website otomatis menampilkan avatar SVG bersih.
+     */
     const TEACHERS = [
       {
         id: 'nadia',
         name: 'Kak Nadia',
         subject: 'Bahasa Inggris',
         category: 'Bahasa Inggris',
+        categories: ['Bahasa Inggris'],
         rating: '4.9',
-        schedule: 'Sen • Rab • Sab',
+        credential: 'S1 Pend. Bahasa Inggris • 5 Thn Mengajar',
+        experienceBadge: '5 Thn Mengajar',
+        availableDays: 'Sen • Rab • Sab',
         highlight: 'Sabar, interaktif, dan mudah dipahami anak.',
-        method: 'Belajar lewat cerita bergambar & dialog ringan agar anak langsung percaya diri.',
-        greeting: 'Halo Ayah & Bunda! Yuk belajar bahasa Inggris seru bareng Kak Nadia.',
+        methodSummary: 'Menggunakan cerita bergambar, kosakata harian, dan dialog ringan agar anak langsung percaya diri berbicara bahasa Inggris tanpa merasa tertekan.',
+        greetingQuote: 'Halo Ayah & Bunda! Yuk belajar bahasa Inggris dengan cara yang santai dan menyenangkan bareng Kak Nadia.',
+        priceTrial: 100000,
         price4: 400000,
-        accentBg: 'from-sky-100 to-blue-50',
+        photoUrl: '', // Contoh jika sudah ada foto: 'images/guru-nadia.jpg'
         avatarSvg: `
           <svg viewBox="0 0 80 80" class="w-full h-full">
             <rect width="80" height="80" fill="#E8F1FC"/>
@@ -1046,13 +1565,17 @@
         name: 'Kak Dimas',
         subject: 'Matematika',
         category: 'Matematika',
+        categories: ['Matematika'],
         rating: '5.0',
-        schedule: 'Sel • Kam • Min',
-        highlight: 'Logika sederhana bikin matematika terasa menyenangkan.',
-        method: 'Memahami konsep lewat ilustrasi visual langkah demi langkah tanpa hafalan rumus.',
-        greeting: 'Halo! Matematika itu mudah kalau tahu pola logikanya. Kita coba bareng ya!',
+        credential: 'S1 Pendidikan Matematika • 6 Thn Mengajar',
+        experienceBadge: '6 Thn Mengajar',
+        availableDays: 'Sel • Kam • Min',
+        highlight: 'Logika sederhana bikin matematika terasa mudah.',
+        methodSummary: 'Membedah soal sulit menjadi langkah visual sederhana. Fokus pada pemahaman konsep dasar sehingga murid mampu mengerjakan variasi soal ujian secara mandiri.',
+        greetingQuote: 'Halo! Matematika itu seru kalau kita tahu pola logikanya. Kita bedah pelan-pelan bareng ya!',
+        priceTrial: 100000,
         price4: 400000,
-        accentBg: 'from-indigo-100 to-slate-50',
+        photoUrl: '', // Contoh jika sudah ada foto: 'images/guru-dimas.jpg'
         avatarSvg: `
           <svg viewBox="0 0 80 80" class="w-full h-full">
             <rect width="80" height="80" fill="#ECEEF8"/>
@@ -1070,13 +1593,17 @@
         name: 'Kak Rina',
         subject: 'Calistung & SD',
         category: 'Calistung',
+        categories: ['Calistung'],
         rating: '4.9',
-        schedule: 'Sen • Kam • Jum',
-        highlight: 'Telaten melatih baca tulis sejak dini.',
-        method: 'Permainan kartu suku kata & latihan menulis bertahap sesuai tempo belajar anak.',
-        greeting: 'Halo Ayah & Bunda, Kak Rina siap menemani si kecil lancar membaca dengan ceria.',
+        credential: 'Bersertifikat Pendidik PAUD/SD • 6 Thn Mengajar',
+        experienceBadge: '6 Thn Mengajar',
+        availableDays: 'Sen • Kam • Jum',
+        highlight: 'Telaten melatih baca tulis hitung sejak dini.',
+        methodSummary: 'Belajar membaca dan berhitung lewat permainan kartu suku kata, tebak gambar, dan latihan motorik halus yang disesuaikan dengan rentang fokus anak.',
+        greetingQuote: 'Halo Ayah & Bunda, Kak Rina siap menemani si kecil lancar membaca dan berhitung dengan ceria.',
+        priceTrial: 100000,
         price4: 400000,
-        accentBg: 'from-amber-100 to-orange-50',
+        photoUrl: '', // Contoh jika sudah ada foto: 'images/guru-rina.jpg'
         avatarSvg: `
           <svg viewBox="0 0 80 80" class="w-full h-full">
             <rect width="80" height="80" fill="#FDF3E7"/>
@@ -1092,14 +1619,18 @@
         id: 'bagas',
         name: 'Kak Bagas',
         subject: 'English Conversation',
-        category: 'Bahasa Inggris',
+        category: 'Dewasa & Umum',
+        categories: ['Bahasa Inggris', 'Dewasa & Umum'],
         rating: '4.8',
-        schedule: 'Rab • Sab • Min',
-        highlight: 'Bikin anak percaya diri bicara Inggris.',
-        method: 'Simulasi percakapan sehari-hari & kuis interaktif agar anak terbiasa berbicara.',
-        greeting: 'Hi! Di kelas Kak Bagas, anak-anak bebas praktik ngobrol bahasa Inggris tanpa takut salah.',
+        credential: 'Sastra Inggris • TOEFL 610 • 5 Thn Mengajar',
+        experienceBadge: '5 Thn Mengajar',
+        availableDays: 'Rab • Sab • Min',
+        highlight: 'Bikin pelajar & dewasa lancar ngobrol Inggris.',
+        methodSummary: '80% praktik percakapan aktif (daily conversation, presentasi kerja, hingga persiapan wawancara) dengan koreksi pelafalan dan tata bahasa secara natural.',
+        greetingQuote: 'Hi! Di kelas Kak Bagas, kamu bebas praktik ngobrol bahasa Inggris 1-on-1 tanpa takut salah.',
+        priceTrial: 100000,
         price4: 400000,
-        accentBg: 'from-emerald-100 to-teal-50',
+        photoUrl: '', // Contoh jika sudah ada foto: 'images/guru-bagas.jpg'
         avatarSvg: `
           <svg viewBox="0 0 80 80" class="w-full h-full">
             <rect width="80" height="80" fill="#E8F7F0"/>
@@ -1116,21 +1647,70 @@
     // State aplikasi
     let activeFilter = 'Semua';
     let selectedTeacherId = 'nadia';
+    let previewTeacherId = 'nadia';
     let selectedSessions = 4;
-    let selectedTimeSlot = 'Sore (15.00–17.00)';
+    let selectedLearningMode = 'Online (Zoom / Meet)';
+    let selectedTimeSlot = 'Sore (15.00–17.30)';
     let currentHeroPreviewId = 'nadia';
-    let voiceSimTimers = {};
+    let previewAudioInterval = null;
 
     const PACKAGE_PRICES = {
+      1: 100000,
       4: 400000,
       8: 750000
+    };
+
+    const PACKAGE_LABELS = {
+      1: '1 Sesi Trial / Evaluasi Awal',
+      4: 'Paket Fokus (4 Sesi)',
+      8: 'Paket Intensif (8 Sesi)'
     };
 
     function formatRupiah(amount) {
       return 'Rp ' + amount.toLocaleString('id-ID');
     }
 
-    // Ganti pratinjau suasana kelas langsung di layar iPhone Hero
+    // Helper merender foto guru asli jika photoUrl diisi, atau fallback ke SVG avatar
+    function renderTeacherAvatar(teacher) {
+      if (teacher.photoUrl && teacher.photoUrl.trim() !== '') {
+        return `
+          <img
+            src="${teacher.photoUrl}"
+            alt="Foto ${teacher.name}"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+          <div style="display:none;" class="w-full h-full">${teacher.avatarSvg}</div>
+        `;
+      }
+      return teacher.avatarSvg;
+    }
+
+    // Render visual QRIS (gambar asli jika QRIS_IMAGE_URL diisi, atau placeholder rapi)
+    function renderQrisVisual() {
+      const container = document.getElementById('qris-visual-container');
+      if (!container) return;
+
+      if (QRIS_IMAGE_URL && QRIS_IMAGE_URL.trim() !== '') {
+        container.innerHTML = `
+          <img
+            src="${QRIS_IMAGE_URL}"
+            alt="Kode QRIS LesHub Indonesia"
+            class="w-full h-full object-contain rounded-xl"
+            onerror="this.parentElement.innerHTML='<p class=\\'text-xs text-[#6E6E73] p-2\\'>Gambar QRIS belum tersedia. Silakan konfirmasi via WhatsApp Admin.</p>'" />
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="w-full h-full flex flex-col items-center justify-center">
+            <svg viewBox="0 0 100 100" class="w-28 h-28 text-[#1D1D1F]" fill="currentColor">
+              <path d="M10 10h25v25H10V10zm5 5v15h15V15H15zm5 5h5v5h-5v-5zm45-10h25v25H65V10zm5 5v15h15V15H70zm5 5h5v5h-5v-5zM10 65h25v25H10V65zm5 5v15h15V70H15zm5 5h5v5h-5v-5zm25-65h10v10H45V10zm0 20h10v15H45V30zm-15 15h10v10H30V45zm30 0h15v10H60V45zm25 0h5v15h-5V45zM45 60h15v10H45V60zm20 15h10v15H65V75zm15-5h10v10H80V70zm-35 10h10v10H45V80z"/>
+            </svg>
+            <span class="text-[9px] font-semibold uppercase tracking-wider text-[#6E6E73] mt-1">QRIS Placeholder</span>
+          </div>
+        `;
+      }
+    }
+
+    // Ganti pratinjau suasana kelas di layar iPhone Hero
     function switchHeroPreview(teacherId) {
       const data = HERO_PREVIEWS[teacherId];
       if (!data) return;
@@ -1153,33 +1733,35 @@
         document.getElementById('hero-class-title').textContent = data.title;
         document.getElementById('hero-teacher-badge').textContent = data.badge;
         document.getElementById('hero-topic-quote').textContent = data.quote;
+        document.getElementById('hero-student-emoji').textContent = data.studentEmoji;
+        document.getElementById('hero-student-label').textContent = data.studentLabel;
         const stage = document.getElementById('hero-class-stage');
         stage.className = `relative rounded-2xl overflow-hidden bg-gradient-to-br ${data.stageGradient} h-48 flex flex-col justify-between p-3.5 border border-black/[0.04] transition-colors duration-300`;
         screenContent.style.opacity = '1';
       }, 140);
     }
 
-    // Render katalog guru dengan animasi masuk bertahap & panel Preview Kelas
+    // Render katalog guru
     function renderTeachers() {
       const grid = document.getElementById('teacher-grid');
       const filtered = activeFilter === 'Semua'
         ? TEACHERS
-        : TEACHERS.filter(t => t.category === activeFilter);
+        : TEACHERS.filter(t => t.categories.includes(activeFilter));
 
       grid.innerHTML = filtered.map((teacher, idx) => `
-        <article style="animation-delay: ${idx * 65}ms" class="teacher-card teacher-card-enter bg-[#F5F5F7] rounded-3xl p-6 flex flex-col justify-between">
+        <article style="animation-delay: ${idx * 60}ms" class="teacher-card teacher-card-enter bg-[#F5F5F7] rounded-3xl p-6 flex flex-col justify-between">
           <div>
-            <!-- Baris Atas: Avatar Bersih & Badge Rating -->
+            <!-- Baris Atas: Avatar/Foto & Badge Rating + Jadwal -->
             <div class="flex items-start justify-between gap-3">
               <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-apple-card bg-white shrink-0">
-                ${teacher.avatarSvg}
+                ${renderTeacherAvatar(teacher)}
               </div>
               <div class="flex flex-col items-end gap-1.5">
                 <span class="inline-flex items-center gap-1 bg-white text-[#1D1D1F] text-xs font-semibold px-3 py-1 rounded-full shadow-2xs">
                   <span class="text-amber-500">★</span> ${teacher.rating}
                 </span>
                 <span class="inline-flex items-center gap-1 bg-white/80 text-[#6E6E73] text-[11px] font-medium px-2.5 py-0.5 rounded-full">
-                  ${teacher.schedule}
+                  ${teacher.availableDays}
                 </span>
               </div>
             </div>
@@ -1189,121 +1771,43 @@
               ${teacher.name} <span class="text-[#6E6E73] font-medium">•</span> <span class="text-[#0071E3] font-semibold">${teacher.subject}</span>
             </h3>
 
+            <!-- Pill Kredensial Pengajar -->
+            <div class="mt-2">
+              <span class="inline-block bg-white text-[#1D1D1F]/85 text-[11px] font-medium px-2.5 py-1 rounded-lg border border-black/[0.04]">
+                ${teacher.credential}
+              </span>
+            </div>
+
             <!-- 1 Kalimat Pendek Keunggulan -->
-            <p class="mt-2 text-sm text-[#6E6E73] leading-relaxed">
+            <p class="mt-2.5 text-sm text-[#6E6E73] leading-relaxed">
               ${teacher.highlight}
             </p>
-
-            <!-- Tombol Mini Interaktif Preview Kelas -->
-            <button
-              type="button"
-              onclick="toggleTeacherPreview('${teacher.id}')"
-              class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#0071E3] hover:text-[#0077ED] transition-colors cursor-pointer">
-              <span id="preview-icon-${teacher.id}" class="w-4 h-4 rounded-full bg-[#0071E3]/10 flex items-center justify-center text-[10px]">▶</span>
-              <span id="preview-label-${teacher.id}">Preview Kelas</span>
-            </button>
-
-            <!-- Drawer Ringkas Metode Mengajar & Voice-Note Sapaan -->
-            <div id="preview-drawer-${teacher.id}" class="preview-drawer">
-              <div>
-                <div class="bg-white rounded-2xl p-3.5 text-xs space-y-2.5 border border-black/[0.05]">
-                  <p class="text-[#1D1D1F]/90 leading-relaxed">
-                    <span class="font-semibold text-[#1D1D1F]">Metode:</span> ${teacher.method}
-                  </p>
-                  <div class="pt-2 border-t border-black/[0.05] flex items-center justify-between gap-2">
-                    <button
-                      type="button"
-                      onclick="playTeacherVoiceSim('${teacher.id}')"
-                      class="inline-flex items-center gap-2 rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] px-3 py-1.5 text-[11px] font-semibold text-[#1D1D1F] transition-colors cursor-pointer">
-                      <span id="voice-waves-${teacher.id}" class="inline-flex items-end gap-[2px] h-3">
-                        <span class="w-[2px] h-1.5 bg-[#0071E3] rounded-full"></span>
-                        <span class="w-[2px] h-2.5 bg-[#0071E3] rounded-full"></span>
-                        <span class="w-[2px] h-2 bg-[#0071E3] rounded-full"></span>
-                        <span class="w-[2px] h-1.5 bg-[#0071E3] rounded-full"></span>
-                      </span>
-                      <span id="voice-btn-text-${teacher.id}">Sapaan Guru</span>
-                    </button>
-                    <span id="voice-timer-${teacher.id}" class="text-[11px] font-medium text-[#6E6E73]">0:04</span>
-                  </div>
-                  <p id="voice-caption-${teacher.id}" class="hidden text-[11px] italic text-[#0071E3] bg-[#0071E3]/5 rounded-xl px-2.5 py-1.5">
-                    "${teacher.greeting}"
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
 
-          <!-- Harga Paket All-In & Tombol Pilih Guru -->
+          <!-- Harga & Tombol Aksi -->
           <div class="mt-6 pt-5 border-t border-black/[0.06]">
-            <p class="text-xs text-[#6E6E73]">Mulai dari (sudah termasuk fee)</p>
+            <p class="text-xs text-[#6E6E73]">Mulai sesi trial (all-in)</p>
             <p class="text-base font-bold text-[#1D1D1F] mt-0.5">
-              ${formatRupiah(teacher.price4)} <span class="text-xs font-normal text-[#6E6E73]">/ 4 sesi</span>
+              ${formatRupiah(teacher.priceTrial)} <span class="text-xs font-normal text-[#6E6E73]">• 4 sesi ${formatRupiah(teacher.price4)}</span>
             </p>
 
-            <button
-              type="button"
-              onclick="openBookingModal('${teacher.id}', 4)"
-              class="mt-4 w-full rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.98] text-white text-sm font-medium py-3 px-5 transition-all cursor-pointer">
-              Pilih Guru
-            </button>
+            <div class="mt-4 flex items-center gap-2">
+              <button
+                type="button"
+                onclick="openTeacherPreviewModal('${teacher.id}')"
+                class="flex-1 rounded-full bg-white hover:bg-[#EBEBF0] active:scale-[0.98] text-[#1D1D1F] text-xs font-semibold py-3 px-3 transition-all shadow-2xs cursor-pointer">
+                Preview Kelas
+              </button>
+              <button
+                type="button"
+                onclick="openBookingModal('${teacher.id}', 4)"
+                class="flex-1 rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.98] text-white text-xs font-semibold py-3 px-3 transition-all cursor-pointer">
+                Pilih Guru
+              </button>
+            </div>
           </div>
         </article>
       `).join('');
-    }
-
-    // Buka/tutup drawer preview kelas pada kartu guru
-    function toggleTeacherPreview(teacherId) {
-      const drawer = document.getElementById(`preview-drawer-${teacherId}`);
-      const label = document.getElementById(`preview-label-${teacherId}`);
-      const icon = document.getElementById(`preview-icon-${teacherId}`);
-      if (!drawer) return;
-
-      const isOpen = drawer.classList.toggle('open');
-      label.textContent = isOpen ? 'Tutup Preview' : 'Preview Kelas';
-      icon.textContent = isOpen ? '−' : '▶';
-    }
-
-    // Simulasi voice-note sapaan guru dengan animasi gelombang suara & transkrip singkat
-    function playTeacherVoiceSim(teacherId) {
-      const waves = document.getElementById(`voice-waves-${teacherId}`);
-      const btnText = document.getElementById(`voice-btn-text-${teacherId}`);
-      const timerEl = document.getElementById(`voice-timer-${teacherId}`);
-      const caption = document.getElementById(`voice-caption-${teacherId}`);
-      if (!waves || !btnText) return;
-
-      if (voiceSimTimers[teacherId]) {
-        clearInterval(voiceSimTimers[teacherId]);
-      }
-
-      waves.innerHTML = `
-        <span class="wave-bar w-[2px] h-3 bg-[#0071E3] rounded-full"></span>
-        <span class="wave-bar w-[2px] h-3 bg-[#0071E3] rounded-full"></span>
-        <span class="wave-bar w-[2px] h-3 bg-[#0071E3] rounded-full"></span>
-        <span class="wave-bar w-[2px] h-3 bg-[#0071E3] rounded-full"></span>
-      `;
-      btnText.textContent = 'Memutar...';
-      caption.classList.remove('hidden');
-
-      let remaining = 4;
-      timerEl.textContent = `0:0${remaining}`;
-
-      voiceSimTimers[teacherId] = setInterval(() => {
-        remaining -= 1;
-        if (remaining > 0) {
-          timerEl.textContent = `0:0${remaining}`;
-        } else {
-          clearInterval(voiceSimTimers[teacherId]);
-          delete voiceSimTimers[teacherId];
-          timerEl.textContent = '0:04';
-          btnText.textContent = 'Putar Ulang';
-          waves.innerHTML = `
-            <span class="w-[2px] h-1.5 bg-[#0071E3] rounded-full"></span>
-            <span class="w-[2px] h-2.5 bg-[#0071E3] rounded-full"></span>
-            <span class="w-[2px] h-2 bg-[#0071E3] rounded-full"></span>
-            <span class="w-[2px] h-1.5 bg-[#0071E3] rounded-full"></span>
-          `;
-        }
-      }, 1000);
     }
 
     // Filter kategori pil
@@ -1322,8 +1826,114 @@
       renderTeachers();
     }
 
-    // Animasi counter angka harga pada bagian Pricing Comparison
-    function animateNumber(element, start, end, duration = 380) {
+    // =====================================================================
+    // MODAL PREVIEW KELAS & SAPAAN SUARA GURU
+    // =====================================================================
+    function openTeacherPreviewModal(teacherId) {
+      const teacher = TEACHERS.find(t => t.id === teacherId) || TEACHERS[0];
+      previewTeacherId = teacher.id;
+
+      document.getElementById('preview-modal-avatar').innerHTML = renderTeacherAvatar(teacher);
+      document.getElementById('preview-modal-rating').textContent = `★ ${teacher.rating}`;
+      document.getElementById('preview-modal-exp').textContent = teacher.experienceBadge;
+      document.getElementById('preview-modal-title').textContent = teacher.name;
+      document.getElementById('preview-modal-subject').textContent = teacher.subject;
+      document.getElementById('preview-modal-credential').textContent = teacher.credential;
+      document.getElementById('preview-modal-days').textContent = teacher.availableDays;
+      document.getElementById('preview-modal-method').textContent = teacher.methodSummary;
+      document.getElementById('modal-voice-quote').textContent = `"${teacher.greetingQuote}"`;
+
+      stopPreviewGreetingAudio();
+
+      const modal = document.getElementById('teacher-preview-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => {
+        modal.classList.add('modal-open');
+      });
+    }
+
+    function closeTeacherPreviewModal() {
+      stopPreviewGreetingAudio();
+      const modal = document.getElementById('teacher-preview-modal');
+      modal.classList.remove('modal-open');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }, 250);
+    }
+
+    function stopPreviewGreetingAudio() {
+      if (previewAudioInterval) {
+        clearInterval(previewAudioInterval);
+        previewAudioInterval = null;
+      }
+      const icon = document.getElementById('modal-voice-icon');
+      const label = document.getElementById('modal-voice-label');
+      const timer = document.getElementById('modal-voice-timer');
+      const waves = document.getElementById('modal-voice-waves');
+      if (icon) icon.textContent = '▶';
+      if (label) label.textContent = 'Putar Sapaan Guru';
+      if (timer) timer.textContent = '0:05';
+      if (waves) {
+        waves.innerHTML = `
+          <span class="w-[2px] h-1.5 bg-[#0071E3]/50 rounded-full"></span>
+          <span class="w-[2px] h-2.5 bg-[#0071E3]/50 rounded-full"></span>
+          <span class="w-[2px] h-2 bg-[#0071E3]/50 rounded-full"></span>
+          <span class="w-[2px] h-1.5 bg-[#0071E3]/50 rounded-full"></span>
+        `;
+      }
+    }
+
+    function togglePreviewGreetingAudio() {
+      if (previewAudioInterval) {
+        stopPreviewGreetingAudio();
+        return;
+      }
+
+      const icon = document.getElementById('modal-voice-icon');
+      const label = document.getElementById('modal-voice-label');
+      const timer = document.getElementById('modal-voice-timer');
+      const waves = document.getElementById('modal-voice-waves');
+
+      icon.textContent = '❚❚';
+      label.textContent = 'Memutar Sapaan...';
+      waves.innerHTML = `
+        <span class="wave-bar w-[2px] h-3.5 bg-[#0071E3] rounded-full"></span>
+        <span class="wave-bar w-[2px] h-3.5 bg-[#0071E3] rounded-full"></span>
+        <span class="wave-bar w-[2px] h-3.5 bg-[#0071E3] rounded-full"></span>
+        <span class="wave-bar w-[2px] h-3.5 bg-[#0071E3] rounded-full"></span>
+      `;
+
+      let remaining = 5;
+      timer.textContent = `0:0${remaining}`;
+
+      previewAudioInterval = setInterval(() => {
+        remaining -= 1;
+        if (remaining > 0) {
+          timer.textContent = `0:0${remaining}`;
+        } else {
+          stopPreviewGreetingAudio();
+          document.getElementById('modal-voice-label').textContent = 'Putar Ulang Sapaan';
+        }
+      }, 1000);
+    }
+
+    function bookFromPreviewModal(sessions) {
+      const targetId = previewTeacherId;
+      closeTeacherPreviewModal();
+      setTimeout(() => {
+        openBookingModal(targetId, sessions);
+      }, 260);
+    }
+
+    // =====================================================================
+    // PERBANDINGAN HARGA & ANIMASI ANGKA PER SESI
+    // =====================================================================
+    function animateNumber(element, start, end, duration = 350) {
       const startTime = performance.now();
       function update(now) {
         const elapsed = now - startTime;
@@ -1348,9 +1958,9 @@
       const savingsBadge = document.getElementById('animated-savings-badge');
 
       if (sessions === 4) {
-        tab4.classList.add('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-xs');
+        tab4.classList.add('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
         tab4.classList.remove('text-[#6E6E73]', 'font-medium');
-        tab8.classList.remove('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-xs');
+        tab8.classList.remove('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
         tab8.classList.add('text-[#6E6E73]', 'font-medium');
 
         card4.classList.add('ring-2', 'ring-[#0071E3]');
@@ -1359,9 +1969,9 @@
         animateNumber(rateEl, currentDisplayedRate, 100000);
         currentDisplayedRate = 100000;
       } else {
-        tab8.classList.add('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-xs');
+        tab8.classList.add('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
         tab8.classList.remove('text-[#6E6E73]', 'font-medium');
-        tab4.classList.remove('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-xs');
+        tab4.classList.remove('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
         tab4.classList.add('text-[#6E6E73]', 'font-medium');
 
         card8.classList.add('ring-2', 'ring-[#0071E3]');
@@ -1372,7 +1982,31 @@
       }
     }
 
-    // Inisialisasi dropdown guru di modal
+    // =====================================================================
+    // FAQ AKORDEON MINIMALIS
+    // =====================================================================
+    function toggleFaq(buttonEl) {
+      const item = buttonEl.closest('.faq-item');
+      if (!item) return;
+
+      const isCurrentlyOpen = item.classList.contains('open');
+
+      // Tutup item lain agar tetap ringkas ala Apple
+      document.querySelectorAll('.faq-item.open').forEach(openItem => {
+        openItem.classList.remove('open');
+        const btn = openItem.querySelector('button');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!isCurrentlyOpen) {
+        item.classList.add('open');
+        buttonEl.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // =====================================================================
+    // MODAL PENDAFTARAN 1-LAYAR + WHATSAPP ADMIN & QRIS
+    // =====================================================================
     function populateTeacherDropdown() {
       const select = document.getElementById('modal-teacher-select');
       select.innerHTML = TEACHERS.map(t =>
@@ -1380,35 +2014,43 @@
       ).join('');
     }
 
-    // Update tampilan ringkasan guru di modal
     function updateModalTeacherUI() {
       const teacher = TEACHERS.find(t => t.id === selectedTeacherId) || TEACHERS[0];
       document.getElementById('modal-teacher-select').value = teacher.id;
-      document.getElementById('modal-teacher-avatar').innerHTML = teacher.avatarSvg;
+      document.getElementById('modal-teacher-avatar').innerHTML = renderTeacherAvatar(teacher);
     }
 
-    // Pilih paket 4 Sesi vs 8 Sesi dan perbarui total harga real-time
     function selectPackage(sessions) {
       selectedSessions = sessions;
-      const btn4 = document.getElementById('pkg-btn-4');
-      const btn8 = document.getElementById('pkg-btn-8');
-
-      if (sessions === 4) {
-        btn4.classList.add('bg-white', 'shadow-xs');
-        btn4.classList.remove('text-[#6E6E73]');
-        btn8.classList.remove('bg-white', 'shadow-xs');
-        btn8.classList.add('text-[#6E6E73]');
-      } else {
-        btn8.classList.add('bg-white', 'shadow-xs');
-        btn8.classList.remove('text-[#6E6E73]');
-        btn4.classList.remove('bg-white', 'shadow-xs');
-        btn4.classList.add('text-[#6E6E73]');
-      }
+      [1, 4, 8].forEach(pkg => {
+        const btn = document.getElementById(`pkg-btn-${pkg}`);
+        if (!btn) return;
+        if (pkg === sessions) {
+          btn.classList.add('bg-white', 'shadow-2xs');
+          btn.classList.remove('text-[#6E6E73]');
+        } else {
+          btn.classList.remove('bg-white', 'shadow-2xs');
+          btn.classList.add('text-[#6E6E73]');
+        }
+      });
 
       document.getElementById('modal-total-price').textContent = formatRupiah(PACKAGE_PRICES[sessions]);
     }
 
-    // Pilih preferensi waktu belajar di modal pendaftaran
+    function selectLearningMode(mode) {
+      selectedLearningMode = mode;
+      document.querySelectorAll('.mode-pill').forEach(btn => {
+        const isSelected = btn.getAttribute('data-mode') === mode;
+        if (isSelected) {
+          btn.classList.remove('border-transparent', 'bg-[#F5F5F7]', 'text-[#1D1D1F]', 'hover:bg-[#EBEBF0]');
+          btn.classList.add('border-[#0071E3]', 'bg-[#0071E3]/10', 'text-[#0071E3]');
+        } else {
+          btn.classList.remove('border-[#0071E3]', 'bg-[#0071E3]/10', 'text-[#0071E3]');
+          btn.classList.add('border-transparent', 'bg-[#F5F5F7]', 'text-[#1D1D1F]', 'hover:bg-[#EBEBF0]');
+        }
+      });
+    }
+
     function selectTimeSlot(slot) {
       selectedTimeSlot = slot;
       document.querySelectorAll('.time-pill').forEach(btn => {
@@ -1428,8 +2070,8 @@
       updateModalTeacherUI();
     }
 
-    // Buka modal pendaftaran dengan transisi spring halus
     function openBookingModal(teacherId = null, sessions = 4) {
+      closeMobileMenu();
       if (teacherId) {
         selectedTeacherId = teacherId;
       }
@@ -1447,7 +2089,6 @@
       });
     }
 
-    // Tutup modal pendaftaran
     function closeBookingModal() {
       const modal = document.getElementById('booking-modal');
       modal.classList.remove('modal-open');
@@ -1455,10 +2096,9 @@
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         document.body.style.overflow = '';
-      }, 260);
+      }, 250);
     }
 
-    // Kembali ke layar form
     function resetBookingModal() {
       document.getElementById('modal-step-form').classList.remove('hidden');
       document.getElementById('modal-step-success').classList.add('hidden');
@@ -1466,7 +2106,6 @@
       document.getElementById('qris-preview').classList.add('hidden');
     }
 
-    // Proses submit form pendaftaran ringkas
     function submitBooking(event) {
       event.preventDefault();
       const parentName = document.getElementById('parent-name').value.trim();
@@ -1485,7 +2124,8 @@
 
       document.getElementById('summary-parent').textContent = parentName;
       document.getElementById('summary-teacher').textContent = `${teacher.name} (${teacher.subject})`;
-      document.getElementById('summary-package').textContent = `${selectedSessions} Sesi • Jenjang ${childGrade}`;
+      document.getElementById('summary-package').textContent = `${PACKAGE_LABELS[selectedSessions]} • ${childGrade}`;
+      document.getElementById('summary-mode').textContent = selectedLearningMode;
       document.getElementById('summary-time').textContent = selectedTimeSlot;
       document.getElementById('summary-total').textContent = formatRupiah(total);
 
@@ -1493,9 +2133,7 @@
       document.getElementById('modal-step-success').classList.remove('hidden');
     }
 
-    // Buka WhatsApp Admin dengan format pesan lengkap termasuk preferensi waktu
     function simulateWhatsAppConfirm() {
-      const nomorAdmin = '6282214837804';
       const teacher = TEACHERS.find(t => t.id === selectedTeacherId) || TEACHERS[0];
       const parentName = document.getElementById('parent-name').value.trim();
       const childGrade = document.getElementById('child-grade').value;
@@ -1504,26 +2142,29 @@
 
       const pesan =
         `Halo Admin LesHub, saya ingin konfirmasi pendaftaran les privat:\n\n` +
-        `*Nama Orang Tua:* ${parentName}\n` +
+        `*Nama:* ${parentName}\n` +
         `*No. WhatsApp:* ${parentWa}\n` +
-        `*Jenjang Anak:* ${childGrade}\n` +
+        `*Jenjang / Kategori:* ${childGrade}\n` +
         `*Guru Pilihan:* ${teacher.name} (${teacher.subject})\n` +
-        `*Paket:* ${selectedSessions} Sesi\n` +
+        `*Paket:* ${PACKAGE_LABELS[selectedSessions]}\n` +
+        `*Mode Belajar:* ${selectedLearningMode}\n` +
         `*Preferensi Waktu:* ${selectedTimeSlot}\n` +
         `*Total Biaya:* ${total}\n\n` +
-        `Mohon info jadwal dan instruksi pembayarannya. Terima kasih!`;
+        `Mohon info ketersediaan jadwal dan instruksi pembayarannya. Terima kasih!`;
 
       const urlWa = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`;
       window.open(urlWa, '_blank');
     }
 
-    // Toggle tampilan simulasi kode QRIS
     function toggleQrisPreview() {
+      renderQrisVisual();
       const qris = document.getElementById('qris-preview');
       qris.classList.toggle('hidden');
     }
 
-    // Setup efek 3D Tilt & Specular Glare pada Mockup iPhone Hero
+    // =====================================================================
+    // INTERAKSI VISUAL: 3D TILT IPHONE (MAX ±4DEG), BENTO SPOTLIGHT & SCROLL
+    // =====================================================================
     function initIphoneTilt() {
       const area = document.getElementById('iphone-tilt-area');
       const device = document.getElementById('iphone-device');
@@ -1531,7 +2172,7 @@
       if (!area || !device || !glare) return;
 
       area.addEventListener('mousemove', (e) => {
-        if (window.innerWidth < 768) return;
+        if (window.innerWidth < 1024) return;
         const rect = device.getBoundingClientRect();
         const relX = (e.clientX - rect.left) / rect.width;
         const relY = (e.clientY - rect.top) / rect.height;
@@ -1539,23 +2180,26 @@
         const normX = Math.max(-1, Math.min(1, (relX - 0.5) * 2));
         const normY = Math.max(-1, Math.min(1, (relY - 0.5) * 2));
 
+        // Clamped max ±4deg agar tetap presisi dan simetris
+        const rotX = (-normY * 4).toFixed(2);
+        const rotY = (normX * 4).toFixed(2);
+
         device.classList.remove('is-returning');
-        device.style.transform = `rotateX(${(-normY * 6).toFixed(2)}deg) rotateY(${(normX * 8).toFixed(2)}deg) scale3d(1.01, 1.01, 1.01)`;
+        device.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
 
         const glareX = Math.round(relX * 100);
         const glareY = Math.round(relY * 100);
-        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.24), transparent 62%)`;
+        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.22), transparent 62%)`;
         glare.style.opacity = '1';
       });
 
       area.addEventListener('mouseleave', () => {
         device.classList.add('is-returning');
-        device.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        device.style.transform = 'rotateX(0deg) rotateY(0deg)';
         glare.style.opacity = '0';
       });
     }
 
-    // Setup efek radial spotlight hover pada Kartu Bento
     function initBentoSpotlights() {
       document.querySelectorAll('.bento-card').forEach(card => {
         const spotlight = card.querySelector('.bento-spotlight');
@@ -1565,17 +2209,34 @@
           const rect = card.getBoundingClientRect();
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
-          spotlight.style.background = `radial-gradient(320px circle at ${x}px ${y}px, rgba(0, 113, 227, 0.09), transparent 70%)`;
+          spotlight.style.background = `radial-gradient(300px circle at ${x}px ${y}px, rgba(0, 113, 227, 0.085), transparent 70%)`;
         });
       });
     }
 
-    // Setup Scroll Progress Bar, Active Section Navbar & Floating Action Visibility
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mobile-navigation');
+      const btn = document.getElementById('mobile-menu-toggle');
+      if (!nav || !btn) return;
+      const isHidden = nav.classList.toggle('hidden');
+      nav.classList.toggle('flex', !isHidden);
+      btn.setAttribute('aria-expanded', String(!isHidden));
+    }
+
+    function closeMobileMenu() {
+      const nav = document.getElementById('mobile-navigation');
+      const btn = document.getElementById('mobile-menu-toggle');
+      if (!nav || !btn) return;
+      nav.classList.add('hidden');
+      nav.classList.remove('flex');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
     function initScrollEffects() {
       const progressBar = document.getElementById('scroll-progress');
       const floatingActions = document.getElementById('floating-actions');
       const navLinks = document.querySelectorAll('.nav-link');
-      const sections = ['cara-kerja', 'pilih-guru', 'harga']
+      const sections = ['cara-kerja', 'pilih-guru', 'harga', 'testimoni', 'faq']
         .map(id => document.getElementById(id))
         .filter(Boolean);
 
@@ -1587,7 +2248,6 @@
           progressBar.style.width = `${pct}%`;
         }
 
-        // Tampilkan tombol mengambang setelah melewati Hero section
         if (floatingActions) {
           if (scrollTop > 460) {
             floatingActions.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
@@ -1598,7 +2258,6 @@
           }
         }
 
-        // Deteksi section aktif pada navbar
         let currentSection = '';
         const offset = 160;
         sections.forEach(sec => {
@@ -1621,23 +2280,27 @@
       onScroll();
     }
 
-    // Tutup modal saat klik area luar atau tekan tombol Escape
+    // Tutup modal saat klik area luar atau tekan Escape
     document.getElementById('booking-modal').addEventListener('click', function (e) {
-      if (e.target === this) {
-        closeBookingModal();
-      }
+      if (e.target === this) closeBookingModal();
+    });
+    document.getElementById('teacher-preview-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeTeacherPreviewModal();
     });
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
+        closeMobileMenu();
+        closeTeacherPreviewModal();
         closeBookingModal();
       }
     });
 
-    // Jalankan inisialisasi halaman dan animasi scroll saat DOM siap
+    // Inisialisasi saat DOM siap
     window.addEventListener('DOMContentLoaded', () => {
       renderTeachers();
       populateTeacherDropdown();
+      renderQrisVisual();
       initIphoneTilt();
       initBentoSpotlights();
       initScrollEffects();
