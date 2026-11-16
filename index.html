@@ -1148,9 +1148,28 @@
 
     // Simulasi klik tombol WhatsApp Admin
     function simulateWhatsAppConfirm() {
-      const feedback = document.getElementById('action-feedback');
-      feedback.textContent = '✓ Pesan konfirmasi jadwal & link pembayaran siap dikirim via WhatsApp.';
-      feedback.classList.remove('hidden');
+      // Ganti dengan nomor WhatsApp kamu (diawali 62, tanpa + atau 0)
+      const nomorAdmin = '6281234567890';
+
+      const teacher = TEACHERS.find(t => t.id === selectedTeacherId) || TEACHERS[0];
+      const parentName = document.getElementById('parent-name').value.trim();
+      const childGrade = document.getElementById('child-grade').value;
+      const parentWa = document.getElementById('parent-whatsapp').value.trim();
+      const total = formatRupiah(PACKAGE_PRICES[selectedSessions]);
+
+      const pesan =
+        `Halo Admin LesHub, saya ingin konfirmasi pendaftaran les privat:\n\n` +
+        `*Nama Orang Tua:* ${parentName}\n` +
+        `*No. WhatsApp:* ${parentWa}\n` +
+        `*Jenjang Anak:* ${childGrade}\n` +
+        `*Guru Pilihan:* ${teacher.name} (${teacher.subject})\n` +
+        `*Paket:* ${selectedSessions} Sesi\n` +
+        `*Total Biaya:* ${total}\n\n` +
+        `Mohon info jadwal dan instruksi pembayarannya. Terima kasih!`;
+
+      const urlWa = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`;
+      window.open(urlWa, '_blank');
+  
     }
 
     // Toggle tampilan simulasi kode QRIS
