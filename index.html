@@ -4,27 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LesHub — Guru les terbaik. Sesimpel itu.</title>
-  <meta name="description" content="Les privat 1-on-1 terkurasi untuk SD, SMP, SMA, hingga Umum. Pilih guru terverifikasi, coba 1 sesi trial gratis tanpa komitmen, langsung belajar." />
+  <meta name="description" content="Les Privat 1-on-1 Terkurasi di Indonesia. Pilih guru terkurasi, coba 1 sesi trial gratis, lalu mulai belajar." />
 
-  <!-- OpenGraph & WhatsApp Link Preview -->
-  <meta property="og:title" content="LesHub — Guru les terbaik. Sesimpel itu." />
-  <meta property="og:description" content="Pilih guru les privat 1-on-1 terkurasi, coba 1 sesi trial gratis tanpa biaya komitmen, langsung belajar." />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="id_ID" />
-  <meta property="og:site_name" content="LesHub Indonesia" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="LesHub — Guru les terbaik. Sesimpel itu." />
-  <meta name="twitter:description" content="Pilih guru les privat 1-on-1 terkurasi, coba 1 sesi trial gratis tanpa komitmen, langsung belajar." />
-
-  <!-- Inline SVG Data-URI Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231D1D1F'/%3E%3Ctext x='50%25' y='53%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,-apple-system,sans-serif' font-weight='700' font-size='36' fill='%23FFFFFF'%3EL%3C/text%3E%3C/svg%3E" />
-
-  <!-- Google Font: Inter -->
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -33,17 +18,17 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'sans-serif'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
           },
           colors: {
             apple: {
-              white: '#FFFFFF',
-              bg: '#F5F5F7',
-              border: '#EBEBF0',
-              text: '#1D1D1F',
-              secondary: '#6E6E73',
+              bg: '#FFFFFF',
+              surface: '#F5F5F7',
+              ink: '#1D1D1F',
+              muted: '#6E6E73',
               blue: '#0071E3',
               blueHover: '#0077ED',
+              border: '#E5E5EA',
             }
           }
         }
@@ -52,1421 +37,987 @@
   </script>
 
   <style>
-    :root {
-      --bg-primary: #FFFFFF;
-      --bg-secondary: #F5F5F7;
-      --border-subtle: #EBEBF0;
-      --text-primary: #1D1D1F;
-      --text-secondary: #6E6E73;
-      --accent-blue: #0071E3;
-      --accent-blue-hover: #0077ED;
-    }
-
+    /* Base typography and rendering */
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
+      background-color: #FFFFFF;
+      color: #1D1D1F;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
-    /* Global Studio Dot-Grid Texture */
+    /* Subtle studio dot-grid background locked behind z-10 content */
     .studio-dot-grid {
       background-image: radial-gradient(#D2D2D7 1px, transparent 1px);
       background-size: 24px 24px;
-      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 25%, #000 35%, transparent 100%);
-      mask-image: radial-gradient(ellipse 80% 70% at 50% 25%, #000 35%, transparent 100%);
     }
 
-    /* Bento Card Cursor Spotlight */
-    .bento-card {
-      position: relative;
-      overflow: hidden;
-      --mouse-x: 50%;
-      --mouse-y: 50%;
-    }
-    .bento-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(
-        420px circle at var(--mouse-x) var(--mouse-y),
-        rgba(0, 113, 227, 0.07),
-        transparent 65%
-      );
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      pointer-events: none;
-    }
-    .bento-card:hover::before {
-      opacity: 1;
+    /* Frosted glass navigation */
+    .frosted-nav {
+      background-color: rgba(255, 255, 255, 0.82);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
     }
 
-    /* Audio Equalizer Bars Animation */
-    @keyframes eqBounce {
-      0%, 100% { transform: scaleY(0.32); }
-      50% { transform: scaleY(1); }
-    }
-    .eq-bar {
-      transform-origin: bottom;
-      animation: eqBounce 1.1s ease-in-out infinite;
-    }
-    .eq-bar:nth-child(2) { animation-delay: 0.18s; }
-    .eq-bar:nth-child(3) { animation-delay: 0.36s; }
-    .eq-bar:nth-child(4) { animation-delay: 0.12s; }
-    .eq-bar:nth-child(5) { animation-delay: 0.28s; }
-
-    /* Smooth FAQ Accordion using CSS Grid */
-    .faq-content {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.32s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .faq-item.active .faq-content {
-      grid-template-rows: 1fr;
-    }
-    .faq-inner {
-      overflow: hidden;
-    }
-    .faq-icon {
-      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .faq-item.active .faq-icon {
-      transform: rotate(45deg);
+    /* Clean modal fade transition */
+    .modal-backdrop {
+      background-color: rgba(29, 29, 31, 0.48);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
-    /* iPhone 3D Tilt Transition */
-    #iphone-tilt-frame {
-      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
-      transform-style: preserve-3d;
+    /* Hide scrollbar for horizontal pill filters on small screens */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
     }
-
-    /* Subtle Floating Animation for Desktop Badges */
-    @keyframes gentleFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
-    }
-    .float-slow {
-      animation: gentleFloat 5s ease-in-out infinite;
-    }
-    .float-slow-delay {
-      animation: gentleFloat 5.6s ease-in-out 1.4s infinite;
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #F5F5F7;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #D2D2D7;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #A1A1A6;
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   </style>
 </head>
-<body class="bg-white text-[#1D1D1F] overflow-x-hidden selection:bg-[#0071E3]/15 selection:text-[#0071E3]">
+<body class="relative bg-white text-[#1D1D1F] selection:bg-[#0071E3] selection:text-white">
 
-  <!-- Fixed Global Studio Dot-Grid Texture -->
-  <div aria-hidden="true" class="fixed inset-0 z-0 pointer-events-none studio-dot-grid opacity-75"></div>
+  <!-- Locked Studio Dot-Grid Background Layer (Strictly behind content) -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0 studio-dot-grid opacity-55"></div>
 
-  <!-- Main Content Container -->
-  <div class="relative z-10">
+  <!-- Main Content Wrapper (z-10 above background) -->
+  <div class="relative z-10 flex min-h-screen flex-col">
 
-    <!-- Sticky Frosted-Glass Navbar -->
-    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-[#EBEBF0]/80 transition-all">
-      <!-- 2px Top Scroll Progress Bar -->
-      <div class="w-full h-[2px] bg-transparent overflow-hidden">
-        <div id="scroll-progress-bar" class="h-full bg-[#0071E3] w-0 transition-[width] duration-75 ease-out"></div>
+    <!-- 1. STICKY FROSTED GLASS NAVBAR -->
+    <header class="sticky top-0 z-40 w-full border-b border-black/[0.06] frosted-nav">
+      <!-- Top 2px Apple Blue Scroll Progress Bar -->
+      <div class="h-[2px] w-full bg-transparent">
+        <div id="scroll-progress" class="h-full w-0 bg-[#0071E3] transition-[width] duration-75 ease-out"></div>
       </div>
 
-      <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between" aria-label="Navigasi Utama">
-        <!-- Brand Logo -->
-        <a href="#" class="flex items-center gap-2.5 group focus:outline-none">
-          <span class="w-8 h-8 rounded-[10px] bg-[#1D1D1F] text-white font-bold text-base flex items-center justify-center shadow-sm group-hover:bg-[#0071E3] transition-colors">
+      <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <!-- Left: Logo -->
+        <a href="#" class="flex items-center gap-2.5 focus:outline-none">
+          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1D1D1F] text-sm font-bold tracking-tight text-white">
             L
           </span>
-          <span class="font-semibold text-[18px] tracking-tight text-[#1D1D1F]">LesHub</span>
+          <span class="text-lg font-bold tracking-tight text-[#1D1D1F]">LesHub</span>
         </a>
 
-        <!-- Center Navigation Links (Desktop) -->
-        <div class="hidden md:flex items-center gap-7 text-[13px] font-medium text-[#6E6E73]">
-          <a href="#cara-kerja" data-nav-link="cara-kerja" class="nav-link hover:text-[#1D1D1F] transition-colors py-1">Cara Kerja</a>
-          <a href="#pilih-guru" data-nav-link="pilih-guru" class="nav-link hover:text-[#1D1D1F] transition-colors py-1">Pilih Guru</a>
-          <a href="#harga" data-nav-link="harga" class="nav-link hover:text-[#1D1D1F] transition-colors py-1">Harga</a>
-          <a href="#testimoni" data-nav-link="testimoni" class="nav-link hover:text-[#1D1D1F] transition-colors py-1">Testimoni</a>
-          <a href="#faq" data-nav-link="faq" class="nav-link hover:text-[#1D1D1F] transition-colors py-1">FAQ</a>
-        </div>
+        <!-- Center: Desktop Nav Links -->
+        <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-[#6E6E73]">
+          <a href="#cara-kerja" class="transition-colors hover:text-[#1D1D1F]">Cara Kerja</a>
+          <a href="#pilih-guru" class="transition-colors hover:text-[#1D1D1F]">Pilih Guru</a>
+          <a href="#harga" class="transition-colors hover:text-[#1D1D1F]">Harga</a>
+          <a href="#testimoni" class="transition-colors hover:text-[#1D1D1F]">Testimoni</a>
+          <a href="#faq" class="transition-colors hover:text-[#1D1D1F]">FAQ</a>
+        </nav>
 
-        <!-- Right CTA & Mobile Menu Button -->
+        <!-- Right: CTA + Mobile Hamburger -->
         <div class="flex items-center gap-2.5">
           <button
             type="button"
-            onclick="openBookingModal(null, 1)"
-            class="inline-flex items-center justify-center rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.98] text-white text-[13px] font-medium px-4 py-2 shadow-sm transition-all cursor-pointer"
+            onclick="openBookingModal({ packageId: 1 })"
+            class="rounded-full bg-[#0071E3] px-4 py-2 text-xs sm:text-sm font-medium text-white shadow-sm transition hover:bg-[#0077ED] active:scale-[0.98]"
           >
             Coba Trial Gratis
           </button>
 
+          <!-- Mobile Hamburger Button -->
           <button
             id="mobile-menu-btn"
             type="button"
-            aria-label="Buka Menu Navigasi"
+            aria-label="Buka menu navigasi"
             aria-expanded="false"
-            onclick="toggleMobileMenu()"
-            class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full text-[#1D1D1F] hover:bg-[#F5F5F7] transition-colors"
+            class="inline-flex md:hidden h-9 w-9 items-center justify-center rounded-full border border-[#E5E5EA] bg-white text-[#1D1D1F] transition hover:bg-[#F5F5F7]"
           >
-            <svg id="hamburger-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <svg id="icon-menu" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
             </svg>
-            <svg id="close-menu-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <svg id="icon-close" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-      </nav>
+      </div>
 
-      <!-- Mobile Navigation Drawer -->
-      <div id="mobile-menu-drawer" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-b border-[#EBEBF0] px-4 pt-2 pb-5">
-        <div class="flex flex-col space-y-1 text-[15px] font-medium text-[#1D1D1F]">
-          <a href="#cara-kerja" onclick="closeMobileMenu()" class="px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] transition-colors">Cara Kerja</a>
-          <a href="#pilih-guru" onclick="closeMobileMenu()" class="px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] transition-colors">Pilih Guru</a>
-          <a href="#harga" onclick="closeMobileMenu()" class="px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] transition-colors">Harga</a>
-          <a href="#testimoni" onclick="closeMobileMenu()" class="px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] transition-colors">Testimoni</a>
-          <a href="#faq" onclick="closeMobileMenu()" class="px-3 py-2.5 rounded-xl hover:bg-[#F5F5F7] transition-colors">FAQ</a>
-        </div>
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden border-t border-[#E5E5EA] bg-white/95 px-4 py-4 md:hidden">
+        <nav class="flex flex-col space-y-2 text-sm font-medium text-[#1D1D1F]">
+          <a href="#cara-kerja" class="mobile-nav-link rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7]">Cara Kerja</a>
+          <a href="#pilih-guru" class="mobile-nav-link rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7]">Pilih Guru</a>
+          <a href="#harga" class="mobile-nav-link rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7]">Harga</a>
+          <a href="#testimoni" class="mobile-nav-link rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7]">Testimoni</a>
+          <a href="#faq" class="mobile-nav-link rounded-xl px-3 py-2.5 hover:bg-[#F5F5F7]">FAQ</a>
+        </nav>
       </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="pt-12 pb-20 sm:pt-16 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div class="max-w-5xl mx-auto text-center">
-        <!-- Eyebrow -->
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] border border-[#EBEBF0] text-[12px] sm:text-[13px] font-medium text-[#6E6E73] mb-6">
-          <span class="w-2 h-2 rounded-full bg-[#0071E3]"></span>
-          <span>Les Privat 1-on-1 Terkurasi</span>
-        </div>
+    <!-- MAIN CONTENT -->
+    <main class="flex-1">
 
-        <!-- Display Headline -->
-        <h1 class="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-[-0.03em] leading-[1.06] text-[#1D1D1F] max-w-3xl mx-auto">
-          Guru les terbaik.<br class="hidden sm:inline" /> Sesimpel itu.
-        </h1>
-
-        <!-- Subtitle -->
-        <p class="mt-5 text-[17px] sm:text-[21px] leading-[1.45] font-normal text-[#6E6E73] max-w-xl mx-auto">
-          Pilih guru terkurasi, coba sesi trial gratis, langsung belajar.
-        </p>
-
-        <!-- Primary & Secondary Hero CTAs -->
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-          <button
-            type="button"
-            onclick="openBookingModal(null, 1)"
-            class="inline-flex items-center justify-center rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.98] text-white text-[15px] sm:text-[16px] font-medium px-7 py-3.5 shadow-sm transition-all cursor-pointer"
-          >
-            Coba Trial Gratis
-          </button>
-          <a
-            href="#pilih-guru"
-            class="inline-flex items-center gap-1 text-[16px] sm:text-[17px] font-medium text-[#0071E3] hover:text-[#0077ED] hover:underline underline-offset-4 py-2 px-2 transition-colors"
-          >
-            <span>Pilih Guru</span>
-            <span aria-hidden="true" class="text-lg leading-none">›</span>
-          </a>
-        </div>
-
-        <!-- Centered iPhone Mockup & Surrounding Orbit / Badges -->
-        <div class="relative mt-14 sm:mt-16 max-w-4xl mx-auto flex flex-col items-center justify-center">
-
-          <!-- Isolated Aurora Glow & Concentric Orbit Rings (-z-10) -->
-          <div aria-hidden="true" class="absolute inset-0 -z-10 flex items-center justify-center pointer-events-none">
-            <div class="w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] rounded-full bg-gradient-to-tr from-[#0071E3]/12 via-sky-200/20 to-indigo-100/20 blur-3xl"></div>
-            <div class="hidden sm:block absolute w-[480px] h-[480px] rounded-full border border-[#EBEBF0]/90"></div>
-            <div class="hidden md:block absolute w-[640px] h-[640px] rounded-full border border-[#EBEBF0]/60"></div>
-          </div>
-
-          <!-- Desktop Floating Glass Badges (lg: visible symmetrically outside iPhone) -->
-          <div class="hidden lg:flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/85 backdrop-blur-xl border border-[#EBEBF0] shadow-[0_12px_32px_-8px_rgba(0,0,0,0.08)] absolute left-4 top-16 float-slow">
-            <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div class="text-left">
-              <p class="text-[13px] font-semibold text-[#1D1D1F]">100% Guru Terverifikasi</p>
-              <p class="text-[11px] text-[#6E6E73]">Seleksi ketat & micro-teaching</p>
-            </div>
-          </div>
-
-          <div class="hidden lg:flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/85 backdrop-blur-xl border border-[#EBEBF0] shadow-[0_12px_32px_-8px_rgba(0,0,0,0.08)] absolute right-4 top-28 float-slow-delay">
-            <div class="w-9 h-9 rounded-xl bg-[#0071E3]/10 text-[#0071E3] flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div class="text-left">
-              <p class="text-[13px] font-semibold text-[#1D1D1F]">Trial Pertama Gratis</p>
-              <p class="text-[11px] text-[#6E6E73]">30 menit tanpa biaya komitmen</p>
-            </div>
-          </div>
-
-          <div class="hidden lg:flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/85 backdrop-blur-xl border border-[#EBEBF0] shadow-[0_12px_32px_-8px_rgba(0,0,0,0.08)] absolute left-8 bottom-20 float-slow-delay">
-            <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>
-            </div>
-            <div class="text-left">
-              <p class="text-[13px] font-semibold text-[#1D1D1F]">Garansi Ganti Guru</p>
-              <p class="text-[11px] text-[#6E6E73]">Bebas ganti jika belum cocok</p>
-            </div>
-          </div>
-
-          <!-- iPhone Hardware Frame (max-w-[390px]) -->
-          <div id="iphone-tilt-wrapper" class="w-full max-w-[390px] mx-auto px-2 sm:px-0">
-            <div
-              id="iphone-tilt-frame"
-              class="relative rounded-[48px] bg-[#1D1D1F] p-[11px] shadow-[0_28px_70px_-15px_rgba(29,29,31,0.28)] ring-1 ring-black/10"
-            >
-              <!-- Inner Screen -->
-              <div class="relative rounded-[38px] bg-[#F5F5F7] overflow-hidden text-left">
-                <!-- Status Bar & Dynamic Island -->
-                <div class="bg-white pt-3 pb-2.5 px-6 flex items-center justify-between">
-                  <span class="text-[12px] font-semibold text-[#1D1D1F]">09:41</span>
-                  <!-- Dynamic Island -->
-                  <div class="w-28 h-6 rounded-full bg-[#1D1D1F] flex items-center justify-between px-3">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span class="text-[10px] font-medium text-white/90 tracking-tight">Live 1-on-1</span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-[#2C2C2E] ring-1 ring-white/10"></span>
-                  </div>
-                  <!-- Signal / Battery -->
-                  <div class="flex items-center gap-1 text-[#1D1D1F]">
-                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 18c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-4.9-2.3l1.4 1.4C9.4 16.4 10.6 16 12 16s2.6.4 3.5 1.1l1.4-1.4C15.6 14.6 13.9 14 12 14s-3.6.6-4.9 1.7zm-2.8-2.8l1.4 1.4C7.3 13 9.5 12 12 12s4.7 1 6.3 2.3l1.4-1.4C17.7 11.1 15 10 12 10s-5.7 1.1-7.7 2.9z"/>
-                    </svg>
-                    <div class="w-5 h-2.5 rounded-[3px] border border-[#1D1D1F] p-[1px] flex items-center">
-                      <div class="w-full h-full bg-[#1D1D1F] rounded-[1px]"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Interactive Subject Switcher Tabs -->
-                <div class="bg-white px-4 pb-3.5 border-b border-[#EBEBF0]">
-                  <p class="text-[11px] font-medium text-[#6E6E73] mb-2">Pratinjau Sesi Belajar</p>
-                  <div class="grid grid-cols-3 gap-1.5 bg-[#F5F5F7] p-1 rounded-full" role="tablist" aria-label="Pilih Mata Pelajaran Pratinjau">
-                    <button
-                      type="button"
-                      onclick="switchPhonePreview('english')"
-                      id="phone-tab-english"
-                      class="phone-tab rounded-full py-1.5 px-2 text-[11px] font-semibold bg-white text-[#1D1D1F] shadow-xs transition-all cursor-pointer"
-                    >
-                      B. Inggris
-                    </button>
-                    <button
-                      type="button"
-                      onclick="switchPhonePreview('math')"
-                      id="phone-tab-math"
-                      class="phone-tab rounded-full py-1.5 px-2 text-[11px] font-medium text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer"
-                    >
-                      Matematika
-                    </button>
-                    <button
-                      type="button"
-                      onclick="switchPhonePreview('calistung')"
-                      id="phone-tab-calistung"
-                      class="phone-tab rounded-full py-1.5 px-2 text-[11px] font-medium text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer"
-                    >
-                      Calistung
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Dynamic Class Preview Body -->
-                <div class="p-4 space-y-3">
-                  <!-- Active Teacher & Audio Wave Card -->
-                  <div class="bg-white rounded-2xl p-3.5 border border-[#EBEBF0] shadow-2xs">
-                    <div class="flex items-center justify-between gap-2.5">
-                      <div class="flex items-center gap-2.5">
-                        <div id="phone-teacher-avatar" class="w-11 h-11 rounded-full overflow-hidden shrink-0 bg-[#F5F5F7]"></div>
-                        <div>
-                          <div class="flex items-center gap-1.5">
-                            <h2 id="phone-teacher-name" class="text-[14px] font-semibold text-[#1D1D1F]">Kak Nadia</h2>
-                            <span class="inline-flex items-center text-[11px] font-medium text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-full">
-                              ★ <span id="phone-teacher-rating" class="ml-0.5">4.98</span>
-                            </span>
-                          </div>
-                          <p id="phone-teacher-cred" class="text-[11px] text-[#6E6E73] mt-0.5">Sastra Inggris UI • IELTS 8.0</p>
-                        </div>
-                      </div>
-
-                      <!-- Animated Audio Equalizer -->
-                      <div class="flex items-end gap-[3px] h-5 px-2 py-1 rounded-lg bg-[#0071E3]/10" aria-hidden="true">
-                        <span class="eq-bar w-[2.5px] h-3 bg-[#0071E3] rounded-full"></span>
-                        <span class="eq-bar w-[2.5px] h-3 bg-[#0071E3] rounded-full"></span>
-                        <span class="eq-bar w-[2.5px] h-3 bg-[#0071E3] rounded-full"></span>
-                        <span class="eq-bar w-[2.5px] h-3 bg-[#0071E3] rounded-full"></span>
-                      </div>
-                    </div>
-
-                    <!-- Topic Card -->
-                    <div class="mt-3 pt-3 border-t border-[#EBEBF0]">
-                      <div class="flex items-center justify-between text-[11px] text-[#6E6E73] mb-1">
-                        <span>Topik Sesi Hari Ini</span>
-                        <span id="phone-session-mode" class="font-medium text-[#0071E3]">Zoom / Tatap Muka</span>
-                      </div>
-                      <p id="phone-topic-title" class="text-[13px] font-semibold text-[#1D1D1F]">
-                        Daily Conversation &amp; Confidence
-                      </p>
-                      <p id="phone-topic-desc" class="text-[11.5px] text-[#6E6E73] mt-0.5 leading-relaxed">
-                        Latihan berbicara santai dengan koreksi pelafalan langsung tanpa takut salah.
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- Live Feedback Pill -->
-                  <div class="bg-white/80 rounded-2xl px-3.5 py-2.5 border border-[#EBEBF0] flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                      <span class="text-[11.5px] font-medium text-[#1D1D1F]">Laporan progres tiap selesai sesi</span>
-                    </div>
-                    <span class="text-[11px] font-semibold text-emerald-600">Aktif</span>
-                  </div>
-
-                  <!-- Bottom Trial Gratis Action Card inside iPhone -->
-                  <div class="bg-[#1D1D1F] text-white rounded-2xl p-3.5 flex items-center justify-between gap-3">
-                    <div>
-                      <p class="text-[11px] text-white/70">Kenalan &amp; Evaluasi 30 Menit</p>
-                      <p class="text-[14px] font-semibold tracking-tight mt-0.5">1 Sesi Trial • <span class="text-sky-400">Gratis</span></p>
-                    </div>
-                    <button
-                      type="button"
-                      onclick="openBookingModal(currentPreviewTeacherId, 1)"
-                      class="rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-95 text-white text-[12px] font-semibold px-4 py-2 transition-all shrink-0 cursor-pointer"
-                    >
-                      Coba
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Home Indicator Bar -->
-                <div class="pb-2.5 pt-1 flex justify-center">
-                  <div class="w-28 h-1 rounded-full bg-[#1D1D1F]/20"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Mobile & Tablet Floating Badges Row (< lg) -->
-          <div class="lg:hidden mt-7 flex flex-wrap items-center justify-center gap-2.5 px-2">
-            <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/90 border border-[#EBEBF0] shadow-2xs text-[12px] font-medium text-[#1D1D1F]">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-              100% Guru Terverifikasi
-            </span>
-            <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/90 border border-[#EBEBF0] shadow-2xs text-[12px] font-medium text-[#1D1D1F]">
-              <span class="w-2 h-2 rounded-full bg-[#0071E3]"></span>
-              Trial Pertama Gratis
-            </span>
-            <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/90 border border-[#EBEBF0] shadow-2xs text-[12px] font-medium text-[#1D1D1F]">
-              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-              Garansi Ganti Guru
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3 LANGKAH MUDAH (BENTO GRID) -->
-    <section id="cara-kerja" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-[#EBEBF0]/80">
-      <div class="max-w-6xl mx-auto">
-        <div class="max-w-2xl">
-          <p class="text-[13px] font-semibold uppercase tracking-wider text-[#0071E3]">Cara Kerja</p>
-          <h2 class="mt-2 text-3xl sm:text-[42px] font-bold tracking-[-0.025em] leading-[1.12] text-[#1D1D1F]">
-            Mulai belajar dalam tiga langkah tanpa ribet.
-          </h2>
-        </div>
-
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Bento Card 1 -->
-          <div class="bento-card rounded-[28px] bg-[#F5F5F7] border border-[#EBEBF0] p-7 sm:p-8 flex flex-col justify-between transition-all hover:shadow-[0_16px_36px_-12px_rgba(0,0,0,0.06)]">
-            <div>
-              <div class="w-11 h-11 rounded-2xl bg-white border border-[#EBEBF0] flex items-center justify-center text-[#1D1D1F] font-semibold text-[16px] shadow-2xs">
-                1
-              </div>
-              <h3 class="mt-6 text-[21px] font-semibold tracking-tight text-[#1D1D1F]">
-                1. Pilih Guru
-              </h3>
-              <p class="mt-2.5 text-[15px] leading-relaxed text-[#6E6E73]">
-                Bandingkan profil guru terverifikasi, dengarkan sapaan suaranya, dan pilih yang paling pas dengan karakter anak.
-              </p>
-            </div>
-            <div class="mt-8 pt-4 border-t border-[#EBEBF0] flex items-center justify-between text-[13px] font-medium text-[#1D1D1F]">
-              <span>Kurasi ketat &lt; 8% pendaftar</span>
-              <span class="text-[#0071E3]">Terverifikasi</span>
-            </div>
-          </div>
-
-          <!-- Bento Card 2 -->
-          <div class="bento-card rounded-[28px] bg-[#F5F5F7] border border-[#EBEBF0] p-7 sm:p-8 flex flex-col justify-between transition-all hover:shadow-[0_16px_36px_-12px_rgba(0,0,0,0.06)]">
-            <div>
-              <div class="w-11 h-11 rounded-2xl bg-[#0071E3] text-white flex items-center justify-center font-semibold text-[16px] shadow-2xs">
-                2
-              </div>
-              <h3 class="mt-6 text-[21px] font-semibold tracking-tight text-[#1D1D1F]">
-                2. Coba Trial Gratis
-              </h3>
-              <p class="mt-2.5 text-[15px] leading-relaxed text-[#6E6E73]">
-                Ikuti sesi perkenalan &amp; evaluasi 30 menit secara gratis. Lihat langsung cara guru menjelaskan materi ke anak.
-              </p>
-            </div>
-            <div class="mt-8 pt-4 border-t border-[#EBEBF0] flex items-center justify-between text-[13px] font-medium text-[#1D1D1F]">
-              <span>30 menit sesi perdana</span>
-              <span class="text-[#0071E3] font-semibold">Gratis</span>
-            </div>
-          </div>
-
-          <!-- Bento Card 3 -->
-          <div class="bento-card rounded-[28px] bg-[#F5F5F7] border border-[#EBEBF0] p-7 sm:p-8 flex flex-col justify-between transition-all hover:shadow-[0_16px_36px_-12px_rgba(0,0,0,0.06)]">
-            <div>
-              <div class="w-11 h-11 rounded-2xl bg-white border border-[#EBEBF0] flex items-center justify-center text-[#1D1D1F] font-semibold text-[16px] shadow-2xs">
-                3
-              </div>
-              <h3 class="mt-6 text-[21px] font-semibold tracking-tight text-[#1D1D1F]">
-                3. Lanjut Belajar
-              </h3>
-              <p class="mt-2.5 text-[15px] leading-relaxed text-[#6E6E73]">
-                Jika sudah cocok, pilih paket 4 atau 8 sesi sesuai ritme belajar anak. Jadwal fleksibel via Zoom atau tatap muka.
-              </p>
-            </div>
-            <div class="mt-8 pt-4 border-t border-[#EBEBF0] flex items-center justify-between text-[13px] font-medium text-[#1D1D1F]">
-              <span>Garansi ganti guru kapan saja</span>
-              <span class="text-[#0071E3]">Fleksibel</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PILIH GURU (INTERACTIVE CATALOG + PREVIEW MODAL) -->
-    <section id="pilih-guru" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-[#EBEBF0]/80">
-      <div class="max-w-6xl mx-auto">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div class="max-w-xl">
-            <p class="text-[13px] font-semibold uppercase tracking-wider text-[#0071E3]">Pilih Guru</p>
-            <h2 class="mt-2 text-3xl sm:text-[42px] font-bold tracking-[-0.025em] leading-[1.12] text-[#1D1D1F]">
-              Pengajar pilihan yang sabar dan komunikatif.
-            </h2>
-          </div>
-
-          <!-- Pill Filter Tabs -->
-          <div class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter Mata Pelajaran Guru">
-            <button
-              type="button"
-              onclick="filterTeachers('Semua')"
-              data-filter="Semua"
-              class="teacher-filter-btn rounded-full px-4 py-2 text-[13px] font-medium bg-[#1D1D1F] text-white transition-all cursor-pointer"
-            >
-              Semua
-            </button>
-            <button
-              type="button"
-              onclick="filterTeachers('Bahasa Inggris')"
-              data-filter="Bahasa Inggris"
-              class="teacher-filter-btn rounded-full px-4 py-2 text-[13px] font-medium bg-[#F5F5F7] text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer"
-            >
-              Bahasa Inggris
-            </button>
-            <button
-              type="button"
-              onclick="filterTeachers('Matematika')"
-              data-filter="Matematika"
-              class="teacher-filter-btn rounded-full px-4 py-2 text-[13px] font-medium bg-[#F5F5F7] text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer"
-            >
-              Matematika
-            </button>
-            <button
-              type="button"
-              onclick="filterTeachers('Calistung')"
-              data-filter="Calistung"
-              class="teacher-filter-btn rounded-full px-4 py-2 text-[13px] font-medium bg-[#F5F5F7] text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer"
-            >
-              Calistung
-            </button>
-          </div>
-        </div>
-
-        <!-- Teachers Grid -->
-        <div id="teachers-grid" class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Populated dynamically via JavaScript -->
-        </div>
-      </div>
-    </section>
-
-    <!-- HARGA TRANSPARAN -->
-    <section id="harga" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-[#EBEBF0]/80">
-      <div class="max-w-5xl mx-auto">
-        <div class="text-center max-w-2xl mx-auto">
-          <p class="text-[13px] font-semibold uppercase tracking-wider text-[#0071E3]">Harga Transparan</p>
-          <h2 class="mt-2 text-3xl sm:text-[42px] font-bold tracking-[-0.025em] leading-[1.12] text-[#1D1D1F]">
-            Satu harga jelas. Tanpa biaya tersembunyi.
-          </h2>
-          <p class="mt-3 text-[16px] text-[#6E6E73]">
-            Semua paket sudah termasuk modul belajar, laporan perkembangan, dan garansi ganti guru.
-          </p>
-
-          <!-- Interactive Schedule Frequency Toggle -->
-          <div class="mt-7 inline-flex items-center p-1 rounded-full bg-[#F5F5F7] border border-[#EBEBF0]">
-            <button
-              type="button"
-              id="freq-1x-btn"
-              onclick="setScheduleFrequency(1)"
-              class="rounded-full px-5 py-2 text-[13px] font-semibold bg-white text-[#1D1D1F] shadow-2xs transition-all cursor-pointer"
-            >
-              1x Seminggu
-            </button>
-            <button
-              type="button"
-              id="freq-2x-btn"
-              onclick="setScheduleFrequency(2)"
-              class="rounded-full px-5 py-2 text-[13px] font-medium text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer"
-            >
-              2x Seminggu
-            </button>
-          </div>
-        </div>
-
-        <!-- 2 Side-by-Side Main Package Cards -->
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Paket Fokus (4 Sesi) -->
-          <div class="rounded-[28px] bg-white border border-[#EBEBF0] p-7 sm:p-9 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.03)]">
-            <div>
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[13px] font-semibold text-[#6E6E73]">4 Sesi • 60 Menit / Sesi</span>
-              </div>
-              <h3 class="mt-3 text-[24px] font-bold tracking-tight text-[#1D1D1F]">
-                Paket Fokus (4 Sesi)
-              </h3>
-              <div class="mt-4 flex items-baseline gap-2">
-                <span class="text-3xl sm:text-[38px] font-bold tracking-tight text-[#1D1D1F]">Rp 400.000</span>
-              </div>
-              <p id="fokus-freq-caption" class="mt-1.5 text-[13px] text-[#6E6E73]">
-                Setara Rp 100.000 / sesi • Estimasi selesai 4 minggu
-              </p>
-
-              <ul class="mt-7 space-y-3.5 text-[14.5px] text-[#1D1D1F]">
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>4x pertemuan privat 1-on-1 (Online / Tatap Muka)</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>Materi disesuaikan kurikulum sekolah atau kebutuhan anak</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>Ringkasan evaluasi belajar setiap selesai sesi</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>Gratis reschedule maksimal H-4 jam sebelum kelas</span>
-                </li>
-              </ul>
+      <!-- 2. HERO SECTION -->
+      <section class="pt-12 pb-16 sm:pt-16 sm:pb-24">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <!-- Hero Typography Block -->
+          <div class="mx-auto max-w-3xl text-center">
+            <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E5E5EA] bg-[#F5F5F7] px-3.5 py-1.5 text-xs font-semibold tracking-wide text-[#1D1D1F]">
+              <span class="h-2 w-2 rounded-full bg-[#0071E3]"></span>
+              Les Privat 1-on-1 Terkurasi
             </div>
 
-            <div class="mt-8 pt-6 border-t border-[#EBEBF0]">
+            <h1 class="text-4xl font-extrabold tracking-tight text-[#1D1D1F] sm:text-5xl lg:text-6xl lg:leading-[1.08]">
+              Guru les terbaik.<br class="hidden sm:inline" /> Sesimpel itu.
+            </h1>
+
+            <p class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-[#6E6E73] sm:text-lg">
+              Pilih guru terkurasi, coba 1 sesi trial gratis, lalu mulai belajar.
+            </p>
+
+            <!-- Hero CTAs -->
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-5">
               <button
                 type="button"
-                onclick="openBookingModal(null, 4)"
-                class="w-full rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] active:scale-[0.99] text-[#1D1D1F] font-semibold text-[15px] py-3.5 px-6 transition-all cursor-pointer"
+                onclick="openBookingModal({ packageId: 1 })"
+                class="w-full sm:w-auto rounded-full bg-[#0071E3] px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-sm transition hover:bg-[#0077ED] active:scale-[0.98]"
               >
-                Pilih Paket Fokus
+                Coba 1 Sesi Trial Gratis
+              </button>
+              <a
+                href="#harga"
+                class="inline-flex items-center gap-1 rounded-full px-4 py-2.5 text-sm sm:text-base font-medium text-[#0071E3] transition hover:underline"
+              >
+                Lihat Paket <span aria-hidden="true">&gt;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Mobile / Tablet Stacked Trust Pills (Visible below lg) -->
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-2.5 lg:hidden">
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-[#E5E5EA] bg-white px-3.5 py-1.5 text-xs font-medium text-[#1D1D1F] shadow-sm">
+              <svg class="h-3.5 w-3.5 text-[#0071E3]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+              100% Guru Terverifikasi
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-[#E5E5EA] bg-white px-3.5 py-1.5 text-xs font-medium text-[#1D1D1F] shadow-sm">
+              <svg class="h-3.5 w-3.5 text-[#0071E3]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+              Harga Transparan All-In
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-[#E5E5EA] bg-white px-3.5 py-1.5 text-xs font-medium text-[#1D1D1F] shadow-sm">
+              <svg class="h-3.5 w-3.5 text-[#0071E3]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+              Garansi Ganti Guru Gratis
+            </span>
+          </div>
+
+          <!-- Centered iPhone Mockup Stage + Safe Desktop Side Trust Badges -->
+          <div class="relative mx-auto mt-10 sm:mt-12 flex max-w-5xl items-center justify-center">
+
+            <!-- Left Desktop Trust Badges (Strictly lg:flex, safely outside centered 380px mockup) -->
+            <div class="hidden lg:flex flex-col items-end gap-5 pr-10 w-64">
+              <div class="flex items-center gap-3 rounded-2xl border border-[#E5E5EA] bg-white/95 px-4 py-3 shadow-sm">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#0071E3]/10 text-[#0071E3]">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div class="text-left">
+                  <p class="text-xs font-semibold text-[#1D1D1F]">100% Guru Terverifikasi</p>
+                  <p class="text-[11px] text-[#6E6E73]">Seleksi mikro-teaching ketat</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 rounded-2xl border border-[#E5E5EA] bg-white/95 px-4 py-3 shadow-sm">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#0071E3]/10 text-[#0071E3]">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="text-left">
+                  <p class="text-xs font-semibold text-[#1D1D1F]">Harga Transparan All-In</p>
+                  <p class="text-[11px] text-[#6E6E73]">Tanpa biaya admin tersembunyi</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Centered iPhone Frame (max-w-[380px]) -->
+            <div class="w-full max-w-[380px] rounded-[46px] border-[8px] border-[#1D1D1F] bg-white p-4 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.14)]">
+              <!-- Dynamic Island -->
+              <div class="mx-auto mb-4 flex h-6 w-28 items-center justify-between rounded-full bg-[#1D1D1F] px-3">
+                <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                <span class="h-2 w-2 rounded-full bg-[#2C2C2E]"></span>
+              </div>
+
+              <!-- App Header inside iPhone -->
+              <div class="flex items-center justify-between px-1">
+                <div>
+                  <p class="text-[11px] font-medium text-[#6E6E73]">Sesi Privat 1-on-1</p>
+                  <p class="text-sm font-bold text-[#1D1D1F]">Pilih Mata Pelajaran</p>
+                </div>
+                <span class="rounded-full bg-[#F5F5F7] px-2.5 py-1 text-[11px] font-semibold text-[#1D1D1F]">
+                  Live Preview
+                </span>
+              </div>
+
+              <!-- Interactive Subject Tabs -->
+              <div class="mt-3 grid grid-cols-3 gap-1.5 rounded-2xl bg-[#F5F5F7] p-1" role="tablist">
+                <button
+                  type="button"
+                  data-hero-tab="english"
+                  class="hero-tab-btn rounded-xl bg-white py-2 text-xs font-semibold text-[#1D1D1F] shadow-sm transition"
+                >
+                  B. Inggris
+                </button>
+                <button
+                  type="button"
+                  data-hero-tab="math"
+                  class="hero-tab-btn rounded-xl py-2 text-xs font-medium text-[#6E6E73] transition hover:text-[#1D1D1F]"
+                >
+                  Matematika
+                </button>
+                <button
+                  type="button"
+                  data-hero-tab="calistung"
+                  class="hero-tab-btn rounded-xl py-2 text-xs font-medium text-[#6E6E73] transition hover:text-[#1D1D1F]"
+                >
+                  Calistung
+                </button>
+              </div>
+
+              <!-- Dynamic Live 1-on-1 Preview Card -->
+              <div id="hero-preview-card" class="mt-3.5 rounded-3xl border border-[#E5E5EA] bg-[#F5F5F7] p-4 transition-all">
+                <!-- Populated by JS on load & tab click -->
+              </div>
+
+              <!-- Bottom CTA Card inside iPhone -->
+              <div class="mt-3.5 rounded-3xl bg-[#1D1D1F] p-4 text-white">
+                <div class="flex items-center justify-between gap-2">
+                  <div>
+                    <p class="text-xs font-semibold text-white">1 Sesi Trial • Gratis</p>
+                    <p class="mt-0.5 text-[11px] text-white/70">Tanpa biaya komitmen</p>
+                  </div>
+                  <button
+                    type="button"
+                    onclick="openBookingModal({ packageId: 1 })"
+                    class="shrink-0 rounded-full bg-[#0071E3] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#0077ED]"
+                  >
+                    Coba Gratis
+                  </button>
+                </div>
+              </div>
+
+              <!-- iPhone Home Indicator -->
+              <div class="mx-auto mt-4 h-1 w-28 rounded-full bg-[#1D1D1F]/20"></div>
+            </div>
+
+            <!-- Right Desktop Trust Badge (Strictly lg:flex, safely outside centered 380px mockup) -->
+            <div class="hidden lg:flex flex-col items-start gap-5 pl-10 w-64">
+              <div class="flex items-center gap-3 rounded-2xl border border-[#E5E5EA] bg-white/95 px-4 py-3 shadow-sm">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#0071E3]/10 text-[#0071E3]">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                </div>
+                <div class="text-left">
+                  <p class="text-xs font-semibold text-[#1D1D1F]">Garansi Ganti Guru Gratis</p>
+                  <p class="text-[11px] text-[#6E6E73]">Cocokkan ulang kapan saja</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 rounded-2xl border border-[#E5E5EA] bg-white/95 px-4 py-3 shadow-sm">
+                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="text-left">
+                  <p class="text-xs font-semibold text-[#1D1D1F]">Jadwal Fleksibel</p>
+                  <p class="text-[11px] text-[#6E6E73]">Online Zoom atau Tatap Muka</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. "3 LANGKAH MUDAH" BENTO GRID (#cara-kerja) -->
+      <section id="cara-kerja" class="scroll-mt-20 border-t border-[#E5E5EA]/70 bg-white py-16 sm:py-24">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="mx-auto max-w-2xl text-center">
+            <p class="text-xs font-semibold uppercase tracking-widest text-[#0071E3]">Cara Kerja</p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-[#1D1D1F] sm:text-4xl">
+              3 Langkah Mudah
+            </h2>
+            <p class="mt-3 text-base text-[#6E6E73]">
+              Proses pemesanan guru privat yang dirancang ringkas, transparan, dan nyaman bagi orang tua.
+            </p>
+          </div>
+
+          <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <!-- Step 1 -->
+            <div class="flex flex-col justify-between rounded-3xl bg-[#F5F5F7] p-7 sm:p-8">
+              <div>
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-base font-bold text-[#1D1D1F] shadow-sm">
+                  1
+                </div>
+                <h3 class="mt-6 text-xl font-bold text-[#1D1D1F]">1. Pilih Guru</h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-[#6E6E73]">
+                  Lihat profil, kredensial, dan gaya mengajarnya.
+                </p>
+              </div>
+              <div class="mt-8 border-t border-black/[0.06] pt-4 text-xs font-medium text-[#6E6E73]">
+                Kurasi ketat • Profil terverifikasi
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex flex-col justify-between rounded-3xl bg-[#F5F5F7] p-7 sm:p-8">
+              <div>
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0071E3] text-base font-bold text-white shadow-sm">
+                  2
+                </div>
+                <h3 class="mt-6 text-xl font-bold text-[#1D1D1F]">2. Coba Trial Gratis</h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-[#6E6E73]">
+                  Kenalan 30 menit tanpa biaya komitmen.
+                </p>
+              </div>
+              <div class="mt-8 border-t border-black/[0.06] pt-4 text-xs font-medium text-[#0071E3]">
+                Rp 0 • Evaluasi kebutuhan belajar anak
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex flex-col justify-between rounded-3xl bg-[#F5F5F7] p-7 sm:p-8">
+              <div>
+                <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-base font-bold text-[#1D1D1F] shadow-sm">
+                  3
+                </div>
+                <h3 class="mt-6 text-xl font-bold text-[#1D1D1F]">3. Mulai Belajar</h3>
+                <p class="mt-2.5 text-sm leading-relaxed text-[#6E6E73]">
+                  Jadwal fleksibel via Zoom atau tatap muka.
+                </p>
+              </div>
+              <div class="mt-8 border-t border-black/[0.06] pt-4 text-xs font-medium text-[#6E6E73]">
+                Sesi 1-on-1 personal • Laporan berkala
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. "PILIH GURU" CATALOG (#pilih-guru) -->
+      <section id="pilih-guru" class="scroll-mt-20 border-t border-[#E5E5EA]/70 bg-[#F5F5F7]/60 py-16 sm:py-24">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col items-center text-center">
+            <p class="text-xs font-semibold uppercase tracking-widest text-[#0071E3]">Tutor Pilihan</p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-[#1D1D1F] sm:text-4xl">
+              Pilih Guru Terkurasi
+            </h2>
+            <p class="mt-3 max-w-xl text-base text-[#6E6E73]">
+              Setiap pengajar telah melewati seleksi kompetensi materi, komunikasi anak, dan simulasi mengajar.
+            </p>
+
+            <!-- Pill Filter Tabs -->
+            <div id="teacher-filters" class="mt-8 flex w-full max-w-full items-center justify-start sm:justify-center gap-2 overflow-x-auto no-scrollbar pb-1">
+              <button
+                type="button"
+                data-filter="Semua"
+                class="filter-btn shrink-0 rounded-full bg-[#1D1D1F] px-5 py-2 text-sm font-medium text-white transition"
+              >
+                Semua
+              </button>
+              <button
+                type="button"
+                data-filter="Bahasa Inggris"
+                class="filter-btn shrink-0 rounded-full border border-[#E5E5EA] bg-white px-5 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-[#F5F5F7]"
+              >
+                Bahasa Inggris
+              </button>
+              <button
+                type="button"
+                data-filter="Matematika"
+                class="filter-btn shrink-0 rounded-full border border-[#E5E5EA] bg-white px-5 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-[#F5F5F7]"
+              >
+                Matematika
+              </button>
+              <button
+                type="button"
+                data-filter="Calistung"
+                class="filter-btn shrink-0 rounded-full border border-[#E5E5EA] bg-white px-5 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-[#F5F5F7]"
+              >
+                Calistung
               </button>
             </div>
           </div>
 
-          <!-- Paket Intensif (8 Sesi) -->
-          <div class="relative rounded-[28px] bg-white ring-2 ring-[#0071E3] p-7 sm:p-9 flex flex-col justify-between shadow-[0_18px_45px_-12px_rgba(0,113,227,0.16)]">
-            <div>
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[13px] font-semibold text-[#6E6E73]">8 Sesi • 60 Menit / Sesi</span>
-                <span class="inline-flex items-center px-3 py-1 rounded-full bg-[#0071E3] text-white text-[11.5px] font-semibold">
-                  Paling Diminati
-                </span>
-              </div>
-              <h3 class="mt-3 text-[24px] font-bold tracking-tight text-[#1D1D1F]">
-                Paket Intensif (8 Sesi)
-              </h3>
-              <div class="mt-4 flex items-baseline gap-2.5">
-                <span class="text-3xl sm:text-[38px] font-bold tracking-tight text-[#1D1D1F]">Rp 750.000</span>
-                <span class="text-[14px] text-[#6E6E73] line-through">Rp 800.000</span>
-              </div>
-              <p id="intensif-freq-caption" class="mt-1.5 text-[13px] text-[#0071E3] font-medium">
-                Setara Rp 93.750 / sesi • Estimasi selesai 8 minggu
-              </p>
+          <!-- Teacher Cards Grid (Rendered cleanly via JS) -->
+          <div id="teacher-grid" class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <!-- Teacher cards injected by JS -->
+          </div>
+        </div>
+      </section>
 
-              <ul class="mt-7 space-y-3.5 text-[14.5px] text-[#1D1D1F]">
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>8x pertemuan privat 1-on-1 untuk progres lebih konsisten</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>Prioritas penguncian slot jadwal rutin pilihan orang tua</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>Latihan soal terarah &amp; persiapan ulangan harian / ujian</span>
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span>Garansi ganti guru gratis kapan saja jika kurang cocok</span>
-                </li>
-              </ul>
-            </div>
+      <!-- 5. "HARGA TRANSPARAN" SECTION (#harga) -->
+      <section id="harga" class="scroll-mt-20 border-t border-[#E5E5EA]/70 bg-white py-16 sm:py-24">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="mx-auto max-w-2xl text-center">
+            <p class="text-xs font-semibold uppercase tracking-widest text-[#0071E3]">Biaya Jelas & All-In</p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-[#1D1D1F] sm:text-4xl">
+              Harga Transparan
+            </h2>
+            <p class="mt-3 text-base text-[#6E6E73]">
+              Mulai dari sesi trial gratis tanpa risiko, lanjutkan dengan paket belajar fleksibel sesuai kebutuhan anak.
+            </p>
+          </div>
 
-            <div class="mt-8 pt-6 border-t border-[#EBEBF0]">
+          <!-- Highlighted Horizontal Trial Banner Card -->
+          <div class="mx-auto mt-10 max-w-4xl rounded-3xl border border-[#0071E3]/25 bg-[#F5F5F7] p-6 sm:p-8">
+            <div class="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
+              <div>
+                <div class="inline-flex items-center gap-2 rounded-full bg-[#0071E3]/10 px-3 py-1 text-xs font-semibold text-[#0071E3]">
+                  Langkah Awal Terbaik
+                </div>
+                <h3 class="mt-2.5 text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                  1 Sesi Trial — Gratis
+                </h3>
+                <p class="mt-1 text-sm text-[#6E6E73]">
+                  30 menit evaluasi &amp; kenalan dengan guru • Tanpa biaya komitmen
+                </p>
+              </div>
               <button
                 type="button"
-                onclick="openBookingModal(null, 8)"
-                class="w-full rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.99] text-white font-semibold text-[15px] py-3.5 px-6 shadow-sm transition-all cursor-pointer"
+                onclick="openBookingModal({ packageId: 1 })"
+                class="w-full sm:w-auto shrink-0 rounded-full bg-[#0071E3] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0077ED] active:scale-[0.98]"
+              >
+                Coba Trial Gratis
+              </button>
+            </div>
+          </div>
+
+          <!-- 2 Side-by-Side Comparison Cards -->
+          <div class="mx-auto mt-8 grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
+            <!-- Card 1: Paket Fokus (4 Sesi) -->
+            <div class="flex flex-col justify-between rounded-3xl border border-[#E5E5EA] bg-white p-7 sm:p-8 shadow-sm">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-semibold text-[#6E6E73]">Reguler</span>
+                </div>
+                <h3 class="mt-2 text-2xl font-bold text-[#1D1D1F]">Paket Fokus (4 Sesi)</h3>
+                <div class="mt-4 flex items-baseline gap-1.5">
+                  <span class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1D1D1F]">Rp 320.000</span>
+                  <span class="text-sm font-medium text-[#6E6E73]">/ paket</span>
+                </div>
+                <p class="mt-2 text-xs font-medium text-[#6E6E73]">
+                  Rp 80.000 per sesi • Sudah termasuk biaya layanan
+                </p>
+
+                <ul class="mt-6 space-y-3 border-t border-[#E5E5EA] pt-6 text-sm text-[#1D1D1F]">
+                  <li class="flex items-start gap-2.5">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0071E3]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                    <span>Cocok untuk evaluasi awal</span>
+                  </li>
+                  <li class="flex items-start gap-2.5">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0071E3]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                    <span>Jadwal 1x seminggu fleksibel</span>
+                  </li>
+                  <li class="flex items-start gap-2.5">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0071E3]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                    <span>Garansi ganti guru gratis</span>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                type="button"
+                onclick="openBookingModal({ packageId: 4 })"
+                class="mt-8 w-full rounded-full border border-[#1D1D1F] bg-white py-3 text-sm font-semibold text-[#1D1D1F] transition hover:bg-[#1D1D1F] hover:text-white active:scale-[0.98]"
+              >
+                Pilih Paket Fokus
+              </button>
+            </div>
+
+            <!-- Card 2: Paket Intensif (8 Sesi) - Highlighted -->
+            <div class="flex flex-col justify-between rounded-3xl bg-white p-7 sm:p-8 ring-2 ring-[#0071E3] shadow-md">
+              <div>
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-sm font-semibold text-[#0071E3]">Rekomendasi</span>
+                  <span class="rounded-full bg-[#0071E3] px-3 py-1 text-xs font-semibold text-white">
+                    Paling Diminati
+                  </span>
+                </div>
+                <h3 class="mt-2 text-2xl font-bold text-[#1D1D1F]">Paket Intensif (8 Sesi)</h3>
+                <div class="mt-4 flex items-baseline gap-1.5">
+                  <span class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1D1D1F]">Rp 600.000</span>
+                  <span class="text-sm font-medium text-[#6E6E73]">/ paket</span>
+                </div>
+                <p class="mt-2 text-xs font-medium text-[#0071E3]">
+                  Rp 75.000 per sesi • Hemat Rp 40.000 dibanding 2x Paket Fokus (Rp 640.000)
+                </p>
+
+                <ul class="mt-6 space-y-3 border-t border-[#E5E5EA] pt-6 text-sm text-[#1D1D1F]">
+                  <li class="flex items-start gap-2.5">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0071E3]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                    <span>Progres belajar lebih cepat</span>
+                  </li>
+                  <li class="flex items-start gap-2.5">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0071E3]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                    <span>Jadwal 2x seminggu fleksibel</span>
+                  </li>
+                  <li class="flex items-start gap-2.5">
+                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-[#0071E3]" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
+                    <span>Laporan perkembangan bulanan</span>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                type="button"
+                onclick="openBookingModal({ packageId: 8 })"
+                class="mt-8 w-full rounded-full bg-[#0071E3] py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0077ED] active:scale-[0.98]"
               >
                 Pilih Paket Intensif
               </button>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Full-Width Apple-Style Banner Card for 1 Sesi Trial Gratis -->
-        <div class="mt-6 rounded-[28px] bg-[#F5F5F7] border border-[#EBEBF0] p-7 sm:p-9 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div class="max-w-xl">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#EBEBF0] text-[12px] font-semibold text-[#0071E3]">
-              Tanpa Risiko
-            </span>
-            <h3 class="mt-3 text-[22px] sm:text-[26px] font-bold tracking-tight text-[#1D1D1F]">
-              Belum yakin? Coba 1 Sesi Trial Gratis.
-            </h3>
-            <p class="mt-2 text-[15px] leading-relaxed text-[#6E6E73]">
-              30 menit evaluasi belajar &amp; kenalan langsung dengan guru pilihan. Tanpa biaya komitmen.
+      <!-- 6. "CERITA ORANG TUA" TESTIMONIALS (#testimoni) -->
+      <section id="testimoni" class="scroll-mt-20 border-t border-[#E5E5EA]/70 bg-white py-16 sm:py-24">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="mx-auto max-w-2xl text-center">
+            <p class="text-xs font-semibold uppercase tracking-widest text-[#0071E3]">Pengalaman Nyata</p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-[#1D1D1F] sm:text-4xl">
+              Cerita Orang Tua
+            </h2>
+            <p class="mt-3 text-base text-[#6E6E73]">
+              Kepercayaan keluarga Indonesia yang telah memulai sesi belajar bersama tutor pilihan LesHub.
             </p>
           </div>
 
-          <div class="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-start sm:items-center lg:items-end xl:items-center gap-4 sm:gap-6 shrink-0">
-            <div class="sm:text-right">
-              <span class="block text-3xl sm:text-[34px] font-bold tracking-tight text-[#1D1D1F]">Gratis</span>
-              <span class="text-[12.5px] text-[#6E6E73]">Tanpa biaya komitmen</span>
-            </div>
-            <button
-              type="button"
-              onclick="openBookingModal(null, 1)"
-              class="inline-flex items-center justify-center rounded-full bg-[#1D1D1F] hover:bg-[#0071E3] active:scale-[0.98] text-white text-[15px] font-medium px-7 py-3.5 transition-all cursor-pointer"
-            >
-              Coba Trial Gratis
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TESTIMONI (CERITA ORANG TUA & MURID) -->
-    <section id="testimoni" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-[#EBEBF0]/80">
-      <div class="max-w-6xl mx-auto">
-        <div class="max-w-2xl">
-          <p class="text-[13px] font-semibold uppercase tracking-wider text-[#0071E3]">Testimoni</p>
-          <h2 class="mt-2 text-3xl sm:text-[42px] font-bold tracking-[-0.025em] leading-[1.12] text-[#1D1D1F]">
-            Cerita orang tua &amp; murid setelah mencoba LesHub.
-          </h2>
-        </div>
-
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Testimonial 1 -->
-          <article class="rounded-[28px] bg-[#F5F5F7] border border-[#EBEBF0] p-7 sm:p-8 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-1 text-amber-500 text-sm" aria-label="Rating 5 dari 5 bintang">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <p class="mt-4 text-[15.5px] leading-relaxed text-[#1D1D1F]">
-                “Awalnya ragu anak kelas 3 SD bakal betah les online. Ternyata di sesi trial gratis sama Kak Rina langsung klik dan sekarang malah nungguin jadwal belajarnya.”
-              </p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-[#EBEBF0]">
-              <p class="text-[14px] font-semibold text-[#1D1D1F]">Ibu Sari</p>
-              <p class="text-[12.5px] text-[#6E6E73]">Orang Tua Siswa SD</p>
-            </div>
-          </article>
-
-          <!-- Testimonial 2 -->
-          <article class="rounded-[28px] bg-[#F5F5F7] border border-[#EBEBF0] p-7 sm:p-8 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-1 text-amber-500 text-sm" aria-label="Rating 5 dari 5 bintang">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <p class="mt-4 text-[15.5px] leading-relaxed text-[#1D1D1F]">
-                “Kak Dimas jelasin Matematika SMP pakai logika visual yang gampang dicerna. Nilai ulangan aljabar anak saya naik drastis dalam sebulan pertama.”
-              </p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-[#EBEBF0]">
-              <p class="text-[14px] font-semibold text-[#1D1D1F]">Bapak Hendra</p>
-              <p class="text-[12.5px] text-[#6E6E73]">Orang Tua Siswa SMP</p>
-            </div>
-          </article>
-
-          <!-- Testimonial 3 -->
-          <article class="rounded-[28px] bg-[#F5F5F7] border border-[#EBEBF0] p-7 sm:p-8 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-1 text-amber-500 text-sm" aria-label="Rating 5 dari 5 bintang">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <p class="mt-4 text-[15.5px] leading-relaxed text-[#1D1D1F]">
-                “Suasana belajarnya santai kayak ngobrol sama teman tapi tetap terstruktur. Setelah 8 sesi sama Kak Nadia, aku jauh lebih percaya diri pas interview kerja.”
-              </p>
-            </div>
-            <div class="mt-6 pt-4 border-t border-[#EBEBF0]">
-              <p class="text-[14px] font-semibold text-[#1D1D1F]">Tania</p>
-              <p class="text-[12.5px] text-[#6E6E73]">Kelas English Conversation</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ AKORDEON MINIMALIS -->
-    <section id="faq" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-[#EBEBF0]/80">
-      <div class="max-w-3xl mx-auto">
-        <div class="text-center">
-          <p class="text-[13px] font-semibold uppercase tracking-wider text-[#0071E3]">FAQ</p>
-          <h2 class="mt-2 text-3xl sm:text-[40px] font-bold tracking-[-0.025em] leading-[1.15] text-[#1D1D1F]">
-            Pertanyaan yang sering ditanyakan.
-          </h2>
-        </div>
-
-        <div class="mt-12 divide-y divide-[#EBEBF0] border-y border-[#EBEBF0]">
-          <!-- FAQ 1 -->
-          <div class="faq-item py-5">
-            <button
-              type="button"
-              onclick="toggleFaq(this)"
-              class="w-full flex items-center justify-between gap-4 text-left py-1 cursor-pointer focus:outline-none"
-            >
-              <span class="text-[16px] sm:text-[17px] font-semibold text-[#1D1D1F]">
-                Apakah sesi trial benar-benar gratis dan tanpa komitmen?
-              </span>
-              <span class="faq-icon w-7 h-7 rounded-full bg-[#F5F5F7] text-[#1D1D1F] flex items-center justify-center shrink-0 text-lg leading-none">
-                +
-              </span>
-            </button>
-            <div class="faq-content">
-              <div class="faq-inner">
-                <p class="pt-3 pr-8 text-[15px] leading-relaxed text-[#6E6E73]">
-                  Ya, 100% gratis tanpa biaya pendaftaran atau deposit apa pun. Orang tua dan anak bisa mencoba 1 sesi kenalan &amp; evaluasi selama 30 menit terlebih dahulu. Jika merasa cocok, baru lanjut memilih paket 4 atau 8 sesi.
+          <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <!-- Testimonial 1 -->
+            <article class="flex flex-col justify-between rounded-3xl bg-[#F5F5F7] p-7 sm:p-8">
+              <div>
+                <div class="flex items-center gap-1 text-amber-500 text-sm" aria-label="Rating 5 dari 5 bintang">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-[#1D1D1F]">
+                  “Suka banget karena bisa coba trial gratis 30 menit dulu sebelum bayar paket. Kak Nadia sabar banget ngajarin anak saya speaking, sekarang lebih percaya diri di sekolah.”
                 </p>
               </div>
-            </div>
-          </div>
+              <div class="mt-6 border-t border-black/[0.06] pt-4">
+                <p class="text-sm font-bold text-[#1D1D1F]">Ibu Maya Pratiwi</p>
+                <p class="text-xs text-[#6E6E73]">Orang Tua Siswa Kelas 4 SD • Jakarta Selatan</p>
+              </div>
+            </article>
 
-          <!-- FAQ 2 -->
-          <div class="faq-item py-5">
-            <button
-              type="button"
-              onclick="toggleFaq(this)"
-              class="w-full flex items-center justify-between gap-4 text-left py-1 cursor-pointer focus:outline-none"
-            >
-              <span class="text-[16px] sm:text-[17px] font-semibold text-[#1D1D1F]">
-                Bagaimana jika anak saya kurang cocok dengan gurunya?
-              </span>
-              <span class="faq-icon w-7 h-7 rounded-full bg-[#F5F5F7] text-[#1D1D1F] flex items-center justify-center shrink-0 text-lg leading-none">
-                +
-              </span>
-            </button>
-            <div class="faq-content">
-              <div class="faq-inner">
-                <p class="pt-3 pr-8 text-[15px] leading-relaxed text-[#6E6E73]">
-                  Kami memberikan garansi ganti guru gratis kapan saja. Cukup beri tahu admin kami lewat WhatsApp, dan kami akan langsung mencarikan rekomendasi pengajar pengganti yang lebih sesuai dengan gaya belajar anak tanpa memotong sisa kuota sesi Anda.
+            <!-- Testimonial 2 -->
+            <article class="flex flex-col justify-between rounded-3xl bg-[#F5F5F7] p-7 sm:p-8">
+              <div>
+                <div class="flex items-center gap-1 text-amber-500 text-sm" aria-label="Rating 5 dari 5 bintang">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-[#1D1D1F]">
+                  “Dulu anak saya paling menghindar kalau ada PR Matematika. Sama Kak Dimas dijelasin pakai logika sederhana, nilai ulangan hariannya langsung naik signifikan.”
                 </p>
               </div>
-            </div>
-          </div>
+              <div class="mt-6 border-t border-black/[0.06] pt-4">
+                <p class="text-sm font-bold text-[#1D1D1F]">Bapak Hendra Wijaya</p>
+                <p class="text-xs text-[#6E6E73]">Orang Tua Siswa Kelas 7 SMP • Tangerang</p>
+              </div>
+            </article>
 
-          <!-- FAQ 3 -->
-          <div class="faq-item py-5">
-            <button
-              type="button"
-              onclick="toggleFaq(this)"
-              class="w-full flex items-center justify-between gap-4 text-left py-1 cursor-pointer focus:outline-none"
-            >
-              <span class="text-[16px] sm:text-[17px] font-semibold text-[#1D1D1F]">
-                Apakah les tersedia secara online atau tatap muka?
-              </span>
-              <span class="faq-icon w-7 h-7 rounded-full bg-[#F5F5F7] text-[#1D1D1F] flex items-center justify-center shrink-0 text-lg leading-none">
-                +
-              </span>
-            </button>
-            <div class="faq-content">
-              <div class="faq-inner">
-                <p class="pt-3 pr-8 text-[15px] leading-relaxed text-[#6E6E73]">
-                  Keduanya tersedia. Sesi online dilaksanakan secara interaktif via Zoom atau Google Meet dengan papan tulis digital, sedangkan sesi tatap muka (guru datang ke rumah) tersedia di area jangkauan masing-masing pengajar.
+            <!-- Testimonial 3 -->
+            <article class="flex flex-col justify-between rounded-3xl bg-[#F5F5F7] p-7 sm:p-8">
+              <div>
+                <div class="flex items-center gap-1 text-amber-500 text-sm" aria-label="Rating 5 dari 5 bintang">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                </div>
+                <p class="mt-4 text-sm leading-relaxed text-[#1D1D1F]">
+                  “Harganya jelas dari awal tanpa biaya admin aneh-aneh. Kak Rina telaten melatih anak saya membaca tanpa bikin anak tertekan. Sangat direkomendasikan!”
                 </p>
               </div>
-            </div>
+              <div class="mt-6 border-t border-black/[0.06] pt-4">
+                <p class="text-sm font-bold text-[#1D1D1F]">Ibu Sarah Larasati</p>
+                <p class="text-xs text-[#6E6E73]">Orang Tua Siswa TK B • Bandung</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. "PERTANYAAN UMUM" FAQ ACCORDION (#faq) -->
+      <section id="faq" class="scroll-mt-20 border-t border-[#E5E5EA]/70 bg-[#F5F5F7]/60 py-16 sm:py-24">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <p class="text-xs font-semibold uppercase tracking-widest text-[#0071E3]">Bantuan &amp; Informasi</p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-[#1D1D1F] sm:text-4xl">
+              Pertanyaan Umum
+            </h2>
+            <p class="mt-3 text-base text-[#6E6E73]">
+              Jawaban singkat untuk hal-hal yang paling sering ditanyakan orang tua sebelum mendaftar.
+            </p>
           </div>
 
-          <!-- FAQ 4 -->
-          <div class="faq-item py-5">
-            <button
-              type="button"
-              onclick="toggleFaq(this)"
-              class="w-full flex items-center justify-between gap-4 text-left py-1 cursor-pointer focus:outline-none"
-            >
-              <span class="text-[16px] sm:text-[17px] font-semibold text-[#1D1D1F]">
-                Bisa ubah jadwal jika anak berhalangan hadir?
-              </span>
-              <span class="faq-icon w-7 h-7 rounded-full bg-[#F5F5F7] text-[#1D1D1F] flex items-center justify-center shrink-0 text-lg leading-none">
-                +
-              </span>
-            </button>
-            <div class="faq-content">
-              <div class="faq-inner">
-                <p class="pt-3 pr-8 text-[15px] leading-relaxed text-[#6E6E73]">
-                  Tentu bisa. Anda dapat mengajukan perubahan jadwal (reschedule) tanpa kehilangan kuota sesi selama dikonfirmasi maksimal 4 jam sebelum jadwal kelas dimulai.
-                </p>
+          <div id="faq-list" class="mt-10 space-y-3">
+            <!-- FAQ Item 1 -->
+            <div class="faq-item overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white">
+              <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-left" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-[#1D1D1F]">Bagaimana aturan reschedule jika anak berhalangan hadir?</span>
+                <svg class="faq-chevron h-5 w-5 shrink-0 text-[#6E6E73] transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="faq-content hidden px-6 pb-5 text-sm leading-relaxed text-[#6E6E73]">
+                Orang tua dapat mengajukan perubahan jadwal (reschedule) secara gratis maksimal 4 jam sebelum sesi dimulai melalui admin WhatsApp atau langsung koordinasi dengan guru, sehingga kuota sesi tidak hangus.
               </div>
             </div>
-          </div>
 
-          <!-- FAQ 5 -->
-          <div class="faq-item py-5">
-            <button
-              type="button"
-              onclick="toggleFaq(this)"
-              class="w-full flex items-center justify-between gap-4 text-left py-1 cursor-pointer focus:outline-none"
-            >
-              <span class="text-[16px] sm:text-[17px] font-semibold text-[#1D1D1F]">
-                Apakah tersedia untuk jenjang SMA, mahasiswa, atau umum?
-              </span>
-              <span class="faq-icon w-7 h-7 rounded-full bg-[#F5F5F7] text-[#1D1D1F] flex items-center justify-center shrink-0 text-lg leading-none">
-                +
-              </span>
-            </button>
-            <div class="faq-content">
-              <div class="faq-inner">
-                <p class="pt-3 pr-8 text-[15px] leading-relaxed text-[#6E6E73]">
-                  Ya! Selain jenjang SD dan SMP, LesHub juga melayani siswa SMA (persiapan ujian sekolah/UTBK) serta mahasiswa maupun karyawan umum yang ingin melatih English Conversation atau kemampuan akademik spesifik.
-                </p>
+            <!-- FAQ Item 2 -->
+            <div class="faq-item overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white">
+              <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-left" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-[#1D1D1F]">Platform apa yang digunakan untuk kelas online?</span>
+                <svg class="faq-chevron h-5 w-5 shrink-0 text-[#6E6E73] transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="faq-content hidden px-6 pb-5 text-sm leading-relaxed text-[#6E6E73]">
+                Kelas online dilaksanakan secara interaktif 1-on-1 melalui Zoom atau Google Meet menggunakan fitur screen sharing dan papan tulis digital. Tautan ruang kelas dikirimkan sebelum sesi dimulai.
+              </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="faq-item overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white">
+              <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-left" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-[#1D1D1F]">Bagaimana mekanisme garansi ganti guru gratis?</span>
+                <svg class="faq-chevron h-5 w-5 shrink-0 text-[#6E6E73] transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="faq-content hidden px-6 pb-5 text-sm leading-relaxed text-[#6E6E73]">
+                Jika gaya mengajar guru dirasa kurang cocok dengan karakter belajar anak, Anda cukup menghubungi tim LesHub kapan saja. Kami akan mencarikan pengganti yang lebih sesuai tanpa biaya tambahan dan sisa sesi tetap utuh.
+              </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="faq-item overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white">
+              <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-left" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-[#1D1D1F]">Apa saja yang dilakukan saat 1 Sesi Trial Gratis?</span>
+                <svg class="faq-chevron h-5 w-5 shrink-0 text-[#6E6E73] transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="faq-content hidden px-6 pb-5 text-sm leading-relaxed text-[#6E6E73]">
+                Sesi Trial berdurasi 30 menit berisi perkenalan guru dengan anak, simulasi belajar singkat, serta pemetaan kebutuhan dan target belajar anak. Sepenuhnya gratis dan tanpa kewajiban membeli paket setelahnya.
+              </div>
+            </div>
+
+            <!-- FAQ Item 5 -->
+            <div class="faq-item overflow-hidden rounded-2xl border border-[#E5E5EA] bg-white">
+              <button type="button" class="faq-trigger flex w-full items-center justify-between gap-4 px-6 py-5 text-left" aria-expanded="false">
+                <span class="text-sm sm:text-base font-semibold text-[#1D1D1F]">Apa perbedaan Paket Fokus (Rp 320.000) dan Paket Intensif (Rp 600.000)?</span>
+                <svg class="faq-chevron h-5 w-5 shrink-0 text-[#6E6E73] transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="faq-content hidden px-6 pb-5 text-sm leading-relaxed text-[#6E6E73]">
+                Paket Fokus berisi 4 sesi (Rp 80.000/sesi) yang ideal untuk evaluasi awal dengan jadwal 1x seminggu. Paket Intensif berisi 8 sesi (Rp 75.000/sesi) sehingga Anda hemat Rp 40.000 dibanding mengambil 2x Paket Fokus (Rp 640.000), sekaligus mendapatkan laporan perkembangan bulanan.
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <!-- MINIMALIST FOOTER -->
-    <footer class="bg-[#F5F5F7] border-t border-[#EBEBF0] py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-2.5">
-          <span class="w-7 h-7 rounded-[8px] bg-[#1D1D1F] text-white font-bold text-sm flex items-center justify-center">
-            L
-          </span>
-          <span class="font-semibold text-[16px] tracking-tight text-[#1D1D1F]">LesHub</span>
-          <span class="text-[13px] text-[#6E6E73] ml-1">• Guru les terbaik. Sesimpel itu.</span>
+    <!-- 8. MINIMALIST APPLE-STYLE FOOTER -->
+    <footer class="border-t border-[#E5E5EA] bg-[#F5F5F7] py-12">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <div class="flex items-center gap-2.5">
+            <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1D1D1F] text-xs font-bold text-white">
+              L
+            </span>
+            <span class="text-base font-bold tracking-tight text-[#1D1D1F]">LesHub</span>
+            <span class="text-xs text-[#6E6E73]">• Les Privat 1-on-1 Terkurasi</span>
+          </div>
+
+          <div class="flex flex-wrap gap-5 text-xs font-medium text-[#6E6E73]">
+            <a href="#cara-kerja" class="hover:text-[#1D1D1F]">Cara Kerja</a>
+            <a href="#pilih-guru" class="hover:text-[#1D1D1F]">Pilih Guru</a>
+            <a href="#harga" class="hover:text-[#1D1D1F]">Harga</a>
+            <a href="#testimoni" class="hover:text-[#1D1D1F]">Testimoni</a>
+            <a href="#faq" class="hover:text-[#1D1D1F]">FAQ</a>
+          </div>
         </div>
 
-        <div class="flex flex-wrap items-center justify-center gap-6 text-[13px] text-[#6E6E73]">
-          <a href="#cara-kerja" class="hover:text-[#1D1D1F] transition-colors">Cara Kerja</a>
-          <a href="#pilih-guru" class="hover:text-[#1D1D1F] transition-colors">Pilih Guru</a>
-          <a href="#harga" class="hover:text-[#1D1D1F] transition-colors">Harga</a>
-          <a href="#faq" class="hover:text-[#1D1D1F] transition-colors">FAQ</a>
+        <div class="mt-8 border-t border-black/[0.06] pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-[#6E6E73]">
+          <p>&copy; 2026 LesHub Indonesia. Seluruh hak cipta dilindungi.</p>
+          <p>Dirancang sederhana untuk kenyamanan belajar anak dan orang tua.</p>
         </div>
-
-        <p class="text-[13px] text-[#6E6E73]">
-          © 2026 LesHub Indonesia
-        </p>
       </div>
     </footer>
   </div>
 
-  <!-- FLOATING QUICK ACTION BAR (Bottom-Right) -->
-  <div
-    id="floating-action-bar"
-    class="fixed bottom-5 right-5 z-30 flex items-center gap-2 p-1.5 rounded-full bg-white/85 backdrop-blur-xl border border-[#EBEBF0] shadow-[0_12px_32px_-6px_rgba(0,0,0,0.14)] translate-y-24 opacity-0 pointer-events-none transition-all duration-300"
-  >
-    <button
-      type="button"
-      onclick="openBookingModal(null, 1)"
-      class="inline-flex items-center gap-2 rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-95 text-white text-[13px] font-medium px-4 py-2.5 transition-all cursor-pointer"
-    >
-      <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-      <span>Coba Trial Gratis</span>
-    </button>
-    <button
-      type="button"
-      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
-      aria-label="Kembali ke atas"
-      class="w-9 h-9 rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] text-[#1D1D1F] flex items-center justify-center transition-colors cursor-pointer"
-    >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-      </svg>
-    </button>
-  </div>
-
-  <!-- TEACHER PREVIEW MODAL (#teacher-preview-modal) -->
-  <div
-    id="teacher-preview-modal"
-    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="preview-modal-title"
-  >
-    <div class="relative w-full max-w-lg rounded-[30px] bg-white border border-[#EBEBF0] shadow-2xl overflow-hidden animate-[fadeIn_0.2s_ease-out]">
-      <!-- Header -->
-      <div class="px-6 pt-6 pb-4 flex items-start justify-between gap-4 border-b border-[#EBEBF0]">
-        <div class="flex items-center gap-3.5">
-          <div id="preview-teacher-avatar" class="w-14 h-14 rounded-2xl overflow-hidden bg-[#F5F5F7] shrink-0"></div>
-          <div>
-            <div class="flex items-center gap-2">
-              <h3 id="preview-modal-title" class="text-[20px] font-bold text-[#1D1D1F]">Kak Nadia</h3>
-              <span id="preview-teacher-rating" class="text-[12px] font-semibold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">★ 4.98</span>
-            </div>
-            <p id="preview-teacher-subject" class="text-[13.5px] font-medium text-[#0071E3] mt-0.5">Bahasa Inggris</p>
-          </div>
-        </div>
-
-        <button
-          type="button"
-          onclick="closeTeacherPreviewModal()"
-          aria-label="Tutup Pratinjau Guru"
-          class="w-9 h-9 rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] text-[#1D1D1F] flex items-center justify-center transition-colors cursor-pointer"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Body -->
-      <div class="p-6 space-y-5">
-        <div>
-          <p class="text-[12px] font-semibold uppercase tracking-wider text-[#6E6E73]">Kredensial &amp; Pengalaman</p>
-          <p id="preview-teacher-credential" class="mt-1 text-[14.5px] font-medium text-[#1D1D1F]"></p>
-        </div>
-
-        <div>
-          <p class="text-[12px] font-semibold uppercase tracking-wider text-[#6E6E73]">Gaya Mengajar</p>
-          <p id="preview-teacher-style" class="mt-1 text-[14.5px] leading-relaxed text-[#6E6E73]"></p>
-        </div>
-
-        <!-- Simulated Voice Greeting Player -->
-        <div class="rounded-2xl bg-[#F5F5F7] border border-[#EBEBF0] p-4">
-          <div class="flex items-center justify-between gap-3">
-            <button
-              type="button"
-              id="voice-play-btn"
-              onclick="toggleVoiceSimulation()"
-              class="inline-flex items-center gap-2 rounded-full bg-[#1D1D1F] hover:bg-[#0071E3] text-white text-[12.5px] font-medium px-4 py-2 transition-colors cursor-pointer shrink-0"
-            >
-              <svg id="voice-play-icon" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-              <span id="voice-play-label">Dengar Sapaan</span>
-            </button>
-
-            <!-- Equalizer Bars -->
-            <div id="voice-wave-bars" class="flex items-end gap-1 h-5 opacity-40 transition-opacity">
-              <span class="w-1 h-3 bg-[#0071E3] rounded-full"></span>
-              <span class="w-1 h-4 bg-[#0071E3] rounded-full"></span>
-              <span class="w-1 h-2.5 bg-[#0071E3] rounded-full"></span>
-              <span class="w-1 h-5 bg-[#0071E3] rounded-full"></span>
-              <span class="w-1 h-3 bg-[#0071E3] rounded-full"></span>
-              <span class="w-1 h-4 bg-[#0071E3] rounded-full"></span>
-            </div>
-
-            <span id="voice-timer" class="text-[12px] font-mono text-[#6E6E73]">00:08</span>
-          </div>
-          <p id="preview-teacher-quote" class="mt-3 text-[13px] italic text-[#1D1D1F] leading-relaxed"></p>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="px-6 py-4 bg-[#F5F5F7]/70 border-t border-[#EBEBF0] flex items-center justify-between gap-3">
-        <div>
-          <p class="text-[11.5px] text-[#6E6E73]">Mulai Kenalan</p>
-          <p class="text-[14px] font-semibold text-[#1D1D1F]">1 Sesi Trial • <span class="text-[#0071E3]">Gratis</span></p>
-        </div>
-        <button
-          type="button"
-          id="preview-book-trial-btn"
-          class="rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-95 text-white text-[14px] font-medium px-6 py-2.5 transition-all cursor-pointer"
-        >
-          Coba Trial dengan Guru Ini
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- INTERACTIVE 1-SCREEN BOOKING MODAL (#booking-modal) -->
+  <!-- 9. INTERACTIVE 1-SCREEN BOOKING MODAL (#booking-modal) -->
   <div
     id="booking-modal"
-    class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 bg-black/45 backdrop-blur-sm overflow-y-auto"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="booking-modal-title"
+    aria-labelledby="modal-title"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop"
   >
-    <div class="relative w-full max-w-xl rounded-[30px] bg-white border border-[#EBEBF0] shadow-2xl overflow-hidden my-auto">
-      <!-- Modal Top Bar -->
-      <div class="px-6 pt-5 pb-4 border-b border-[#EBEBF0] flex items-center justify-between">
+    <div class="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl bg-white p-6 sm:p-7 shadow-2xl border border-[#E5E5EA]">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-[#E5E5EA] pb-4">
         <div>
-          <span class="text-[11.5px] font-semibold uppercase tracking-wider text-[#0071E3]">LesHub Booking</span>
-          <h3 id="booking-modal-title" class="text-[20px] font-bold tracking-tight text-[#1D1D1F]">
-            Atur Jadwal Belajar
-          </h3>
+          <p class="text-[11px] font-semibold uppercase tracking-wider text-[#0071E3]">Reservasi Sesi</p>
+          <h3 id="modal-title" class="text-lg sm:text-xl font-bold text-[#1D1D1F]">Jadwalkan Les Privat</h3>
         </div>
         <button
           type="button"
-          onclick="closeBookingModal()"
-          aria-label="Tutup Form Pemesanan"
-          class="w-9 h-9 rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] text-[#1D1D1F] flex items-center justify-center transition-colors cursor-pointer"
+          id="close-modal-btn"
+          aria-label="Tutup modal"
+          class="flex h-9 w-9 items-center justify-center rounded-full bg-[#F5F5F7] text-[#1D1D1F] transition hover:bg-[#E5E5EA]"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
 
-      <!-- STEP 1: FORM -->
-      <form id="booking-step-1" onsubmit="handleBookingSubmit(event)" class="p-6 space-y-5 max-h-[82vh] overflow-y-auto">
-        <!-- Validation Alert Banner (Replaces browser alert) -->
-        <div id="booking-error-box" class="hidden rounded-2xl bg-red-50 border border-red-200 px-4 py-3 text-[13px] text-red-700 font-medium"></div>
+      <!-- Validation Alert Box (Replaces browser alert()) -->
+      <div id="modal-error-box" class="mt-4 hidden rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-medium text-red-700">
+        Mohon lengkapi Nama Orang Tua, Jenjang Kelas Anak, dan Nomor WhatsApp terlebih dahulu.
+      </div>
 
-        <!-- Teacher Selector + Thumbnail -->
+      <!-- STEP 1: BOOKING FORM VIEW -->
+      <div id="booking-form-view" class="mt-5 space-y-5">
+        <!-- Teacher Selector + Avatar Preview -->
         <div>
-          <label for="booking-teacher-select" class="block text-[12.5px] font-semibold text-[#1D1D1F] mb-2">
-            Pilih Guru Pengajar
+          <label for="modal-teacher-select" class="block text-xs font-semibold text-[#1D1D1F] mb-2">
+            Pilih Guru
           </label>
-          <div class="flex items-center gap-3 p-2.5 rounded-2xl bg-[#F5F5F7] border border-[#EBEBF0]">
-            <div id="booking-teacher-avatar" class="w-11 h-11 rounded-xl overflow-hidden bg-white shrink-0"></div>
-            <div class="flex-1 min-w-0">
-              <select
-                id="booking-teacher-select"
-                onchange="onBookingTeacherChange()"
-                class="w-full bg-transparent text-[14.5px] font-semibold text-[#1D1D1F] focus:outline-none cursor-pointer"
-              >
-                <!-- Populated dynamically -->
-              </select>
-              <p id="booking-teacher-meta" class="text-[12px] text-[#6E6E73] truncate mt-0.5"></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3-Button Package Selector Pill Bar -->
-        <div>
-          <label class="block text-[12.5px] font-semibold text-[#1D1D1F] mb-2">
-            Pilih Paket Belajar
-          </label>
-          <div id="package-selector" class="grid grid-cols-3 gap-2">
-            <button
-              type="button"
-              onclick="selectPackage(1)"
-              data-pkg="1"
-              class="pkg-pill-btn rounded-2xl p-3 border text-left transition-all cursor-pointer"
-            >
-              <span class="block text-[12.5px] font-semibold">1 Sesi Trial</span>
-              <span class="block text-[14px] font-bold mt-0.5">Gratis</span>
-            </button>
-
-            <button
-              type="button"
-              onclick="selectPackage(4)"
-              data-pkg="4"
-              class="pkg-pill-btn rounded-2xl p-3 border text-left transition-all cursor-pointer"
-            >
-              <span class="block text-[12.5px] font-semibold">4 Sesi</span>
-              <span class="block text-[14px] font-bold mt-0.5">Rp 400.000</span>
-            </button>
-
-            <button
-              type="button"
-              onclick="selectPackage(8)"
-              data-pkg="8"
-              class="pkg-pill-btn rounded-2xl p-3 border text-left transition-all cursor-pointer"
-            >
-              <span class="block text-[12.5px] font-semibold">8 Sesi</span>
-              <span class="block text-[14px] font-bold mt-0.5">Rp 750.000</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Mode Belajar & Preferensi Waktu -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- Mode Belajar Pill Toggle -->
-          <div>
-            <label class="block text-[12.5px] font-semibold text-[#1D1D1F] mb-2">Mode Belajar</label>
-            <div class="grid grid-cols-2 gap-1.5 p-1 rounded-full bg-[#F5F5F7] border border-[#EBEBF0]">
-              <button
-                type="button"
-                onclick="selectMode('Online (Zoom / Meet)')"
-                data-mode="Online (Zoom / Meet)"
-                class="mode-pill-btn rounded-full py-2 px-2.5 text-[12px] font-semibold bg-white text-[#1D1D1F] shadow-2xs transition-all cursor-pointer"
-              >
-                Online
-              </button>
-              <button
-                type="button"
-                onclick="selectMode('Tatap Muka')"
-                data-mode="Tatap Muka"
-                class="mode-pill-btn rounded-full py-2 px-2.5 text-[12px] font-medium text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer"
-              >
-                Tatap Muka
-              </button>
-            </div>
-          </div>
-
-          <!-- Preferensi Waktu Pill Toggle -->
-          <div>
-            <label class="block text-[12.5px] font-semibold text-[#1D1D1F] mb-2">Preferensi Waktu</label>
-            <div class="grid grid-cols-3 gap-1 p-1 rounded-full bg-[#F5F5F7] border border-[#EBEBF0]">
-              <button
-                type="button"
-                onclick="selectTimePref('Sore')"
-                data-time="Sore"
-                class="time-pill-btn rounded-full py-2 px-2 text-[12px] font-semibold bg-white text-[#1D1D1F] shadow-2xs transition-all cursor-pointer"
-              >
-                Sore
-              </button>
-              <button
-                type="button"
-                onclick="selectTimePref('Malam')"
-                data-time="Malam"
-                class="time-pill-btn rounded-full py-2 px-2 text-[12px] font-medium text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer"
-              >
-                Malam
-              </button>
-              <button
-                type="button"
-                onclick="selectTimePref('Akhir Pekan')"
-                data-time="Akhir Pekan"
-                class="time-pill-btn rounded-full py-2 px-2 text-[11.5px] font-medium text-[#6E6E73] hover:text-[#1D1D1F] transition-all cursor-pointer"
-              >
-                Weekend
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3 Clean Inputs -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-          <div>
-            <label for="input-parent-name" class="block text-[12.5px] font-semibold text-[#1D1D1F] mb-1.5">
-              Nama Orang Tua / Murid
-            </label>
-            <input
-              id="input-parent-name"
-              type="text"
-              placeholder="Contoh: Ibu Sari"
-              class="w-full rounded-2xl bg-[#F5F5F7] border border-[#EBEBF0] focus:bg-white focus:border-[#0071E3] px-4 py-3 text-[14px] text-[#1D1D1F] placeholder-[#6E6E73]/70 focus:outline-none transition-colors"
-            />
-          </div>
-
-          <div>
-            <label for="input-grade" class="block text-[12.5px] font-semibold text-[#1D1D1F] mb-1.5">
-              Jenjang Kelas Anak
-            </label>
+          <div class="flex items-center gap-3 rounded-2xl border border-[#E5E5EA] bg-[#F5F5F7] p-2.5">
+            <div id="modal-teacher-avatar" class="h-11 w-11 shrink-0 overflow-hidden rounded-xl bg-white"></div>
             <select
-              id="input-grade"
-              class="w-full rounded-2xl bg-[#F5F5F7] border border-[#EBEBF0] focus:bg-white focus:border-[#0071E3] px-4 py-3 text-[14px] text-[#1D1D1F] focus:outline-none transition-colors cursor-pointer"
+              id="modal-teacher-select"
+              class="w-full bg-transparent pr-2 text-sm font-semibold text-[#1D1D1F] focus:outline-none"
             >
-              <option value="SD">SD</option>
-              <option value="SMP">SMP</option>
-              <option value="SMA">SMA</option>
-              <option value="Mahasiswa / Umum">Mahasiswa / Umum</option>
+              <!-- Options populated by JS -->
             </select>
           </div>
         </div>
 
+        <!-- 3 Package Selector Pills -->
         <div>
-          <label for="input-whatsapp" class="block text-[12.5px] font-semibold text-[#1D1D1F] mb-1.5">
-            Nomor WhatsApp Aktif
-          </label>
-          <input
-            id="input-whatsapp"
-            type="tel"
-            placeholder="Contoh: 081234567890"
-            class="w-full rounded-2xl bg-[#F5F5F7] border border-[#EBEBF0] focus:bg-white focus:border-[#0071E3] px-4 py-3 text-[14px] text-[#1D1D1F] placeholder-[#6E6E73]/70 focus:outline-none transition-colors"
-          />
+          <span class="block text-xs font-semibold text-[#1D1D1F] mb-2">Pilih Paket Belajar</span>
+          <div class="grid grid-cols-3 gap-2">
+            <button
+              type="button"
+              data-pkg="1"
+              class="pkg-pill flex flex-col items-start rounded-2xl border border-[#E5E5EA] bg-white p-3 text-left transition"
+            >
+              <span class="text-xs font-bold text-[#1D1D1F]">1 Sesi Trial</span>
+              <span class="mt-0.5 text-xs font-semibold text-[#0071E3]">Gratis</span>
+              <span class="mt-1 text-[10px] text-[#6E6E73]">Tanpa Risiko</span>
+            </button>
+
+            <button
+              type="button"
+              data-pkg="4"
+              class="pkg-pill flex flex-col items-start rounded-2xl border border-[#E5E5EA] bg-white p-3 text-left transition"
+            >
+              <span class="text-xs font-bold text-[#1D1D1F]">4 Sesi</span>
+              <span class="mt-0.5 text-xs font-semibold text-[#1D1D1F]">Rp 320.000</span>
+              <span class="mt-1 text-[10px] text-[#6E6E73]">Fokus</span>
+            </button>
+
+            <button
+              type="button"
+              data-pkg="8"
+              class="pkg-pill flex flex-col items-start rounded-2xl border border-[#E5E5EA] bg-white p-3 text-left transition"
+            >
+              <span class="text-xs font-bold text-[#1D1D1F]">8 Sesi</span>
+              <span class="mt-0.5 text-xs font-semibold text-[#1D1D1F]">Rp 600.000</span>
+              <span class="mt-1 text-[10px] text-emerald-600 font-medium">Hemat Rp 40rb</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Real-Time Total Row -->
-        <div class="rounded-2xl bg-[#F5F5F7] border border-[#EBEBF0] px-4 py-3.5 flex items-center justify-between gap-4">
+        <!-- Learning Mode Toggle Pills -->
+        <div>
+          <span class="block text-xs font-semibold text-[#1D1D1F] mb-2">Metode Belajar</span>
+          <div class="grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              data-mode="Online (Zoom / Meet)"
+              class="mode-pill rounded-full border border-[#0071E3] bg-[#0071E3]/10 py-2.5 px-3 text-xs font-semibold text-[#0071E3] transition"
+            >
+              Online (Zoom / Meet)
+            </button>
+            <button
+              type="button"
+              data-mode="Tatap Muka"
+              class="mode-pill rounded-full border border-[#E5E5EA] bg-white py-2.5 px-3 text-xs font-medium text-[#1D1D1F] transition"
+            >
+              Tatap Muka
+            </button>
+          </div>
+        </div>
+
+        <!-- Time Preference Pills -->
+        <div>
+          <span class="block text-xs font-semibold text-[#1D1D1F] mb-2">Preferensi Waktu</span>
+          <div class="grid grid-cols-3 gap-2">
+            <button
+              type="button"
+              data-time="Sore (15.00–17.30)"
+              class="time-pill rounded-full border border-[#0071E3] bg-[#0071E3]/10 py-2 px-2 text-[11px] font-semibold text-[#0071E3] transition"
+            >
+              Sore (15.00–17.30)
+            </button>
+            <button
+              type="button"
+              data-time="Malam (18.30–20.30)"
+              class="time-pill rounded-full border border-[#E5E5EA] bg-white py-2 px-2 text-[11px] font-medium text-[#1D1D1F] transition"
+            >
+              Malam (18.30–20.30)
+            </button>
+            <button
+              type="button"
+              data-time="Akhir Pekan"
+              class="time-pill rounded-full border border-[#E5E5EA] bg-white py-2 px-2 text-[11px] font-medium text-[#1D1D1F] transition"
+            >
+              Akhir Pekan
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 Clean Inputs -->
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div>
-            <p class="text-[12.5px] font-medium text-[#6E6E73]">Total Pembayaran</p>
-            <p id="booking-total-note" class="text-[12px] text-[#6E6E73] mt-0.5">Tanpa biaya komitmen</p>
+            <label for="input-parent-name" class="block text-xs font-semibold text-[#1D1D1F] mb-1">
+              Nama Orang Tua
+            </label>
+            <input
+              id="input-parent-name"
+              type="text"
+              placeholder="Contoh: Ibu Rina"
+              class="w-full rounded-xl border border-[#E5E5EA] bg-[#F5F5F7] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#6E6E73] focus:border-[#0071E3] focus:bg-white focus:outline-none"
+            />
           </div>
-          <div class="text-right">
-            <span id="booking-total-price" class="text-[22px] font-bold tracking-tight text-[#0071E3]">Gratis</span>
+
+          <div>
+            <label for="input-grade" class="block text-xs font-semibold text-[#1D1D1F] mb-1">
+              Jenjang Kelas Anak
+            </label>
+            <select
+              id="input-grade"
+              class="w-full rounded-xl border border-[#E5E5EA] bg-[#F5F5F7] px-3.5 py-2.5 text-sm text-[#1D1D1F] focus:border-[#0071E3] focus:bg-white focus:outline-none"
+            >
+              <option value="SD">SD</option>
+              <option value="SMP">SMP</option>
+              <option value="SMA">SMA</option>
+              <option value="Umum / Anak Usia Dini">Umum / Anak Usia Dini</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="input-whatsapp" class="block text-xs font-semibold text-[#1D1D1F] mb-1">
+              Nomor WhatsApp
+            </label>
+            <input
+              id="input-whatsapp"
+              type="tel"
+              placeholder="Contoh: 081234567890"
+              class="w-full rounded-xl border border-[#E5E5EA] bg-[#F5F5F7] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#6E6E73] focus:border-[#0071E3] focus:bg-white focus:outline-none"
+            />
           </div>
         </div>
 
-        <!-- Submit Button -->
-        <button
-          type="submit"
-          id="booking-submit-btn"
-          class="w-full rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.99] text-white font-semibold text-[15px] py-3.5 px-6 shadow-sm transition-all cursor-pointer"
-        >
-          Konfirmasi Sesi Trial Gratis
-        </button>
-      </form>
+        <!-- Real-Time Total Bar + Submit -->
+        <div class="rounded-2xl bg-[#F5F5F7] p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs text-[#6E6E73]">Total Biaya</p>
+              <p id="modal-total-price" class="text-lg font-extrabold text-[#1D1D1F]">Gratis</p>
+              <p id="modal-total-sub" class="text-[11px] font-medium text-[#0071E3]">Tanpa biaya komitmen</p>
+            </div>
+            <button
+              type="button"
+              id="submit-booking-btn"
+              class="rounded-full bg-[#0071E3] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0077ED] active:scale-[0.98]"
+            >
+              Konfirmasi Jadwal
+            </button>
+          </div>
+        </div>
+      </div>
 
-      <!-- STEP 2: SUCCESS & CONFIRMATION -->
-      <div id="booking-step-2" class="hidden p-6 space-y-5 max-h-[82vh] overflow-y-auto">
-        <div class="text-center pt-1">
-          <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      <!-- STEP 2: CONFIRMATION SCREEN VIEW -->
+      <div id="booking-confirm-view" class="mt-5 hidden space-y-5">
+        <div class="rounded-2xl bg-[#F5F5F7] p-5">
+          <div class="flex items-center gap-2 text-emerald-600">
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
             </svg>
+            <span class="text-sm font-bold text-[#1D1D1F]">Ringkasan Reservasi Siap</span>
           </div>
-          <h4 id="step2-heading" class="mt-3 text-[20px] font-bold text-[#1D1D1F]">
-            Jadwal Trial Siap Dikonfirmasi!
-          </h4>
-          <p class="mt-1 text-[13.5px] text-[#6E6E73]">
-            Kirim ringkasan jadwal di bawah ke WhatsApp Admin untuk penentuan jam belajar.
-          </p>
+
+          <dl id="confirm-summary-list" class="mt-4 space-y-2.5 border-t border-black/[0.06] pt-4 text-xs sm:text-sm">
+            <!-- Populated by JS -->
+          </dl>
         </div>
 
-        <!-- Summary Box -->
-        <div class="rounded-2xl bg-[#F5F5F7] border border-[#EBEBF0] p-4 space-y-2.5 text-[13.5px]">
-          <div class="flex justify-between gap-4">
-            <span class="text-[#6E6E73]">Orang Tua</span>
-            <span id="summary-parent" class="font-semibold text-[#1D1D1F] text-right"></span>
-          </div>
-          <div class="flex justify-between gap-4">
-            <span class="text-[#6E6E73]">Guru &amp; Mapel</span>
-            <span id="summary-teacher" class="font-semibold text-[#1D1D1F] text-right"></span>
-          </div>
-          <div class="flex justify-between gap-4">
-            <span class="text-[#6E6E73]">Paket &amp; Jenjang</span>
-            <span id="summary-package" class="font-semibold text-[#1D1D1F] text-right"></span>
-          </div>
-          <div class="flex justify-between gap-4">
-            <span class="text-[#6E6E73]">Mode &amp; Waktu</span>
-            <span id="summary-mode" class="font-semibold text-[#1D1D1F] text-right"></span>
-          </div>
-          <div class="pt-2.5 border-t border-[#EBEBF0] flex justify-between items-center gap-4">
-            <span class="font-medium text-[#6E6E73]">Total Biaya</span>
-            <span id="summary-total" class="text-[17px] font-bold text-[#0071E3]"></span>
+        <!-- QRIS Payment Box (Hidden by default, toggled via button on paid packages) -->
+        <div id="qris-box" class="hidden rounded-2xl border border-[#E5E5EA] bg-white p-4 text-center">
+          <p class="text-xs font-bold text-[#1D1D1F]">Pembayaran QRIS LesHub</p>
+          <p class="mt-0.5 text-[11px] text-[#6E6E73]">Scan kode QR di bawah lalu kirim bukti transfer ke WhatsApp Admin</p>
+          <div id="qris-image-container" class="mx-auto mt-3 flex h-44 w-44 items-center justify-center rounded-2xl border border-[#E5E5EA] bg-[#F5F5F7] p-3">
+            <!-- QRIS image or clean SVG QR rendered by JS -->
           </div>
         </div>
 
-        <!-- Primary Action: WhatsApp Admin -->
-        <a
-          id="whatsapp-confirm-link"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.99] text-white font-semibold text-[15px] py-3.5 px-6 shadow-sm transition-all"
-        >
-          <span>Lanjut ke WhatsApp Admin</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-          </svg>
-        </a>
+        <!-- Action Buttons -->
+        <div class="space-y-2.5">
+          <a
+            id="wa-admin-link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex w-full items-center justify-center gap-2 rounded-full bg-[#0071E3] py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0077ED]"
+          >
+            Lanjut ke WhatsApp Admin
+          </a>
 
-        <!-- Secondary Action: QRIS Payment Toggle (Automatically hidden when selectedSessions === 1) -->
-        <button
-          type="button"
-          id="qris-toggle-btn"
-          onclick="toggleQrisPreview()"
-          class="hidden w-full rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] text-[#1D1D1F] font-semibold text-[14px] py-3 px-5 transition-colors cursor-pointer"
-        >
-          Tampilkan Pembayaran QRIS
-        </button>
-
-        <!-- Collapsible QRIS Preview Container -->
-        <div id="qris-preview" class="hidden rounded-2xl bg-white border border-[#EBEBF0] p-5 text-center space-y-3">
-          <div class="flex items-center justify-between text-[12px] text-[#6E6E73] border-b border-[#EBEBF0] pb-2">
-            <span class="font-bold text-[#1D1D1F] tracking-tight">QRIS</span>
-            <span>LesHub Indonesia</span>
-          </div>
-          <div id="qris-image-container" class="flex flex-col items-center justify-center py-2">
-            <!-- Populated dynamically with QRIS_IMAGE_URL or crisp SVG QR illustration -->
-          </div>
-          <p class="text-[12px] text-[#6E6E73]">
-            Scan menggunakan mobile banking atau e-wallet (GoPay, OVO, Dana, ShopeePay, BCA, Mandiri).
-          </p>
-        </div>
-
-        <!-- Back to Edit Button -->
-        <div class="text-center pt-1">
+          <!-- Shown ONLY for paid packages (4 & 8), HIDDEN for package 1 (Trial Gratis) -->
           <button
             type="button"
-            onclick="backToBookingStep1()"
-            class="text-[13px] font-medium text-[#6E6E73] hover:text-[#1D1D1F] transition-colors cursor-pointer"
+            id="toggle-qris-btn"
+            class="hidden w-full rounded-full border border-[#E5E5EA] bg-white py-3 text-sm font-semibold text-[#1D1D1F] transition hover:bg-[#F5F5F7]"
           >
-            ‹ Ubah Data Pemesanan
+            Tampilkan Pembayaran QRIS
+          </button>
+
+          <button
+            type="button"
+            id="back-to-form-btn"
+            class="w-full py-2 text-xs font-medium text-[#6E6E73] hover:text-[#1D1D1F]"
+          >
+            &larr; Ubah Detail Pemesanan
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- APPLICATION JAVASCRIPT -->
+  <!-- APPLICATION SCRIPT -->
   <script>
     // =========================================================================
-    // 1. CONFIGURATION CONSTANTS
+    // 1. TOP CONFIGURATION BLOCK
     // =========================================================================
-
-    // Ganti dengan nomor WhatsApp kamu diawali 62, tanpa + atau 0
     const nomorAdmin = '6282214837804';
-
-    // Isi dengan nama file/URL gambar QRIS asli jika sudah diunggah ke GitHub, misal 'qris-leshub.jpg'
     const QRIS_IMAGE_URL = '';
 
-    const PACKAGE_CONFIG = {
-      1: {
-        sessions: 1,
-        title: '1 Sesi Trial (30 Menit)',
-        price: 0,
-        displayPrice: 'Gratis',
-        badge: 'Tanpa Risiko',
-        note: '30 menit evaluasi & kenalan • Tanpa biaya komitmen'
-      },
-      4: {
-        sessions: 4,
-        title: 'Paket Fokus (4 Sesi)',
-        price: 400000,
-        displayPrice: 'Rp 400.000',
-        badge: '',
-        note: 'Harga sudah all-in tanpa biaya tambahan'
-      },
-      8: {
-        sessions: 8,
-        title: 'Paket Intensif (8 Sesi)',
-        price: 750000,
-        displayPrice: 'Rp 750.000',
-        badge: 'Hemat',
-        note: 'Hemat Rp 60.000 • Sudah termasuk biaya layanan'
-      }
-    };
-
     // =========================================================================
-    // 2. CURATED TEACHERS DATA
+    // 2. DATA: TEACHERS, PACKAGES & HERO PREVIEW
     // =========================================================================
     const TEACHERS = [
       {
@@ -1474,215 +1025,280 @@
         name: 'Kak Nadia',
         subject: 'Bahasa Inggris',
         category: 'Bahasa Inggris',
-        rating: '4.98',
-        credential: 'Sastra Inggris UI • IELTS 8.0',
-        availability: 'Tersedia • Sore & Malam',
-        highlight: 'Metode interaktif berbasis percakapan agar anak percaya diri berbahasa Inggris.',
-        teachingStyle: 'Menggabungkan praktik percakapan sehari-hari, kosakata kontekstual, dan permainan ringan sehingga murid tidak takut membuat kesalahan saat berbicara.',
-        voiceGreeting: '“Halo Ayah Bunda dan adik-adik! Aku Kak Nadia. Di kelas kita nanti, belajar Bahasa Inggris bakal terasa santai seperti ngobrol sehari-hari.”',
-        avatarBg: '#E8F2FF',
-        avatarAccent: '#0071E3',
-        photoUrl: ''
+        rating: '4.9',
+        credential: 'Lulusan Pendidikan B. Inggris • Bersertifikat Pendidik',
+        highlight: 'Sabar, interaktif, dan mudah dipahami anak.',
+        previewGreeting: '“Halo! Di kelas B. Inggris, kita belajar kosakata dan percakapan sehari-hari lewat cerita visual dan game ringan supaya anak berani bicara tanpa takut salah.”',
+        accentColor: '#0071E3',
+        photoUrl: '',
+        avatarSvg: `
+          <svg viewBox="0 0 80 80" class="h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="20" fill="#E8F2FF"/>
+            <circle cx="40" cy="31" r="14" fill="#1D1D1F"/>
+            <path d="M22 68C22 56.9543 30.0589 48 40 48C49.9411 48 58 56.9543 58 68" fill="#0071E3"/>
+            <circle cx="40" cy="32" r="10" fill="#FAD7C3"/>
+            <path d="M30 28C32 22 48 22 50 28" stroke="#1D1D1F" stroke-width="4" stroke-linecap="round"/>
+          </svg>`
       },
       {
         id: 'dimas',
         name: 'Kak Dimas',
         subject: 'Matematika',
         category: 'Matematika',
-        rating: '4.99',
-        credential: 'Pendidikan Matematika ITB • 5 Thn Mengajar',
-        availability: 'Tersedia • Sore & Akhir Pekan',
-        highlight: 'Membedah konsep Matematika secara visual tanpa menghafal rumus rumit.',
-        teachingStyle: 'Fokus membangun pemahaman konsep dasar terlebih dahulu menggunakan ilustrasi bertahap, lalu melatih ketelitian mengerjakan soal cerita dan ujian.',
-        voiceGreeting: '“Halo! Saya Kak Dimas. Matematika itu sebenarnya seru kalau kita paham logika di balik rumusnya. Yuk kita bedah pelan-pelan di sesi trial!”',
-        avatarBg: '#EEF2FF',
-        avatarAccent: '#4F46E5',
-        photoUrl: ''
+        rating: '5.0',
+        credential: 'Sarjana Matematika • 5 Thn Pengalaman',
+        highlight: 'Logika sederhana bikin matematika terasa menyenangkan.',
+        previewGreeting: '“Halo! Saya membantu siswa memahami konsep dasar matematika dari akarnya, bukan sekadar menghafal rumus, agar soal cerita terasa jauh lebih mudah.”',
+        accentColor: '#1D1D1F',
+        photoUrl: '',
+        avatarSvg: `
+          <svg viewBox="0 0 80 80" class="h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="20" fill="#EFEFF4"/>
+            <path d="M22 68C22 56.9543 30.0589 48 40 48C49.9411 48 58 56.9543 58 68" fill="#1D1D1F"/>
+            <circle cx="40" cy="32" r="11" fill="#F3C6AE"/>
+            <path d="M29 28C30 20 50 20 51 28" fill="#1D1D1F"/>
+            <rect x="33" y="29" width="6" height="4" rx="1" stroke="#1D1D1F" stroke-width="1.5"/>
+            <rect x="41" y="29" width="6" height="4" rx="1" stroke="#1D1D1F" stroke-width="1.5"/>
+          </svg>`
       },
       {
         id: 'rina',
         name: 'Kak Rina',
-        subject: 'Calistung',
+        subject: 'Calistung & SD',
         category: 'Calistung',
-        rating: '5.00',
-        credential: 'PGSD UNJ • Spesialis Anak Usia Dini',
-        availability: 'Tersedia • Sore & Akhir Pekan',
-        highlight: 'Pendekatan sabar, ceria, dan penuh apresiasi untuk fondasi baca-tulis-hitung.',
-        teachingStyle: 'Menggunakan media kartu visual, cerita bergambar, dan ritme belajar 15 menit interaktif agar fokus anak tetap terjaga tanpa merasa tertekan.',
-        voiceGreeting: '“Halo Ayah Bunda! Aku Kak Rina. Aku senang sekali mendampingi adik-adik belajar membaca dan berhitung sambil bermain penuh semangat!”',
-        avatarBg: '#FEF3C7',
-        avatarAccent: '#D97706',
-        photoUrl: ''
+        rating: '4.9',
+        credential: 'Spesialis PAUD & SD • Ramah Anak',
+        highlight: 'Telaten melatih baca tulis sejak dini.',
+        previewGreeting: '“Halo Ayah & Bunda! Sesi Calistung dirancang bertahap dengan kartu huruf bergambar dan latihan menulis singkat agar anak tetap antusias dan fokus.”',
+        accentColor: '#059669',
+        photoUrl: '',
+        avatarSvg: `
+          <svg viewBox="0 0 80 80" class="h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="20" fill="#E6F6F0"/>
+            <circle cx="40" cy="31" r="14" fill="#3A2E2A"/>
+            <path d="M22 68C22 56.9543 30.0589 48 40 48C49.9411 48 58 56.9543 58 68" fill="#10B981"/>
+            <circle cx="40" cy="32" r="10" fill="#FAD7C3"/>
+          </svg>`
       },
       {
         id: 'bagas',
         name: 'Kak Bagas',
-        subject: 'Bahasa Inggris',
+        subject: 'English Conversation',
         category: 'Bahasa Inggris',
-        rating: '4.97',
-        credential: 'TESOL Certified • TOEFL iBT 112',
-        availability: 'Tersedia • Malam & Akhir Pekan',
-        highlight: 'Fokus tata bahasa praktis, penulisan akademik, dan persiapan ujian sekolah.',
-        teachingStyle: 'Terstruktur namun tetap komunikatif. Cocok untuk siswa SMP, SMA, maupun mahasiswa yang ingin meningkatkan skor ujian dan kefasihan akademik.',
-        voiceGreeting: '“Hi there! Saya Kak Bagas. Kita akan susun target belajar Bahasa Inggris yang jelas dan terukur sesuai kebutuhan akademik maupun karier kamu.”',
-        avatarBg: '#ECFDF5',
-        avatarAccent: '#059669',
-        photoUrl: ''
+        rating: '4.8',
+        credential: 'IELTS 8.0 • Tutor Speaking Anak & Remaja',
+        highlight: 'Bikin anak percaya diri bicara Inggris.',
+        previewGreeting: '“Hi! Fokus kelas kita adalah melatih pelafalan dan kelancaran speaking lewat topik favorit siswa seperti hobi, film, dan aktivitas harian.”',
+        accentColor: '#0071E3',
+        photoUrl: '',
+        avatarSvg: `
+          <svg viewBox="0 0 80 80" class="h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="80" height="80" rx="20" fill="#E8F2FF"/>
+            <path d="M22 68C22 56.9543 30.0589 48 40 48C49.9411 48 58 56.9543 58 68" fill="#0071E3"/>
+            <circle cx="40" cy="32" r="11" fill="#E9B89C"/>
+            <path d="M29 27C31 19 49 19 51 27" fill="#1D1D1F"/>
+          </svg>`
       }
     ];
+
+    const PACKAGES = {
+      1: {
+        id: 1,
+        label: '1 Sesi Trial (30 Menit)',
+        priceText: 'Gratis',
+        subText: 'Tanpa biaya komitmen',
+        isFree: true
+      },
+      4: {
+        id: 4,
+        label: 'Paket Fokus (4 Sesi)',
+        priceText: 'Rp 320.000',
+        subText: 'Rp 80.000 / sesi • All-in',
+        isFree: false
+      },
+      8: {
+        id: 8,
+        label: 'Paket Intensif (8 Sesi)',
+        priceText: 'Rp 600.000',
+        subText: 'Rp 75.000 / sesi • Hemat Rp 40.000',
+        isFree: false
+      }
+    };
+
+    const HERO_PREVIEW_DATA = {
+      english: {
+        teacherId: 'nadia',
+        teacherName: 'Kak Nadia',
+        rating: '4.9',
+        badge: 'Bahasa Inggris • SD & SMP',
+        topicTitle: 'Daily Conversation & Vocabulary',
+        topicDesc: 'Latihan dialog interaktif & pelafalan percaya diri.',
+        status: 'Tersedia Minggu Ini'
+      },
+      math: {
+        teacherId: 'dimas',
+        teacherName: 'Kak Dimas',
+        rating: '5.0',
+        badge: 'Matematika • SD, SMP & SMA',
+        topicTitle: 'Logika Pemecahan Soal Cerita',
+        topicDesc: 'Pemahaman konsep langkah demi langkah tanpa menghafal.',
+        status: 'Tersedia Minggu Ini'
+      },
+      calistung: {
+        teacherId: 'rina',
+        teacherName: 'Kak Rina',
+        rating: '4.9',
+        badge: 'Calistung • PAUD & SD Awal',
+        topicTitle: 'Membaca Lancar & Menulis Rapi',
+        topicDesc: 'Metode visual bertahap yang menyenangkan untuk anak.',
+        status: 'Tersedia Minggu Ini'
+      }
+    };
 
     // =========================================================================
     // 3. STATE MANAGEMENT
     // =========================================================================
-    let currentFilter = 'Semua';
-    let currentPreviewTeacherId = 'nadia';
-    let selectedTeacherId = 'nadia';
-    let selectedSessions = 1;
-    let selectedMode = 'Online (Zoom / Meet)';
-    let selectedTimePref = 'Sore';
-    let voiceTimerInterval = null;
-    let isVoicePlaying = false;
-
-    // =========================================================================
-    // 4. SVG AVATAR & PHOTO HELPER
-    // =========================================================================
-    function getTeacherAvatarHtml(teacher, sizeClass = 'w-14 h-14') {
-      const svgFallback = `
-        <svg class="w-full h-full" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="80" height="80" fill="${teacher.avatarBg}"/>
-          <circle cx="40" cy="31" r="14" fill="${teacher.avatarAccent}" fill-opacity="0.88"/>
-          <path d="M16 72C16 57.6406 26.7452 48 40 48C53.2548 48 64 57.6406 64 72" fill="${teacher.avatarAccent}" fill-opacity="0.88"/>
-        </svg>
-      `;
-
-      if (teacher.photoUrl && teacher.photoUrl.trim() !== '') {
-        return `
-          <div class="${sizeClass} relative overflow-hidden">
-            <img
-              src="${teacher.photoUrl}"
-              alt="${teacher.name}"
-              class="w-full h-full object-cover"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-            />
-            <div style="display:none;" class="w-full h-full">${svgFallback}</div>
-          </div>
-        `;
-      }
-
-      return `<div class="${sizeClass} overflow-hidden">${svgFallback}</div>`;
-    }
-
-    // =========================================================================
-    // 5. HERO IPHONE INTERACTIVE PREVIEW
-    // =========================================================================
-    const PHONE_PREVIEWS = {
-      english: {
-        teacherId: 'nadia',
-        topicTitle: 'Daily Conversation & Confidence',
-        topicDesc: 'Latihan berbicara santai dengan koreksi pelafalan langsung tanpa takut salah.'
-      },
-      math: {
-        teacherId: 'dimas',
-        topicTitle: 'Logika Aljabar & Soal Cerita',
-        topicDesc: 'Memahami pola soal langkah demi langkah dengan ilustrasi visual sederhana.'
-      },
-      calistung: {
-        teacherId: 'rina',
-        topicTitle: 'Membaca Ceria & Fonik Dasar',
-        topicDesc: 'Belajar merangkai suku kata dan berhitung dasar lewat permainan interaktif.'
-      }
+    let activeFilter = 'Semua';
+    let bookingState = {
+      teacherId: 'nadia',
+      packageId: 1,
+      mode: 'Online (Zoom / Meet)',
+      time: 'Sore (15.00–17.30)'
     };
 
-    function switchPhonePreview(key) {
-      const data = PHONE_PREVIEWS[key];
-      if (!data) return;
-
-      const teacher = TEACHERS.find(t => t.id === data.teacherId) || TEACHERS[0];
-      currentPreviewTeacherId = teacher.id;
-
-      // Update active tab styles
-      document.querySelectorAll('.phone-tab').forEach(btn => {
-        btn.classList.remove('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-        btn.classList.add('text-[#6E6E73]', 'font-medium');
-      });
-      const activeBtn = document.getElementById(`phone-tab-${key}`);
-      if (activeBtn) {
-        activeBtn.classList.add('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-        activeBtn.classList.remove('text-[#6E6E73]', 'font-medium');
+    // =========================================================================
+    // 4. HELPER: RENDER AVATAR (PHOTO URL OR CLEAN SVG)
+    // =========================================================================
+    function getTeacherAvatarHtml(teacher) {
+      if (teacher.photoUrl) {
+        return `<img src="${teacher.photoUrl}" alt="${teacher.name}" class="h-full w-full object-cover" onerror="this.style.display='none'" />`;
       }
-
-      // Update screen content
-      document.getElementById('phone-teacher-avatar').innerHTML = getTeacherAvatarHtml(teacher, 'w-11 h-11');
-      document.getElementById('phone-teacher-name').textContent = teacher.name;
-      document.getElementById('phone-teacher-rating').textContent = teacher.rating;
-      document.getElementById('phone-teacher-cred').textContent = teacher.credential;
-      document.getElementById('phone-topic-title').textContent = data.topicTitle;
-      document.getElementById('phone-topic-desc').textContent = data.topicDesc;
+      return teacher.avatarSvg;
     }
 
     // =========================================================================
-    // 6. TEACHERS CATALOG & PREVIEW MODAL
+    // 5. HERO INTERACTIVE PREVIEW CARD
+    // =========================================================================
+    function renderHeroPreview(subjectKey) {
+      const data = HERO_PREVIEW_DATA[subjectKey] || HERO_PREVIEW_DATA.english;
+      const teacher = TEACHERS.find(t => t.id === data.teacherId) || TEACHERS[0];
+      const container = document.getElementById('hero-preview-card');
+      if (!container) return;
+
+      container.innerHTML = `
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5">
+            <div class="h-11 w-11 shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm">
+              ${getTeacherAvatarHtml(teacher)}
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <p class="text-sm font-bold text-[#1D1D1F]">${data.teacherName}</p>
+                <span class="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800">★ ${data.rating}</span>
+              </div>
+              <p class="text-[11px] font-medium text-[#6E6E73]">${data.badge}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3.5 rounded-2xl bg-white p-3.5 shadow-sm">
+          <p class="text-[10px] font-semibold uppercase tracking-wider text-[#0071E3]">Topik Sesi 1-on-1</p>
+          <p class="mt-1 text-xs font-bold text-[#1D1D1F]">${data.topicTitle}</p>
+          <p class="mt-1 text-[11px] leading-relaxed text-[#6E6E73]">${data.topicDesc}</p>
+        </div>
+
+        <div class="mt-3 flex items-center justify-between text-[11px]">
+          <span class="inline-flex items-center gap-1.5 font-medium text-emerald-700">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+            ${data.status}
+          </span>
+          <button
+            type="button"
+            onclick="openBookingModal({ teacherId: '${teacher.id}', packageId: 1 })"
+            class="font-semibold text-[#0071E3] hover:underline"
+          >
+            Pilih ${data.teacherName} &rarr;
+          </button>
+        </div>
+      `;
+
+      // Update active tab styling
+      document.querySelectorAll('.hero-tab-btn').forEach(btn => {
+        const isActive = btn.getAttribute('data-hero-tab') === subjectKey;
+        if (isActive) {
+          btn.className = 'hero-tab-btn rounded-xl bg-white py-2 text-xs font-semibold text-[#1D1D1F] shadow-sm transition';
+        } else {
+          btn.className = 'hero-tab-btn rounded-xl py-2 text-xs font-medium text-[#6E6E73] transition hover:text-[#1D1D1F]';
+        }
+      });
+    }
+
+    // =========================================================================
+    // 6. TEACHER CATALOG RENDERING & FILTERING
     // =========================================================================
     function renderTeachers() {
-      const grid = document.getElementById('teachers-grid');
-      const filtered = currentFilter === 'Semua'
+      const grid = document.getElementById('teacher-grid');
+      if (!grid) return;
+
+      const filtered = activeFilter === 'Semua'
         ? TEACHERS
-        : TEACHERS.filter(t => t.category === currentFilter);
+        : TEACHERS.filter(t => t.category === activeFilter);
 
       grid.innerHTML = filtered.map(teacher => `
-        <article class="rounded-[28px] bg-white border border-[#EBEBF0] p-6 sm:p-7 flex flex-col justify-between shadow-[0_8px_28px_rgba(0,0,0,0.03)] hover:shadow-[0_18px_40px_-12px_rgba(0,0,0,0.08)] transition-all">
+        <article class="flex flex-col justify-between rounded-3xl border border-[#E5E5EA] bg-white p-6 sm:p-7 shadow-sm transition hover:shadow-md">
           <div>
-            <!-- Top Row: Avatar, Rating, Availability -->
+            <!-- Top Row: Avatar, Name, Subject, Rating -->
             <div class="flex items-start justify-between gap-3">
               <div class="flex items-center gap-3.5">
-                <div class="w-14 h-14 rounded-2xl overflow-hidden border border-[#EBEBF0] shrink-0">
-                  ${getTeacherAvatarHtml(teacher, 'w-14 h-14')}
+                <div class="h-14 w-14 shrink-0 overflow-hidden rounded-2xl border border-[#E5E5EA] bg-[#F5F5F7]">
+                  ${getTeacherAvatarHtml(teacher)}
                 </div>
                 <div>
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <h3 class="text-[19px] font-bold tracking-tight text-[#1D1D1F]">${teacher.name}</h3>
-                    <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 text-[12px] font-semibold">
-                      ★ ${teacher.rating}
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h3 class="text-lg font-bold text-[#1D1D1F]">${teacher.name}</h3>
+                    <span class="rounded-full bg-[#F5F5F7] px-2.5 py-0.5 text-xs font-semibold text-[#1D1D1F]">
+                      ${teacher.subject}
                     </span>
                   </div>
-                  <p class="text-[13.5px] font-semibold text-[#0071E3] mt-0.5">${teacher.subject}</p>
+                  <p class="mt-1 text-xs font-medium text-[#6E6E73]">${teacher.credential}</p>
                 </div>
               </div>
 
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F5F5F7] text-[11.5px] font-medium text-[#6E6E73] shrink-0">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                ${teacher.availability.replace('Tersedia • ', '')}
+              <span class="shrink-0 rounded-full bg-amber-50 border border-amber-200/70 px-2.5 py-1 text-xs font-bold text-amber-800">
+                ★ ${teacher.rating}
               </span>
             </div>
 
-            <!-- Credential Badge -->
-            <div class="mt-4 inline-flex items-center px-3 py-1 rounded-xl bg-[#F5F5F7] border border-[#EBEBF0] text-[12.5px] font-medium text-[#1D1D1F]">
-              ${teacher.credential}
-            </div>
-
-            <!-- 1-Line Highlight -->
-            <p class="mt-3.5 text-[14.5px] leading-relaxed text-[#6E6E73]">
-              ${teacher.highlight}
+            <!-- Short Highlight -->
+            <p class="mt-4 text-sm leading-relaxed text-[#1D1D1F]">
+              “${teacher.highlight}”
             </p>
+
+            <!-- Collapsible Inline Preview Kelas Box -->
+            <div id="preview-box-${teacher.id}" class="mt-4 hidden rounded-2xl border border-[#0071E3]/20 bg-[#F5F5F7] p-4">
+              <p class="text-[11px] font-semibold uppercase tracking-wider text-[#0071E3]">Gaya Mengajar &amp; Sapaan</p>
+              <p class="mt-1 text-xs leading-relaxed text-[#1D1D1F]">${teacher.previewGreeting}</p>
+            </div>
           </div>
 
-          <!-- Pricing & Action Buttons -->
-          <div class="mt-6 pt-5 border-t border-[#EBEBF0]">
-            <p class="text-[12.5px] font-medium text-[#6E6E73] mb-4">
-              Mulai dari <span class="text-[#1D1D1F] font-semibold">Gratis (Trial)</span> • Paket Rp 400rb
+          <!-- Bottom Price & Actions -->
+          <div class="mt-6 border-t border-[#E5E5EA] pt-4">
+            <p class="text-xs font-medium text-[#6E6E73]">
+              Mulai <span class="font-bold text-[#1D1D1F]">Rp 320.000</span> / 4 sesi (All-in)
             </p>
-            <div class="grid grid-cols-2 gap-2.5">
+
+            <div class="mt-3.5 flex flex-col sm:flex-row gap-2.5">
               <button
                 type="button"
-                onclick="openTeacherPreviewModal('${teacher.id}')"
-                class="rounded-full bg-[#F5F5F7] hover:bg-[#EBEBF0] active:scale-[0.98] text-[#1D1D1F] text-[13.5px] font-semibold py-2.5 px-4 transition-all cursor-pointer"
+                onclick="toggleTeacherPreview('${teacher.id}', this)"
+                class="w-full sm:w-auto flex-1 rounded-full border border-[#E5E5EA] bg-[#F5F5F7] px-4 py-2.5 text-xs sm:text-sm font-semibold text-[#1D1D1F] transition hover:bg-[#E5E5EA]"
               >
                 Preview Kelas
               </button>
               <button
                 type="button"
-                onclick="openBookingModal('${teacher.id}', 1)"
-                class="rounded-full bg-[#0071E3] hover:bg-[#0077ED] active:scale-[0.98] text-white text-[13.5px] font-semibold py-2.5 px-4 transition-all cursor-pointer"
+                onclick="openBookingModal({ teacherId: '${teacher.id}', packageId: 1 })"
+                class="w-full sm:w-auto flex-1 rounded-full bg-[#0071E3] px-4 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm transition hover:bg-[#0077ED]"
               >
                 Pilih Guru
               </button>
@@ -1692,237 +1308,82 @@
       `).join('');
     }
 
-    function filterTeachers(category) {
-      currentFilter = category;
-      document.querySelectorAll('.teacher-filter-btn').forEach(btn => {
-        const isMatch = btn.getAttribute('data-filter') === category;
-        if (isMatch) {
-          btn.classList.add('bg-[#1D1D1F]', 'text-white');
-          btn.classList.remove('bg-[#F5F5F7]', 'text-[#6E6E73]');
-        } else {
-          btn.classList.remove('bg-[#1D1D1F]', 'text-white');
-          btn.classList.add('bg-[#F5F5F7]', 'text-[#6E6E73]');
-        }
-      });
-      renderTeachers();
-    }
-
-    function openTeacherPreviewModal(teacherId) {
-      const teacher = TEACHERS.find(t => t.id === teacherId);
-      if (!teacher) return;
-
-      stopVoiceSimulation();
-
-      document.getElementById('preview-teacher-avatar').innerHTML = getTeacherAvatarHtml(teacher, 'w-14 h-14');
-      document.getElementById('preview-modal-title').textContent = teacher.name;
-      document.getElementById('preview-teacher-rating').textContent = `★ ${teacher.rating}`;
-      document.getElementById('preview-teacher-subject').textContent = teacher.subject;
-      document.getElementById('preview-teacher-credential').textContent = teacher.credential;
-      document.getElementById('preview-teacher-style').textContent = teacher.teachingStyle;
-      document.getElementById('preview-teacher-quote').textContent = teacher.voiceGreeting;
-
-      const bookBtn = document.getElementById('preview-book-trial-btn');
-      bookBtn.onclick = () => {
-        closeTeacherPreviewModal();
-        openBookingModal(teacher.id, 1);
-      };
-
-      const modal = document.getElementById('teacher-preview-modal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeTeacherPreviewModal() {
-      stopVoiceSimulation();
-      const modal = document.getElementById('teacher-preview-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.body.style.overflow = '';
-    }
-
-    function toggleVoiceSimulation() {
-      if (isVoicePlaying) {
-        stopVoiceSimulation();
-        return;
-      }
-
-      isVoicePlaying = true;
-      let secondsLeft = 8;
-      const label = document.getElementById('voice-play-label');
-      const timer = document.getElementById('voice-timer');
-      const waveContainer = document.getElementById('voice-wave-bars');
-      const playIcon = document.getElementById('voice-play-icon');
-
-      label.textContent = 'Memutar...';
-      waveContainer.classList.remove('opacity-40');
-      waveContainer.querySelectorAll('span').forEach(bar => bar.classList.add('eq-bar'));
-      playIcon.innerHTML = '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>';
-
-      voiceTimerInterval = setInterval(() => {
-        secondsLeft -= 1;
-        timer.textContent = `00:0${Math.max(0, secondsLeft)}`;
-        if (secondsLeft <= 0) {
-          stopVoiceSimulation();
-        }
-      }, 1000);
-    }
-
-    function stopVoiceSimulation() {
-      isVoicePlaying = false;
-      if (voiceTimerInterval) {
-        clearInterval(voiceTimerInterval);
-        voiceTimerInterval = null;
-      }
-      const label = document.getElementById('voice-play-label');
-      const timer = document.getElementById('voice-timer');
-      const waveContainer = document.getElementById('voice-wave-bars');
-      const playIcon = document.getElementById('voice-play-icon');
-
-      if (label) label.textContent = 'Dengar Sapaan';
-      if (timer) timer.textContent = '00:08';
-      if (waveContainer) {
-        waveContainer.classList.add('opacity-40');
-        waveContainer.querySelectorAll('span').forEach(bar => bar.classList.remove('eq-bar'));
-      }
-      if (playIcon) {
-        playIcon.innerHTML = '<path d="M8 5v14l11-7z" />';
-      }
+    function toggleTeacherPreview(teacherId, btn) {
+      const box = document.getElementById(`preview-box-${teacherId}`);
+      if (!box) return;
+      const isHidden = box.classList.contains('hidden');
+      box.classList.toggle('hidden');
+      btn.textContent = isHidden ? 'Tutup Preview' : 'Preview Kelas';
     }
 
     // =========================================================================
-    // 7. PRICING FREQUENCY TOGGLE
+    // 7. BOOKING MODAL LOGIC
     // =========================================================================
-    function setScheduleFrequency(timesPerWeek) {
-      const btn1 = document.getElementById('freq-1x-btn');
-      const btn2 = document.getElementById('freq-2x-btn');
-      const fokusCaption = document.getElementById('fokus-freq-caption');
-      const intensifCaption = document.getElementById('intensif-freq-caption');
-
-      if (timesPerWeek === 1) {
-        btn1.classList.add('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-        btn1.classList.remove('text-[#6E6E73]', 'font-medium');
-        btn2.classList.remove('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-        btn2.classList.add('text-[#6E6E73]', 'font-medium');
-
-        fokusCaption.textContent = 'Setara Rp 100.000 / sesi • Estimasi selesai 4 minggu';
-        intensifCaption.textContent = 'Setara Rp 93.750 / sesi • Estimasi selesai 8 minggu';
-      } else {
-        btn2.classList.add('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-        btn2.classList.remove('text-[#6E6E73]', 'font-medium');
-        btn1.classList.remove('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-        btn1.classList.add('text-[#6E6E73]', 'font-medium');
-
-        fokusCaption.textContent = 'Setara Rp 100.000 / sesi • Estimasi selesai 2 minggu';
-        intensifCaption.textContent = 'Setara Rp 93.750 / sesi • Estimasi selesai 4 minggu';
-      }
+    function populateModalTeacherSelect() {
+      const select = document.getElementById('modal-teacher-select');
+      if (!select) return;
+      select.innerHTML = TEACHERS.map(t => `
+        <option value="${t.id}">${t.name} — ${t.subject} (★ ${t.rating})</option>
+      `).join('');
     }
 
-    // =========================================================================
-    // 8. FAQ ACCORDION
-    // =========================================================================
-    function toggleFaq(buttonEl) {
-      const item = buttonEl.closest('.faq-item');
-      const wasActive = item.classList.contains('active');
+    function syncModalUI() {
+      // Teacher select & avatar
+      const select = document.getElementById('modal-teacher-select');
+      const avatarBox = document.getElementById('modal-teacher-avatar');
+      const selectedTeacher = TEACHERS.find(t => t.id === bookingState.teacherId) || TEACHERS[0];
+      if (select) select.value = selectedTeacher.id;
+      if (avatarBox) avatarBox.innerHTML = getTeacherAvatarHtml(selectedTeacher);
 
-      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
-      if (!wasActive) {
-        item.classList.add('active');
-      }
-    }
-
-    // =========================================================================
-    // 9. INTERACTIVE BOOKING MODAL & WHATSAPP / QRIS LOGIC
-    // =========================================================================
-    function populateTeacherDropdown() {
-      const select = document.getElementById('booking-teacher-select');
-      select.innerHTML = TEACHERS.map(t => (
-        `<option value="${t.id}">${t.name} — ${t.subject}</option>`
-      )).join('');
-    }
-
-    function onBookingTeacherChange() {
-      const select = document.getElementById('booking-teacher-select');
-      selectedTeacherId = select.value;
-      const teacher = TEACHERS.find(t => t.id === selectedTeacherId) || TEACHERS[0];
-
-      document.getElementById('booking-teacher-avatar').innerHTML = getTeacherAvatarHtml(teacher, 'w-11 h-11');
-      document.getElementById('booking-teacher-meta').textContent = `${teacher.credential} • ★ ${teacher.rating}`;
-    }
-
-    function selectPackage(sessions) {
-      selectedSessions = Number(sessions);
-      const pkg = PACKAGE_CONFIG[selectedSessions] || PACKAGE_CONFIG[1];
-
-      // Update package pill styles
-      document.querySelectorAll('.pkg-pill-btn').forEach(btn => {
-        const isSelected = Number(btn.getAttribute('data-pkg')) === selectedSessions;
-        if (isSelected) {
-          btn.classList.add('border-[#0071E3]', 'bg-[#0071E3]/8', 'text-[#1D1D1F]', 'ring-1', 'ring-[#0071E3]');
-          btn.classList.remove('border-[#EBEBF0]', 'bg-[#F5F5F7]', 'text-[#6E6E73]');
-        } else {
-          btn.classList.remove('border-[#0071E3]', 'bg-[#0071E3]/8', 'text-[#1D1D1F]', 'ring-1', 'ring-[#0071E3]');
-          btn.classList.add('border-[#EBEBF0]', 'bg-[#F5F5F7]', 'text-[#6E6E73]');
-        }
+      // Package pills
+      document.querySelectorAll('.pkg-pill').forEach(pill => {
+        const pkgId = Number(pill.getAttribute('data-pkg'));
+        const active = pkgId === bookingState.packageId;
+        pill.className = active
+          ? 'pkg-pill flex flex-col items-start rounded-2xl border-2 border-[#0071E3] bg-[#0071E3]/[0.06] p-3 text-left transition'
+          : 'pkg-pill flex flex-col items-start rounded-2xl border border-[#E5E5EA] bg-white p-3 text-left transition hover:bg-[#F5F5F7]';
       });
 
-      // Update Real-time Total Display
-      const totalPriceEl = document.getElementById('booking-total-price');
-      const totalNoteEl = document.getElementById('booking-total-note');
-      const submitBtn = document.getElementById('booking-submit-btn');
+      // Mode pills
+      document.querySelectorAll('.mode-pill').forEach(pill => {
+        const active = pill.getAttribute('data-mode') === bookingState.mode;
+        pill.className = active
+          ? 'mode-pill rounded-full border border-[#0071E3] bg-[#0071E3]/10 py-2.5 px-3 text-xs font-semibold text-[#0071E3] transition'
+          : 'mode-pill rounded-full border border-[#E5E5EA] bg-white py-2.5 px-3 text-xs font-medium text-[#1D1D1F] transition hover:bg-[#F5F5F7]';
+      });
 
-      totalPriceEl.textContent = pkg.displayPrice;
-      if (selectedSessions === 1) {
-        totalNoteEl.textContent = 'Tanpa biaya komitmen';
-        submitBtn.textContent = 'Konfirmasi Sesi Trial Gratis';
-      } else {
-        totalNoteEl.textContent = pkg.note;
-        submitBtn.textContent = 'Lanjutkan ke Ringkasan';
+      // Time pills
+      document.querySelectorAll('.time-pill').forEach(pill => {
+        const active = pill.getAttribute('data-time') === bookingState.time;
+        pill.className = active
+          ? 'time-pill rounded-full border border-[#0071E3] bg-[#0071E3]/10 py-2 px-2 text-[11px] font-semibold text-[#0071E3] transition'
+          : 'time-pill rounded-full border border-[#E5E5EA] bg-white py-2 px-2 text-[11px] font-medium text-[#1D1D1F] transition hover:bg-[#F5F5F7]';
+      });
+
+      // Real-time Total Bar
+      const pkg = PACKAGES[bookingState.packageId] || PACKAGES[1];
+      const totalPriceEl = document.getElementById('modal-total-price');
+      const totalSubEl = document.getElementById('modal-total-sub');
+      if (totalPriceEl) totalPriceEl.textContent = pkg.priceText;
+      if (totalSubEl) {
+        totalSubEl.textContent = pkg.subText;
+        totalSubEl.className = pkg.isFree
+          ? 'text-[11px] font-medium text-[#0071E3]'
+          : 'text-[11px] font-medium text-[#6E6E73]';
       }
     }
 
-    function selectMode(mode) {
-      selectedMode = mode;
-      document.querySelectorAll('.mode-pill-btn').forEach(btn => {
-        const isSelected = btn.getAttribute('data-mode') === mode;
-        if (isSelected) {
-          btn.classList.add('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-          btn.classList.remove('text-[#6E6E73]', 'font-medium');
-        } else {
-          btn.classList.remove('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-          btn.classList.add('text-[#6E6E73]', 'font-medium');
-        }
-      });
-    }
+    function openBookingModal(options = {}) {
+      if (options.teacherId) bookingState.teacherId = options.teacherId;
+      if (options.packageId) bookingState.packageId = Number(options.packageId);
 
-    function selectTimePref(timePref) {
-      selectedTimePref = timePref;
-      document.querySelectorAll('.time-pill-btn').forEach(btn => {
-        const isSelected = btn.getAttribute('data-time') === timePref;
-        if (isSelected) {
-          btn.classList.add('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-          btn.classList.remove('text-[#6E6E73]', 'font-medium');
-        } else {
-          btn.classList.remove('bg-white', 'text-[#1D1D1F]', 'font-semibold', 'shadow-2xs');
-          btn.classList.add('text-[#6E6E73]', 'font-medium');
-        }
-      });
-    }
+      // Reset views to Form View
+      document.getElementById('modal-error-box').classList.add('hidden');
+      document.getElementById('booking-form-view').classList.remove('hidden');
+      document.getElementById('booking-confirm-view').classList.add('hidden');
+      document.getElementById('qris-box').classList.add('hidden');
 
-    function openBookingModal(teacherId = null, sessions = 1) {
-      if (teacherId && TEACHERS.some(t => t.id === teacherId)) {
-        selectedTeacherId = teacherId;
-      } else if (!selectedTeacherId) {
-        selectedTeacherId = TEACHERS[0].id;
-      }
-
-      const select = document.getElementById('booking-teacher-select');
-      select.value = selectedTeacherId;
-      onBookingTeacherChange();
-
-      selectPackage(sessions);
-      backToBookingStep1();
-      hideBookingError();
+      syncModalUI();
 
       const modal = document.getElementById('booking-modal');
       modal.classList.remove('hidden');
@@ -1937,297 +1398,247 @@
       document.body.style.overflow = '';
     }
 
-    function showBookingError(message) {
-      const box = document.getElementById('booking-error-box');
-      box.textContent = message;
-      box.classList.remove('hidden');
+    function renderQrisContent() {
+      const container = document.getElementById('qris-image-container');
+      if (!container) return;
+
+      if (QRIS_IMAGE_URL && QRIS_IMAGE_URL.trim() !== '') {
+        container.innerHTML = `<img src="${QRIS_IMAGE_URL}" alt="QRIS LesHub" class="h-full w-full object-contain rounded-xl" />`;
+      } else {
+        // Clean generated SVG QR placeholder when QRIS_IMAGE_URL is empty
+        container.innerHTML = `
+          <svg viewBox="0 0 120 120" class="h-full w-full text-[#1D1D1F]" fill="currentColor">
+            <rect x="10" y="10" width="30" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="6"/>
+            <rect x="19" y="19" width="12" height="12" rx="2"/>
+            <rect x="80" y="10" width="30" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="6"/>
+            <rect x="89" y="19" width="12" height="12" rx="2"/>
+            <rect x="10" y="80" width="30" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="6"/>
+            <rect x="19" y="89" width="12" height="12" rx="2"/>
+            <rect x="52" y="12" width="8" height="8"/><rect x="64" y="22" width="8" height="14"/>
+            <rect x="12" y="52" width="14" height="8"/><rect x="34" y="56" width="10" height="10"/>
+            <rect x="52" y="52" width="16" height="16" rx="3" fill="#0071E3"/>
+            <rect x="76" y="52" width="10" height="16"/><rect x="94" y="54" width="14" height="8"/>
+            <rect x="52" y="78" width="8" height="14"/><rect x="66" y="86" width="16" height="8"/>
+            <rect x="88" y="78" width="20" height="10"/><rect x="88" y="96" width="12" height="12"/>
+          </svg>
+        `;
+      }
     }
 
-    function hideBookingError() {
-      const box = document.getElementById('booking-error-box');
-      box.classList.add('hidden');
-    }
-
-    function backToBookingStep1() {
-      document.getElementById('booking-step-1').classList.remove('hidden');
-      document.getElementById('booking-step-2').classList.add('hidden');
-      document.getElementById('qris-preview').classList.add('hidden');
-    }
-
-    function handleBookingSubmit(event) {
-      event.preventDefault();
-      hideBookingError();
-
+    function handleBookingSubmit() {
       const parentName = document.getElementById('input-parent-name').value.trim();
       const grade = document.getElementById('input-grade').value;
       const whatsapp = document.getElementById('input-whatsapp').value.trim();
+      const errorBox = document.getElementById('modal-error-box');
 
-      if (!parentName) {
-        showBookingError('Mohon isi Nama Orang Tua atau Murid terlebih dahulu.');
-        document.getElementById('input-parent-name').focus();
+      if (!parentName || !grade || !whatsapp) {
+        errorBox.classList.remove('hidden');
         return;
       }
+      errorBox.classList.add('hidden');
 
-      if (!whatsapp || whatsapp.replace(/\D/g, '').length < 9) {
-        showBookingError('Mohon masukkan Nomor WhatsApp aktif yang valid.');
-        document.getElementById('input-whatsapp').focus();
-        return;
-      }
+      const teacher = TEACHERS.find(t => t.id === bookingState.teacherId) || TEACHERS[0];
+      const pkg = PACKAGES[bookingState.packageId] || PACKAGES[1];
 
-      const teacher = TEACHERS.find(t => t.id === selectedTeacherId) || TEACHERS[0];
-      const pkg = PACKAGE_CONFIG[selectedSessions] || PACKAGE_CONFIG[1];
+      // Build confirmation summary list
+      const summaryList = document.getElementById('confirm-summary-list');
+      summaryList.innerHTML = `
+        <div class="flex justify-between gap-2">
+          <dt class="text-[#6E6E73]">Guru Pilihan</dt>
+          <dd class="font-semibold text-[#1D1D1F] text-right">${teacher.name} (${teacher.subject})</dd>
+        </div>
+        <div class="flex justify-between gap-2">
+          <dt class="text-[#6E6E73]">Paket</dt>
+          <dd class="font-semibold text-[#1D1D1F] text-right">${pkg.label}</dd>
+        </div>
+        <div class="flex justify-between gap-2">
+          <dt class="text-[#6E6E73]">Metode &amp; Waktu</dt>
+          <dd class="font-semibold text-[#1D1D1F] text-right">${bookingState.mode} • ${bookingState.time}</dd>
+        </div>
+        <div class="flex justify-between gap-2">
+          <dt class="text-[#6E6E73]">Orang Tua / Siswa</dt>
+          <dd class="font-semibold text-[#1D1D1F] text-right">${parentName} (${grade})</dd>
+        </div>
+        <div class="flex justify-between gap-2">
+          <dt class="text-[#6E6E73]">No. WhatsApp</dt>
+          <dd class="font-semibold text-[#1D1D1F] text-right">${whatsapp}</dd>
+        </div>
+        <div class="flex justify-between gap-2 border-t border-black/[0.06] pt-2.5">
+          <dt class="font-semibold text-[#1D1D1F]">Total Biaya</dt>
+          <dd class="font-extrabold text-[#0071E3] text-right">${pkg.priceText}</dd>
+        </div>
+      `;
 
-      // Populate Step 2 Summary
-      document.getElementById('step2-heading').textContent = selectedSessions === 1
-        ? 'Jadwal Trial Siap Dikonfirmasi!'
-        : 'Pesanan Belajar Siap Dikonfirmasi!';
-
-      document.getElementById('summary-parent').textContent = `${parentName} (${whatsapp})`;
-      document.getElementById('summary-teacher').textContent = `${teacher.name} • ${teacher.subject}`;
-      document.getElementById('summary-package').textContent = `${pkg.title} • Jenjang ${grade}`;
-      document.getElementById('summary-mode').textContent = `${selectedMode} • ${selectedTimePref}`;
-      document.getElementById('summary-total').textContent = selectedSessions === 1
-        ? 'Gratis (Tanpa biaya komitmen)'
-        : pkg.displayPrice;
-
-      // Format WhatsApp Message
-      const totalWaText = selectedSessions === 1
-        ? 'Gratis (Tanpa biaya komitmen)'
-        : pkg.displayPrice;
-
+      // Build prefilled WhatsApp message
       const waMessage = [
-        'Halo Admin *LesHub*, saya ingin menjadwalkan sesi belajar:',
-        '',
-        `*Nama Orang Tua/Murid:* ${parentName}`,
-        `*No. WhatsApp:* ${whatsapp}`,
-        `*Guru Pilihan:* ${teacher.name} (${teacher.subject})`,
-        `*Paket:* ${pkg.title}`,
-        `*Jenjang:* ${grade}`,
-        `*Mode Belajar:* ${selectedMode}`,
-        `*Preferensi Waktu:* ${selectedTimePref}`,
-        `*Total Biaya:* ${totalWaText}`,
-        '',
-        'Mohon info jadwal yang tersedia ya. Terima kasih!'
+        `Halo Admin LesHub, saya ingin reservasi les privat:`,
+        `• Nama Orang Tua: ${parentName}`,
+        `• Jenjang Anak: ${grade}`,
+        `• No. WhatsApp: ${whatsapp}`,
+        `• Guru Pilihan: ${teacher.name} (${teacher.subject})`,
+        `• Paket: ${pkg.label} (${pkg.priceText})`,
+        `• Metode: ${bookingState.mode}`,
+        `• Preferensi Waktu: ${bookingState.time}`,
+        `Mohon info konfirmasi jadwalnya. Terima kasih!`
       ].join('\n');
 
-      const waLink = document.getElementById('whatsapp-confirm-link');
+      const waLink = document.getElementById('wa-admin-link');
       waLink.href = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(waMessage)}`;
 
-      // Automatically hide QRIS button when Trial Gratis (selectedSessions === 1) is chosen
-      const qrisBtn = document.getElementById('qris-toggle-btn');
-      const qrisPreview = document.getElementById('qris-preview');
-      qrisPreview.classList.add('hidden');
-      qrisBtn.textContent = 'Tampilkan Pembayaran QRIS';
-
-      if (selectedSessions === 1) {
+      // Hide QRIS button when package 1 (Trial Gratis) is selected; show for paid packages 4 & 8
+      const qrisBtn = document.getElementById('toggle-qris-btn');
+      const qrisBox = document.getElementById('qris-box');
+      qrisBox.classList.add('hidden');
+      if (pkg.isFree) {
         qrisBtn.classList.add('hidden');
       } else {
         qrisBtn.classList.remove('hidden');
+        qrisBtn.textContent = 'Tampilkan Pembayaran QRIS';
         renderQrisContent();
       }
 
-      // Switch to Step 2
-      document.getElementById('booking-step-1').classList.add('hidden');
-      document.getElementById('booking-step-2').classList.remove('hidden');
-    }
-
-    function toggleQrisPreview() {
-      const qrisPreview = document.getElementById('qris-preview');
-      const qrisBtn = document.getElementById('qris-toggle-btn');
-      const isHidden = qrisPreview.classList.contains('hidden');
-
-      if (isHidden) {
-        qrisPreview.classList.remove('hidden');
-        qrisBtn.textContent = 'Sembunyikan Pembayaran QRIS';
-      } else {
-        qrisPreview.classList.add('hidden');
-        qrisBtn.textContent = 'Tampilkan Pembayaran QRIS';
-      }
-    }
-
-    function renderQrisContent() {
-      const container = document.getElementById('qris-image-container');
-      const svgQrIllustration = `
-        <svg class="w-44 h-44 text-[#1D1D1F]" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustrasi Kode QRIS">
-          <rect width="180" height="180" rx="16" fill="#F5F5F7"/>
-          <rect x="20" y="20" width="44" height="44" rx="8" stroke="currentColor" stroke-width="6"/>
-          <rect x="33" y="33" width="18" height="18" rx="3" fill="currentColor"/>
-          <rect x="116" y="20" width="44" height="44" rx="8" stroke="currentColor" stroke-width="6"/>
-          <rect x="129" y="33" width="18" height="18" rx="3" fill="currentColor"/>
-          <rect x="20" y="116" width="44" height="44" rx="8" stroke="currentColor" stroke-width="6"/>
-          <rect x="33" y="129" width="18" height="18" rx="3" fill="currentColor"/>
-          <rect x="78" y="22" width="10" height="10" rx="2" fill="currentColor"/>
-          <rect x="94" y="36" width="10" height="24" rx="2" fill="currentColor"/>
-          <rect x="78" y="52" width="10" height="14" rx="2" fill="currentColor"/>
-          <rect x="22" y="78" width="24" height="10" rx="2" fill="currentColor"/>
-          <rect x="54" y="78" width="14" height="24" rx="2" fill="currentColor"/>
-          <rect x="78" y="78" width="24" height="24" rx="5" fill="#0071E3"/>
-          <rect x="114" y="78" width="18" height="10" rx="2" fill="currentColor"/>
-          <rect x="142" y="78" width="16" height="26" rx="2" fill="currentColor"/>
-          <rect x="78" y="114" width="12" height="22" rx="2" fill="currentColor"/>
-          <rect x="98" y="114" width="26" height="10" rx="2" fill="currentColor"/>
-          <rect x="134" y="116" width="24" height="12" rx="2" fill="currentColor"/>
-          <rect x="98" y="136" width="16" height="22" rx="2" fill="currentColor"/>
-          <rect x="124" y="138" width="34" height="20" rx="3" fill="currentColor"/>
-        </svg>
-      `;
-
-      if (QRIS_IMAGE_URL && QRIS_IMAGE_URL.trim() !== '') {
-        container.innerHTML = `
-          <img
-            src="${QRIS_IMAGE_URL}"
-            alt="Kode QRIS Pembayaran LesHub"
-            class="w-48 h-48 object-contain rounded-xl border border-[#EBEBF0]"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-          />
-          <div style="display:none;">${svgQrIllustration}</div>
-        `;
-      } else {
-        container.innerHTML = svgQrIllustration;
-      }
+      // Switch views
+      document.getElementById('booking-form-view').classList.add('hidden');
+      document.getElementById('booking-confirm-view').classList.remove('hidden');
     }
 
     // =========================================================================
-    // 10. NAVIGATION, SCROLL PROGRESS, BENTO SPOTLIGHT & IPHONE TILT
+    // 8. INITIALIZATION & EVENT LISTENERS
     // =========================================================================
-    function toggleMobileMenu() {
-      const drawer = document.getElementById('mobile-menu-drawer');
-      const btn = document.getElementById('mobile-menu-btn');
-      const hamburger = document.getElementById('hamburger-icon');
-      const closeIcon = document.getElementById('close-menu-icon');
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initial renders
+      renderHeroPreview('english');
+      renderTeachers();
+      populateModalTeacherSelect();
+      syncModalUI();
 
-      const isHidden = drawer.classList.contains('hidden');
-      if (isHidden) {
-        drawer.classList.remove('hidden');
-        btn.setAttribute('aria-expanded', 'true');
-        hamburger.classList.add('hidden');
-        closeIcon.classList.remove('hidden');
-      } else {
-        closeMobileMenu();
-      }
-    }
+      // Scroll progress bar
+      const progressBar = document.getElementById('scroll-progress');
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const percent = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+        if (progressBar) progressBar.style.width = `${percent}%`;
+      }, { passive: true });
 
-    function closeMobileMenu() {
-      const drawer = document.getElementById('mobile-menu-drawer');
-      const btn = document.getElementById('mobile-menu-btn');
-      const hamburger = document.getElementById('hamburger-icon');
-      const closeIcon = document.getElementById('close-menu-icon');
+      // Mobile hamburger toggle
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconMenu = document.getElementById('icon-menu');
+      const iconClose = document.getElementById('icon-close');
 
-      drawer.classList.add('hidden');
-      btn.setAttribute('aria-expanded', 'false');
-      hamburger.classList.remove('hidden');
-      closeIcon.classList.add('hidden');
-    }
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          const isHidden = mobileMenu.classList.contains('hidden');
+          mobileMenu.classList.toggle('hidden');
+          iconMenu.classList.toggle('hidden', isHidden);
+          iconClose.classList.toggle('hidden', !isHidden);
+          mobileMenuBtn.setAttribute('aria-expanded', String(isHidden));
+        });
 
-    function handleScrollEffects() {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
-
-      // Top 2px Progress Bar
-      const progressBar = document.getElementById('scroll-progress-bar');
-      if (progressBar) {
-        progressBar.style.width = `${progress}%`;
-      }
-
-      // Floating Bottom-Right Quick Action Bar
-      const floatingBar = document.getElementById('floating-action-bar');
-      if (floatingBar) {
-        if (scrollTop > 460) {
-          floatingBar.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
-          floatingBar.classList.add('translate-y-0', 'opacity-100');
-        } else {
-          floatingBar.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
-          floatingBar.classList.remove('translate-y-0', 'opacity-100');
-        }
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            iconMenu.classList.remove('hidden');
+            iconClose.classList.add('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
       }
 
-      // Scroll-Spy Active Link Highlighting
-      const sectionIds = ['cara-kerja', 'pilih-guru', 'harga', 'testimoni', 'faq'];
-      let activeSection = '';
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 160 && rect.bottom >= 160) {
-            activeSection = id;
-            break;
-          }
-        }
-      }
-
-      document.querySelectorAll('.nav-link').forEach(link => {
-        const target = link.getAttribute('data-nav-link');
-        if (target === activeSection) {
-          link.classList.add('text-[#1D1D1F]', 'font-semibold');
-          link.classList.remove('text-[#6E6E73]');
-        } else {
-          link.classList.remove('text-[#1D1D1F]', 'font-semibold');
-          link.classList.add('text-[#6E6E73]');
-        }
-      });
-    }
-
-    function initBentoSpotlights() {
-      document.querySelectorAll('.bento-card').forEach(card => {
-        card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty('--mouse-x', `${x}px`);
-          card.style.setProperty('--mouse-y', `${y}px`);
+      // Hero interactive subject tabs
+      document.querySelectorAll('.hero-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const subject = btn.getAttribute('data-hero-tab');
+          renderHeroPreview(subject);
         });
       });
-    }
 
-    function initIphoneTilt() {
-      const wrapper = document.getElementById('iphone-tilt-wrapper');
-      const frame = document.getElementById('iphone-tilt-frame');
-      if (!wrapper || !frame) return;
-
-      wrapper.addEventListener('mousemove', e => {
-        if (!window.matchMedia('(min-width: 1024px)').matches) return;
-        const rect = wrapper.getBoundingClientRect();
-        const relX = (e.clientX - rect.left) / rect.width - 0.5;
-        const relY = (e.clientY - rect.top) / rect.height - 0.5;
-        const rotateY = (relX * 8).toFixed(2); // ±4°
-        const rotateX = (-relY * 8).toFixed(2); // ±4°
-        frame.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      // Teacher catalog filter tabs
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeFilter = btn.getAttribute('data-filter');
+          document.querySelectorAll('.filter-btn').forEach(b => {
+            const isSelected = b === btn;
+            b.className = isSelected
+              ? 'filter-btn shrink-0 rounded-full bg-[#1D1D1F] px-5 py-2 text-sm font-medium text-white transition'
+              : 'filter-btn shrink-0 rounded-full border border-[#E5E5EA] bg-white px-5 py-2 text-sm font-medium text-[#1D1D1F] transition hover:bg-[#F5F5F7]';
+          });
+          renderTeachers();
+        });
       });
 
-      wrapper.addEventListener('mouseleave', () => {
-        frame.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+      // FAQ Accordion
+      document.querySelectorAll('.faq-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+          const item = trigger.closest('.faq-item');
+          const content = item.querySelector('.faq-content');
+          const chevron = item.querySelector('.faq-chevron');
+          const isOpen = !content.classList.contains('hidden');
+
+          // Close all others for clean single-open behavior
+          document.querySelectorAll('.faq-item').forEach(other => {
+            other.querySelector('.faq-content').classList.add('hidden');
+            other.querySelector('.faq-chevron').classList.remove('rotate-180');
+            other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+          });
+
+          if (!isOpen) {
+            content.classList.remove('hidden');
+            chevron.classList.add('rotate-180');
+            trigger.setAttribute('aria-expanded', 'true');
+          }
+        });
       });
-    }
 
-    // Close modals on backdrop click or Escape key
-    window.addEventListener('click', e => {
-      const bookingModal = document.getElementById('booking-modal');
-      const previewModal = document.getElementById('teacher-preview-modal');
-      if (e.target === bookingModal) closeBookingModal();
-      if (e.target === previewModal) closeTeacherPreviewModal();
-    });
+      // Modal controls
+      document.getElementById('close-modal-btn').addEventListener('click', closeBookingModal);
+      document.getElementById('booking-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'booking-modal') closeBookingModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeBookingModal();
+      });
 
-    window.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        closeBookingModal();
-        closeTeacherPreviewModal();
-        closeMobileMenu();
-      }
-    });
+      document.getElementById('modal-teacher-select').addEventListener('change', (e) => {
+        bookingState.teacherId = e.target.value;
+        syncModalUI();
+      });
 
-    window.addEventListener('scroll', handleScrollEffects, { passive: true });
+      document.querySelectorAll('.pkg-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          bookingState.packageId = Number(pill.getAttribute('data-pkg'));
+          syncModalUI();
+        });
+      });
 
-    // Initialize App on Load
-    window.addEventListener('DOMContentLoaded', () => {
-      switchPhonePreview('english');
-      renderTeachers();
-      populateTeacherDropdown();
-      onBookingTeacherChange();
-      selectPackage(1);
-      initBentoSpotlights();
-      initIphoneTilt();
-      handleScrollEffects();
+      document.querySelectorAll('.mode-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          bookingState.mode = pill.getAttribute('data-mode');
+          syncModalUI();
+        });
+      });
+
+      document.querySelectorAll('.time-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          bookingState.time = pill.getAttribute('data-time');
+          syncModalUI();
+        });
+      });
+
+      document.getElementById('submit-booking-btn').addEventListener('click', handleBookingSubmit);
+
+      document.getElementById('back-to-form-btn').addEventListener('click', () => {
+        document.getElementById('booking-confirm-view').classList.add('hidden');
+        document.getElementById('booking-form-view').classList.remove('hidden');
+      });
+
+      document.getElementById('toggle-qris-btn').addEventListener('click', (e) => {
+        const qrisBox = document.getElementById('qris-box');
+        const isHidden = qrisBox.classList.contains('hidden');
+        qrisBox.classList.toggle('hidden');
+        e.target.textContent = isHidden ? 'Sembunyikan Pembayaran QRIS' : 'Tampilkan Pembayaran QRIS';
+      });
     });
   </script>
 </body>
