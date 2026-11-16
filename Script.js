@@ -3,7 +3,7 @@
     event.preventDefault(); // Mencegah halaman me-refresh otomatis
 
     // 1. GANTI DENGAN NOMOR WHATSAPP KAMU (Awali dengan 62, tanpa tanda + atau 0 di depan)
-    const nomorAdmin = "6281234567890";
+    const nomorAdmin = "6282214837804";
 
     // 2. Mengambil data guru, paket, dan harga dari tampilan modal
     const namaGuru = document.getElementById("modalTeacherName")?.innerText || "Guru Pilihan";
