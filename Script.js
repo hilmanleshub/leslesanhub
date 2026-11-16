@@ -1,4 +1,4 @@
-<script>
+
   function kirimKeWhatsApp(event) {
     event.preventDefault(); // Mencegah halaman me-refresh otomatis
 
