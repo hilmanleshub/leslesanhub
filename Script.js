@@ -1,4 +1,3 @@
-
   function kirimKeWhatsApp(event) {
     event.preventDefault(); // Mencegah halaman me-refresh otomatis
 
@@ -37,4 +36,3 @@
     const urlWhatsApp = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(teksPesan)}`;
     window.open(urlWhatsApp, "_blank");
   }
-</script>
